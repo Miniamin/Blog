@@ -1,0 +1,1270 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="S_UNmLCii9OVqOu5unmzIdCxCetiyjd0biEMaruNi0U" />
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=PingFang SC:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="HTML,CSS," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="如何清除一个标签的子标签的浮动清除浮动的几种方法：  父元素有高度，此时就没有浮动的影响了 父元素如果不愿意设置固定死的高度，而是自动适配，就写overflow:hidden;_zoom:1; 后面的元素父盒子加上clear:both;盒子还是没有高度，margin失效； 两个盒子之前加上一个&amp;lt;div class=&amp;quot;cl&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;   .fl{cl">
+<meta name="keywords" content="HTML,CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些HTML和CSS面试题">
+<meta property="og:url" content="https://syzq.github.io/2017/08/03/一些HTML和CSS面试题/index.html">
+<meta property="og:site_name" content="Syzq">
+<meta property="og:description" content="如何清除一个标签的子标签的浮动清除浮动的几种方法：  父元素有高度，此时就没有浮动的影响了 父元素如果不愿意设置固定死的高度，而是自动适配，就写overflow:hidden;_zoom:1; 后面的元素父盒子加上clear:both;盒子还是没有高度，margin失效； 两个盒子之前加上一个&amp;lt;div class=&amp;quot;cl&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;   .fl{cl">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-23T15:58:32.801Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="一些HTML和CSS面试题">
+<meta name="twitter:description" content="如何清除一个标签的子标签的浮动清除浮动的几种方法：  父元素有高度，此时就没有浮动的影响了 父元素如果不愿意设置固定死的高度，而是自动适配，就写overflow:hidden;_zoom:1; 后面的元素父盒子加上clear:both;盒子还是没有高度，margin失效； 两个盒子之前加上一个&amp;lt;div class=&amp;quot;cl&amp;quot;&amp;gt;&amp;lt;/div&amp;gt;   .fl{cl">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://syzq.github.io/2017/08/03/一些HTML和CSS面试题/"/>
+
+
+
+
+
+  <title>一些HTML和CSS面试题 | Syzq</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Syzq</span>
+       <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A blog that you won't read.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://syzq.github.io/2017/08/03/一些HTML和CSS面试题/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="思齐">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Syzq">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">一些HTML和CSS面试题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-03T17:29:31+08:00">
+                2017-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端杂烩/" itemprop="url" rel="index">
+                    <span itemprop="name">前端杂烩</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="如何清除一个标签的子标签的浮动"><a href="#如何清除一个标签的子标签的浮动" class="headerlink" title="如何清除一个标签的子标签的浮动"></a>如何清除一个标签的子标签的浮动</h2><p>清除浮动的几种方法：</p>
+<ul>
+<li>父元素有高度，此时就没有浮动的影响了</li>
+<li>父元素如果不愿意设置固定死的高度，而是自动适配，就写<code>overflow:hidden;_zoom:1;</code></li>
+<li>后面的元素父盒子加上<code>clear:both;</code>盒子还是没有高度，<code>margin</code>失效；</li>
+<li>两个盒子之前加上一个<code>&lt;div class=&quot;cl&quot;&gt;&lt;/div&gt;   .fl{clear:both}</code>，隔墙法，盒子还是没有高度，但是<code>marign</code>有用。</li>
+<li>盒子加上<code>::after{content:&quot;&quot;,clear:both;}</code> ，内墙法，这个元素自己最后的子元素是一个标准流元素，所以一下子给这个父盒子撑高了。</li>
+</ul>
+<h2 id="描述一下浮动会造成什么影响，如何居中一个浮动元素"><a href="#描述一下浮动会造成什么影响，如何居中一个浮动元素" class="headerlink" title="描述一下浮动会造成什么影响，如何居中一个浮动元素"></a>描述一下浮动会造成什么影响，如何居中一个浮动元素</h2><ul>
+<li>【脱标】：浮动的元素脱离标准文档流。【贴边】：左浮动就会紧贴父元素左边，右浮动贴右边。【字围】：文字会环绕这个浮动元素。【收缩】：不区分行内元素和块级元素了，原来的行内元素现在可以设置宽度和高度，原来的块级元素如果不写width现在会自动缩进为内容宽度。</li>
+<li>浮动的元素要想居中，必须定位。利用<code>margin-left:50%; left: - 1/2width。</code></li>
+</ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">	div&#123;</span></span><br><span class="line"><span class="undefined">		float: left;</span></span><br><span class="line"><span class="undefined">		width: 500px;</span></span><br><span class="line"><span class="undefined">		height: 100px;</span></span><br><span class="line"><span class="undefined">		background-color: orange;</span></span><br><span class="line"><span class="undefined">		position: relative;</span></span><br><span class="line"><span class="undefined">		margin-left: 50%;</span></span><br><span class="line"><span class="css">		<span class="selector-tag">left</span><span class="selector-pseudo">:-250px</span>;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>原理：<code>margin-left:50%;</code>此时元素的左边线就会到屏幕中线，拉回自己的width一半即可。所以要用相对定位拉动。或者<code>transform:translate(-50%,0);</code></p>
+<h2 id="简单说明绝对定位和浮动的区别和应用。"><a href="#简单说明绝对定位和浮动的区别和应用。" class="headerlink" title="简单说明绝对定位和浮动的区别和应用。"></a>简单说明绝对定位和浮动的区别和应用。</h2><ul>
+<li><p>绝对定位脱离标准文档流，它的参考点是文档的左上角或者右上角。如果有任何父元素有定位属性，此时就依据“子绝父相”规则来设置自己的定位参考元素。在做网页时候非常的灵活方便。制作覆盖效果的时候，会大量使用绝对定位。</p>
+</li>
+<li><p>浮动脱离标准文档流，通常用于制作并排显示的元素，通常用于大的布局，或者无序列表比如图片的并排。可以使用clear:both;属性让标准流中的其他元素在此之后依次排列。</p>
+</li>
+</ul>
+<h2 id="行内元素和块级元素的区别，行内元素有哪些，块级元素有哪些"><a href="#行内元素和块级元素的区别，行内元素有哪些，块级元素有哪些" class="headerlink" title="行内元素和块级元素的区别，行内元素有哪些，块级元素有哪些"></a>行内元素和块级元素的区别，行内元素有哪些，块级元素有哪些</h2><p>行内元素不能设置宽度、高度，但是能并排显示，浏览器视行内元素是“文本流元素”。<code>span、a、em、b、u、i。</code></p>
+<p>块级元素能设置宽度、高度，但是不能并排显示。<code>div、h1、ul、p、li、section、header。</code></p>
+<h2 id="CSS引入的方法有哪些？都有什么区别"><a href="#CSS引入的方法有哪些？都有什么区别" class="headerlink" title="CSS引入的方法有哪些？都有什么区别"></a>CSS引入的方法有哪些？都有什么区别</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">外链式<span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"1.css"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> /&gt;</span></span><br><span class="line">内嵌式<span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">导入式<span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css">@<span class="keyword">import</span> url(<span class="number">1</span>.css)</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">行内式<span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"width:200px;background:red;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>外链式方便多个网页同时使用一个样式表。</p>
+<p>内嵌式速度快，但是改版麻烦，可以减少HTTP请求。</p>
+<p>导入式不好用，因为页面首先加载，然后导入样式表，页面在1s~2s内会有没有样式表的情况，然后突然有了样式。因为link引用CSS时，在页面加载时同步加载；而<code>@import</code>在页面加载完后才开始对对应CSS进行加载。</p>
+<p>行内式通常用于开发时候的临时测试，语义不清晰，不能使用。</p>
+<h2 id="在书写高效CSS时，需要考虑哪些问题？"><a href="#在书写高效CSS时，需要考虑哪些问题？" class="headerlink" title="在书写高效CSS时，需要考虑哪些问题？"></a>在书写高效CSS时，需要考虑哪些问题？</h2><p>基本原则是：去掉不必要的样式、合并相同的样式、尽可能缩小样式的大小。多用公共类，让css变得不臃肿。</p>
+<p>比如：gulp中有一个插件叫做<code>gulp-csso</code>，可以智能合并相同的样式，比如<code>div p{font-size:10px;color:green;}  p{color:green;}</code> 它会智能变为：<code>div p{font-size:10px;}  p{color:green;}。</code></p>
+<h2 id="简述一下什么是内容与表现分离"><a href="#简述一下什么是内容与表现分离" class="headerlink" title="简述一下什么是内容与表现分离"></a>简述一下什么是内容与表现分离</h2><p>HTML就是负责语义，其他什么都不需要管。HTML不要用<code>b、u、i</code>来设置加粗、下划线、倾斜，而是写<code>font-weight:bold;  text-decoration:underline; font-style:italic;</code> 用CSS来表示。再比如，logo可以用<code>h1</code>，用背景替换文字来呈递图片。<code>text-indent:-999em;</code></p>
+<h2 id="CSS层叠是什么"><a href="#CSS层叠是什么" class="headerlink" title="CSS层叠是什么"></a>CSS层叠是什么</h2><p>CSS全名叫做层叠式样式表，<code>cascading style sheet，cascading</code>就是层叠的意思。层叠具体有两层含义：</p>
+<ol>
+<li>比如一个标签它可以通过多种手段给他添加属性。<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml">#logo</span><span class="template-variable">&#123;&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">.spec</span><span class="template-variable">&#123;&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">h1</span><span class="template-variable">&#123;&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">body</span><span class="template-variable">&#123;&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml"></span></span><br><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">h1</span> <span class="attr">id</span>=<span class="string">"logo"</span> <span class="attr">class</span>=<span class="string">"spec"</span>&gt;</span><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>此时这个标签就被多个选择器添加属性，如果属性有冲突，CSS有精确的权重计算方法来确定“听谁的”。</p>
+<ol start="2">
+<li>一个选择器可以同时作用在多个标签身上，也有一些属性可以继承下去。使标签是由多个选择器共同影响而来。此时CSS就可以写的很精简。</li>
+</ol>
+<h2 id="浏览器是如何根据CSS选择器选择对应元素的"><a href="#浏览器是如何根据CSS选择器选择对应元素的" class="headerlink" title="浏览器是如何根据CSS选择器选择对应元素的"></a>浏览器是如何根据CSS选择器选择对应元素的</h2><p><code>#</code>表示id，浏览器会寻找拥有id的元素。<code>.</code>表示类名class属性，空格表示后代，<code>&gt;</code> 表示子元素,<code>+</code> 表示下一个兄弟 ， <code>~</code>后面所有兄弟。</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>权重</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID选择器</td>
+<td>100</td>
+</tr>
+<tr>
+<td>类选择器</td>
+<td>10</td>
+</tr>
+<tr>
+<td>标签选择器</td>
+<td>1</td>
+</tr>
+<tr>
+<td>属性选择器</td>
+<td>10</td>
+</tr>
+<tr>
+<td>各种伪类选择器    如:link， :visited， :hover， :active， :target， :root， :not等</td>
+<td>10</td>
+</tr>
+<tr>
+<td>各种伪元素    如::first-letter,::first-line,::after,::before,::selection</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p><code>!important</code>优先级最高，高于上面一切。<code>*</code> 选择器最低，低于一切。</p>
+<h2 id="在HTML代码中如何做SEO"><a href="#在HTML代码中如何做SEO" class="headerlink" title="在HTML代码中如何做SEO"></a>在HTML代码中如何做SEO</h2><p><code>h</code>标签合理使用，<code>strong</code>标签语义比较强，合理使用。<br><code>title、&lt;meta name=&quot;description&quot; /&gt;、&lt;meta name=&quot;keywords&quot; /&gt;</code>要合理设置<br><code>a</code>标签要写<code>title</code>，<code>img</code>要写<code>alt</code><br><code>div</code>要有合理类名，比如<code>.content、.header、.address</code>，便于搜索引擎爬虫检索<br>HTML层次清晰，id不要重复，便于搜索引擎爬虫检索</p>
+<h2 id="CSS怎样判断不同分辨率显示不同宽度布局，从而实现自适应宽度"><a href="#CSS怎样判断不同分辨率显示不同宽度布局，从而实现自适应宽度" class="headerlink" title="CSS怎样判断不同分辨率显示不同宽度布局，从而实现自适应宽度"></a>CSS怎样判断不同分辨率显示不同宽度布局，从而实现自适应宽度</h2><ul>
+<li>使用百分比布局，用百分比来写宽度、marign、padding</li>
+<li>使用em当做单位，写一段JS让html根元素的字号随着浏览器宽度的变化而等比例变化</li>
+<li>使用媒体查询，<code>&lt;link href=&quot;1.css&quot; media=&quot;screen and (min-width=900px)&quot; /&gt;</code></li>
+</ul>
+<h2 id="一个页面（HTML）由哪几部分构成？分别是什么？作用是什么"><a href="#一个页面（HTML）由哪几部分构成？分别是什么？作用是什么" class="headerlink" title="一个页面（HTML）由哪几部分构成？分别是什么？作用是什么"></a>一个页面（HTML）由哪几部分构成？分别是什么？作用是什么</h2><p>由<code>head</code>和<code>body</code>构成。</p>
+<p><code>head</code>里面放置一些配置信息，比如配置<code>title、keyword、description、charset</code>等等信息，不会显示在浏览器中。</p>
+<p><code>body</code>是内容，会显示在浏览器的屏幕中。</p>
+<h2 id="为什么利用多个域名来存储网站资源会更有效"><a href="#为什么利用多个域名来存储网站资源会更有效" class="headerlink" title="为什么利用多个域名来存储网站资源会更有效"></a>为什么利用多个域名来存储网站资源会更有效</h2><p>CDN，表示让用户从离自己最近的下载点下载资源。</p>
+<p>突破服务器的带宽限制。</p>
+<p>节约主域名的连接数，提升并发。</p>
+<p>更加安全，比如静态资源服务器上面，不能运行任何代码的。</p>
+<h2 id="谈谈对CSS-Sprites技术优缺点的理解。"><a href="#谈谈对CSS-Sprites技术优缺点的理解。" class="headerlink" title="谈谈对CSS Sprites技术优缺点的理解。"></a>谈谈对CSS Sprites技术优缺点的理解。</h2><p>CSS精灵技术，优点就是减少HTTP的请求数量，加快网页渲染速度。便于一整套更换，比如圣诞节了，此时可以改变CSS中的各种按钮、logo变成圣诞风格，一下子全变了。</p>
+<p>缺点就是不能随意改变之前已经在精灵上面的图片的位置，做<code>repeat-x、repeat-y</code>精灵难以实现。做先导小符号的时候，精灵要靠边。</p>
+<h2 id="用纯CSS创建一个三角形的原理是什么？"><a href="#用纯CSS创建一个三角形的原理是什么？" class="headerlink" title="用纯CSS创建一个三角形的原理是什么？"></a>用纯CSS创建一个三角形的原理是什么？</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">把上、左、右三条边隐藏掉（颜色设为 <span class="selector-tag">transparent</span>）</span><br><span class="line">  <span class="selector-id">#demo</span> &#123;</span><br><span class="line">    <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">height</span>: <span class="number">0</span>;</span><br><span class="line">    <span class="attribute">border-width</span>: <span class="number">20px</span>;</span><br><span class="line">    <span class="attribute">border-style</span>: solid;</span><br><span class="line">    <span class="attribute">border-color</span>: yellow red blue gray;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="html5有哪些新特性"><a href="#html5有哪些新特性" class="headerlink" title="html5有哪些新特性"></a>html5有哪些新特性</h2><p>语义化更好的内容标签（header,nav,footer,aside,article,section）</p>
+<p>音频、视频API(audio,video)</p>
+<p>画布(Canvas) API</p>
+<p>地理(Geolocation) API</p>
+<p>拖拽释放(Drag and drop) API</p>
+<p>本地离线存储</p>
+<p>表单控件，calendar、date、time、email、url、search</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+<div>
+  
+    
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+          
+            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/31/Git学习（三）工作区和暂存区/" rel="next" title="Git学习（三）工作区和暂存区">
+                <i class="fa fa-chevron-left"></i> Git学习（三）工作区和暂存区
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/03/Git学习（四）远程仓库/" rel="prev" title="Git学习（四）远程仓库">
+                Git学习（四）远程仓库 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="思齐" />
+          <p class="site-author-name" itemprop="name">思齐</p>
+           
+              <p class="site-description motion-element" itemprop="description">思与之齐</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Syzq" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/p/1005055693566329/home?from=page_100505&mod=TAB#place" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/beme" target="_blank" title="S  F">
+                  
+                    <i class="fa fa-fw fa-scribd"></i>
+                  
+                  S  F
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/YXY81519/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-comment"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何清除一个标签的子标签的浮动"><span class="nav-number">1.</span> <span class="nav-text">如何清除一个标签的子标签的浮动</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#描述一下浮动会造成什么影响，如何居中一个浮动元素"><span class="nav-number">2.</span> <span class="nav-text">描述一下浮动会造成什么影响，如何居中一个浮动元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简单说明绝对定位和浮动的区别和应用。"><span class="nav-number">3.</span> <span class="nav-text">简单说明绝对定位和浮动的区别和应用。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行内元素和块级元素的区别，行内元素有哪些，块级元素有哪些"><span class="nav-number">4.</span> <span class="nav-text">行内元素和块级元素的区别，行内元素有哪些，块级元素有哪些</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS引入的方法有哪些？都有什么区别"><span class="nav-number">5.</span> <span class="nav-text">CSS引入的方法有哪些？都有什么区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在书写高效CSS时，需要考虑哪些问题？"><span class="nav-number">6.</span> <span class="nav-text">在书写高效CSS时，需要考虑哪些问题？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#简述一下什么是内容与表现分离"><span class="nav-number">7.</span> <span class="nav-text">简述一下什么是内容与表现分离</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS层叠是什么"><span class="nav-number">8.</span> <span class="nav-text">CSS层叠是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#浏览器是如何根据CSS选择器选择对应元素的"><span class="nav-number">9.</span> <span class="nav-text">浏览器是如何根据CSS选择器选择对应元素的</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在HTML代码中如何做SEO"><span class="nav-number">10.</span> <span class="nav-text">在HTML代码中如何做SEO</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS怎样判断不同分辨率显示不同宽度布局，从而实现自适应宽度"><span class="nav-number">11.</span> <span class="nav-text">CSS怎样判断不同分辨率显示不同宽度布局，从而实现自适应宽度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一个页面（HTML）由哪几部分构成？分别是什么？作用是什么"><span class="nav-number">12.</span> <span class="nav-text">一个页面（HTML）由哪几部分构成？分别是什么？作用是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#为什么利用多个域名来存储网站资源会更有效"><span class="nav-number">13.</span> <span class="nav-text">为什么利用多个域名来存储网站资源会更有效</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#谈谈对CSS-Sprites技术优缺点的理解。"><span class="nav-number">14.</span> <span class="nav-text">谈谈对CSS Sprites技术优缺点的理解。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用纯CSS创建一个三角形的原理是什么？"><span class="nav-number">15.</span> <span class="nav-text">用纯CSS创建一个三角形的原理是什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#html5有哪些新特性"><span class="nav-number">16.</span> <span class="nav-text">html5有哪些新特性</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-mars"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">思齐</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

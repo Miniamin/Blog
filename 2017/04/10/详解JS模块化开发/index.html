@@ -1,0 +1,1233 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="S_UNmLCii9OVqOu5unmzIdCxCetiyjd0biEMaruNi0U" />
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=PingFang SC:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="思齐,思与之齐,web前端,个人博客,JavaScript" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="什么是模块化开发前端开发中，起初只要在script标签中嵌入几十上百行代码就能实现一些基本的交互效果，后来js得到重视，应用也广泛起来了，jQuery，Ajax，Node.Js，MVC，MVVM等的助力也使得前端开发得到重视，也使得前端项目越来越复杂，然而，JavaScript却没有为组织代码提供任何明显帮助，甚至没有类的概念，更不用说模块（module）了，那么什么是模块呢？ 一个模块就是实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="详解JS模块化开发">
+<meta property="og:url" content="https://syzq.github.io/2017/04/10/详解JS模块化开发/index.html">
+<meta property="og:site_name" content="Syzq">
+<meta property="og:description" content="什么是模块化开发前端开发中，起初只要在script标签中嵌入几十上百行代码就能实现一些基本的交互效果，后来js得到重视，应用也广泛起来了，jQuery，Ajax，Node.Js，MVC，MVVM等的助力也使得前端开发得到重视，也使得前端项目越来越复杂，然而，JavaScript却没有为组织代码提供任何明显帮助，甚至没有类的概念，更不用说模块（module）了，那么什么是模块呢？ 一个模块就是实现">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i2.bvimg.com/602806/090c6bf8a4da2cad.png">
+<meta property="og:updated_time" content="2018-09-23T15:58:41.910Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="详解JS模块化开发">
+<meta name="twitter:description" content="什么是模块化开发前端开发中，起初只要在script标签中嵌入几十上百行代码就能实现一些基本的交互效果，后来js得到重视，应用也广泛起来了，jQuery，Ajax，Node.Js，MVC，MVVM等的助力也使得前端开发得到重视，也使得前端项目越来越复杂，然而，JavaScript却没有为组织代码提供任何明显帮助，甚至没有类的概念，更不用说模块（module）了，那么什么是模块呢？ 一个模块就是实现">
+<meta name="twitter:image" content="http://i2.bvimg.com/602806/090c6bf8a4da2cad.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://syzq.github.io/2017/04/10/详解JS模块化开发/"/>
+
+
+
+
+
+  <title>详解JS模块化开发 | Syzq</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Syzq</span>
+       <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A blog that you won't read.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://syzq.github.io/2017/04/10/详解JS模块化开发/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="思齐">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Syzq">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">详解JS模块化开发</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-10T08:36:37+08:00">
+                2017-04-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaScript学习总结/" itemprop="url" rel="index">
+                    <span itemprop="name">JavaScript学习总结</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><img src="http://i2.bvimg.com/602806/090c6bf8a4da2cad.png" alt="image"></p>
+<h2 id="什么是模块化开发"><a href="#什么是模块化开发" class="headerlink" title="什么是模块化开发"></a>什么是模块化开发</h2><p>前端开发中，起初只要在<code>script</code>标签中嵌入几十上百行代码就能实现一些基本的交互效果，后来js得到重视，应用也广泛起来了，<code>jQuery，Ajax，Node.Js，MVC，MVVM</code>等的助力也使得前端开发得到重视，也使得前端项目越来越复杂，然而，<code>JavaScript</code>却没有为组织代码提供任何明显帮助，甚至没有类的概念，更不用说模块（module）了，那么什么是模块呢？</p>
+<p>一个模块就是实现特定功能的文件，有了模块，我们就可以更方便地使用别人的代码，想要什么功能，就加载什么模块。模块开发需要遵循一定的规范，否则就都乱套了。</p>
+<p>根据AMD规范，我们可以使用<code>define</code>定义模块，使用<code>require</code>调用模块。</p>
+<p>目前，通行的js模块规范主要有两种：<code>CommonJS</code>和<code>AMD</code>。</p>
+<h2 id="AMD规范"><a href="#AMD规范" class="headerlink" title="AMD规范"></a>AMD规范</h2><p><code>AMD</code> 即<code>Asynchronous Module Definition</code>，中文名是“异步模块定义”的意思。它是一个在浏览器端模块化开发的规范，服务器端的规范是<code>CommonJS</code>。</p>
+<p>模块将被异步加载，模块加载不影响后面语句的运行。所有依赖某些模块的语句均放置在回调函数中。</p>
+<p><code>AMD</code>是<code>RequireJS</code> 在推广过程中对模块定义的规范化的产出。</p>
+<h3 id="define-函数"><a href="#define-函数" class="headerlink" title="define() 函数"></a>define() 函数</h3><p><code>AMD</code>规范只定义了一个函数 <code>define()</code>，它是全局变量。函数的描述为：</p>
+<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">define</span>(<span class="section">id</span>?, dependencies?, factory);</span><br></pre></td></tr></table></figure>
+<p>参数说明：</p>
+<p><code>id</code>：指定义中模块的名字，可选；如果没有提供该参数，模块的名字应该默认为模块加载器请求的指定脚本的名字。如果提供了该参数，模块名必须是“顶级”的和绝对的（不允许相对名字）。</p>
+<p>依赖<code>dependencies</code>：是一个当前模块依赖的，已被模块定义的模块标识的数组字面量。<br>依赖参数是可选的，如果忽略此参数，它应该默认为<code>[&quot;require&quot;, &quot;exports&quot;, &quot;module&quot;]</code>。然而，如果工厂方法的长度属性小于3，加载器会选择以函数的长度属性指定的参数个数调用工厂方法。</p>
+<p>工厂方法<code>factory</code>，模块初始化要执行的函数或对象。如果为函数，它应该只被执行一次。如果是对象，此对象应该为模块的输出值。</p>
+<h3 id="模块名的格式"><a href="#模块名的格式" class="headerlink" title="模块名的格式"></a>模块名的格式</h3><p>模块名用来唯一标识定义中模块，它们同样在依赖性数组中使用：</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">模块名是用正斜杠分割的有意义单词的字符串</span><br><span class="line">单词须为驼峰形式，或者<span class="string">"."</span>，<span class="string">".."</span></span><br><span class="line">模块名不允许文件扩展名的形式，如“<span class="string">.js</span>”</span><br><span class="line">模块名可以为 <span class="string">"相对的"</span> 或 <span class="string">"顶级的"</span>。如果首字符为“.”或“<span class="string">..</span>”则为相对的模块名</span><br><span class="line">顶级的模块名从根命名空间的概念模块解析</span><br><span class="line">相对的模块名从 <span class="string">"require"</span> 书写和调用的模块解析</span><br></pre></td></tr></table></figure>
+<h3 id="使用-require-和-exports"><a href="#使用-require-和-exports" class="headerlink" title="使用 require 和 exports"></a>使用 require 和 exports</h3><p>创建一个名为”<code>alpha</code>“的模块，使用了<code>require，exports</code>，和名为”<code>beta</code>“的模块:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="string">"alpha"</span>, [<span class="string">"require"</span>, <span class="string">"exports"</span>, <span class="string">"beta"</span>], <span class="function"><span class="keyword">function</span> (<span class="params">require, exports, beta</span>) </span>&#123;</span><br><span class="line">      exports.verb = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">          <span class="keyword">return</span> beta.verb();</span><br><span class="line">          <span class="comment">//Or:</span></span><br><span class="line">          <span class="keyword">return</span> <span class="built_in">require</span>(<span class="string">"beta"</span>).verb();</span><br><span class="line">      &#125;</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p><code>require API</code>介绍： <a href="https://github.com/amdjs/amdjs-api/wiki/require" target="_blank" rel="noopener">https://github.com/amdjs/amdjs-api/wiki/require</a></p>
+<p><code>AMD</code>规范中文版：<a href="https://github.com/amdjs/amdjs-api/wiki/AMD-(%E4%B8%AD%E6%96%87%E7%89%88)" target="_blank" rel="noopener">https://github.com/amdjs/amdjs-api/wiki/AMD-(%E4%B8%AD%E6%96%87%E7%89%88)</a></p>
+<p>目前，实现<code>AMD</code>的库有<code>RequireJS 、curl 、Dojo 、Nodules</code> 等。</p>
+<h2 id="CommonJS规范"><a href="#CommonJS规范" class="headerlink" title="CommonJS规范"></a>CommonJS规范</h2><p><code>CommonJS</code>是服务器端模块的规范，Node.js采用了这个规范。Node.JS首先采用了js模块化的概念。</p>
+<p>根据<code>CommonJS</code>规范，一个单独的文件就是一个模块。每一个模块都是一个单独的作用域，也就是说，在该模块内部定义的变量，无法被其他模块读取，除非定义为<code>global</code>对象的属性。</p>
+<p>输出模块变量的最好方法是使用<code>module.exports</code>对象。</p>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var i = <span class="number">1</span>;</span><br><span class="line">var <span class="built_in">max</span> = <span class="number">30</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">module</span>.<span class="title">exports</span> =</span> <span class="function"><span class="keyword">function</span> <span class="params">()</span> &#123;</span></span><br><span class="line">  <span class="keyword">for</span> (i -= <span class="number">1</span>; i++ &lt; <span class="built_in">max</span>; ) &#123;</span><br><span class="line">    console.<span class="built_in">log</span>(i);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">max</span> *= <span class="number">1.1</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>上面代码通过<code>module.exports</code>对象，定义了一个函数，该函数就是模块外部与内部通信的桥梁。</p>
+<p>加载模块使用<code>require</code>方法，该方法读取一个文件并执行，最后返回文件内部的<code>module.exports</code>对象。</p>
+<p><code>CommonJS</code> 规范：<a href="http://javascript.ruanyifeng.com/nodejs/module.html" target="_blank" rel="noopener">http://javascript.ruanyifeng.com/nodejs/module.html</a></p>
+<h2 id="RequireJS和SeaJS"><a href="#RequireJS和SeaJS" class="headerlink" title="RequireJS和SeaJS"></a>RequireJS和SeaJS</h2><p><code>RequireJS</code>由James Burke创建，他也是<code>AMD</code>规范的创始人。</p>
+<p><code>define</code>方法用于定义模块，<code>RequireJS</code>要求每个模块放在一个单独的文件里。</p>
+<p><code>RequireJS</code> 和 <code>Sea.js</code> 都是模块加载器，倡导模块化开发理念，核心价值是让 JavaScript 的模块化开发变得简单自然。</p>
+<p><code>SeaJS</code>与<code>RequireJS</code>最大的区别:</p>
+<p><code>SeaJS</code>对模块的态度是懒执行, 而<code>RequireJS</code>对模块的态度是预执行。</p>
+<p><code>RequireJS</code>的用法：<a href="http://www.ruanyifeng.com/blog/2012/11/require_js.html" target="_blank" rel="noopener">http://www.ruanyifeng.com/blog/2012/11/require_js.html</a></p>
+<h3 id="为什么要用requireJS"><a href="#为什么要用requireJS" class="headerlink" title="为什么要用requireJS"></a>为什么要用requireJS</h3><p>试想一下，如果一个网页有很多的js文件，那么浏览器在下载该页面的时候会先加载js文件，从而停止了网页的渲染，如果文件越多，浏览器可能失去响应。其次，要保证js文件的依赖性，依赖性最大的模块（文件）要放在最后加载，当依赖关系很复杂的时候，代码的编写和维护都会变得困难。</p>
+<p><code>RequireJS</code>就是为了解决这两个问题而诞生的：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">（<span class="number">1</span>）实现js文件的异步加载，避免网页失去响应；</span><br><span class="line">（<span class="number">2</span>）管理模块之间的依赖性，便于代码的编写和维护。</span><br></pre></td></tr></table></figure>
+<h2 id="AMD和CMD"><a href="#AMD和CMD" class="headerlink" title="AMD和CMD"></a>AMD和CMD</h2><p><code>CMD</code>（Common Module Definition） 通用模块定义。该规范明确了模块的基本书写格式和基本交互规则。该规范是在国内发展出来的。<code>AMD</code>是依赖关系前置，<code>CMD</code>是按需加载。</p>
+<p>在 <code>CMD</code>规范中，一个模块就是一个文件。代码的书写格式如下：</p>
+<figure class="highlight puppet"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">define</span>(<span class="section">factory</span>);</span><br></pre></td></tr></table></figure>
+<p><code>factory</code>为函数时，表示是模块的构造方法。执行该构造方法，可以得到模块向外提供的接口。<code>factory</code> 方法在执行时，默认会传入三个参数：<code>require、exports 和 module</code>：</p>
+<figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="function"><span class="keyword">function</span><span class="params">(<span class="keyword">require</span>, exports, <span class="keyword">module</span>)</span> <span class="comment">&#123;</span></span></span><br><span class="line"><span class="function"><span class="comment"></span></span></span><br><span class="line"><span class="function"><span class="comment">  // 模块代码</span></span></span><br><span class="line"><span class="function"><span class="comment"></span></span></span><br><span class="line"><span class="function"><span class="comment">&#125;</span>);</span></span><br></pre></td></tr></table></figure>
+<p><code>require</code>是可以把其他模块导入进来的一个参数，而<code>export</code>是可以把模块内的一些属性和方法导出的。</p>
+<p><code>CMD</code>规范地址：<a href="https://github.com/seajs/seajs/issues/242" target="_blank" rel="noopener">https://github.com/seajs/seajs/issues/242</a></p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">AMD 是 RequireJS 在推广过程中对模块定义的规范化产出。</span><br><span class="line"><span class="keyword">CMD</span><span class="bash"> 是 SeaJS 在推广过程中对模块定义的规范化产出。</span></span><br></pre></td></tr></table></figure>
+<p>对于依赖的模块，<code>AMD</code>是提前执行，<code>CMD</code> 是延迟执行。</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">AMD:</span>提前执行（异步加载：依赖先执行）+延迟执行</span><br><span class="line"><span class="symbol">CMD:</span>延迟执行（运行到需加载，根据顺序执行）</span><br></pre></td></tr></table></figure>
+<p><code>CMD</code>推崇依赖就近，<code>AMD</code> 推崇依赖前置。看如下代码：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// CMD</span></span><br><span class="line"><span class="function"><span class="title">define</span><span class="params">(function(require, exports, module)</span></span> &#123;</span><br><span class="line"><span class="selector-tag">var</span> <span class="selector-tag">a</span> = require(<span class="string">'./a'</span>)</span><br><span class="line"><span class="selector-tag">a</span>.doSomething()</span><br><span class="line"><span class="comment">// 此处略去 100 行</span></span><br><span class="line"><span class="selector-tag">var</span> <span class="selector-tag">b</span> = require(<span class="string">'./b'</span>) <span class="comment">// 依赖可以就近书写</span></span><br><span class="line"><span class="selector-tag">b</span>.doSomething()</span><br><span class="line"><span class="comment">// ... </span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// AMD 默认推荐的是</span></span><br><span class="line"><span class="function"><span class="title">define</span><span class="params">([<span class="string">'./a'</span>, <span class="string">'./b'</span>], function(a, b)</span></span> &#123; <span class="comment">// 依赖必须一开始就写好</span></span><br><span class="line"><span class="selector-tag">a</span>.doSomething()</span><br><span class="line"><span class="comment">// 此处略去 100 行</span></span><br><span class="line"><span class="selector-tag">b</span>.doSomething()</span><br><span class="line">...</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>另外一个区别是：</p>
+<figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">AMD:</span>API根据使用范围有区别，但使用同一个api接口</span><br><span class="line"><span class="symbol">CMD:</span>每个API的职责单一</span><br></pre></td></tr></table></figure>
+<p><code>AMD</code>的优点是：异步并行加载，在<code>AMD</code>的规范下，同时异步加载是不会产生错误的。</p>
+<p><code>CMD</code>的机制则不同，这种加载方式会产生错误，如果能规范化模块内容形式，也可以。</p>
+<h2 id="sea-js如何使用？"><a href="#sea-js如何使用？" class="headerlink" title="sea.js如何使用？"></a>sea.js如何使用？</h2><figure class="highlight haml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  -<span class="ruby">  引入sea.js的库</span></span><br><span class="line"><span class="ruby"> -  如何变成模块？</span></span><br><span class="line"><span class="ruby">      - define</span></span><br><span class="line"><span class="ruby"> - 如何调用模块？</span></span><br><span class="line"><span class="ruby">      -exports</span></span><br><span class="line"><span class="ruby">      -sea.js.use</span></span><br><span class="line"><span class="ruby"> - 如何依赖模块？</span></span><br><span class="line"><span class="ruby">      -<span class="keyword">require</span></span></span><br><span class="line"><span class="ruby"></span></span><br><span class="line"><span class="ruby"> &lt;script type=<span class="string">"text/javascript"</span>&gt;</span></span><br><span class="line"><span class="ruby">        define(function (<span class="keyword">require</span>,exports,<span class="class"><span class="keyword">module</span>) &#123;</span></span></span><br><span class="line"><span class="ruby">            /<span class="regexp">/exports : 对外的接口</span></span></span><br><span class="line"><span class="ruby">            /<span class="regexp">/requires : 依赖的接口</span></span></span><br><span class="line"><span class="ruby">            <span class="keyword">require</span>(<span class="string">'./test.js'</span>);<span class="regexp">//</span>如果地址是一个模块的话，那么<span class="keyword">require</span>的返回值就是模块中的exports</span></span><br><span class="line"><span class="ruby">        &#125;)</span></span><br><span class="line"><span class="ruby">&lt;<span class="regexp">/script&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="sea-js-开发实例"><a href="#sea-js-开发实例" class="headerlink" title="sea.js 开发实例"></a>sea.js 开发实例</h2><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"> <span class="meta">&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">xmlns</span>=<span class="string">"http://www.w3.org/1999/xhtml"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=utf-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">title</span>&gt;</span>鼠标拖拽的模块化开发实践<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css"><span class="selector-id">#div1</span>&#123; <span class="attribute">width</span>:<span class="number">200px</span>; <span class="attribute">height</span>:<span class="number">200px</span>; <span class="attribute">background</span>:black; <span class="attribute">position</span>:absolute; <span class="attribute">display</span>:none;&#125;</span></span><br><span class="line"><span class="css"><span class="selector-id">#div2</span>&#123; <span class="attribute">width</span>:<span class="number">30px</span>; <span class="attribute">height</span>:<span class="number">30px</span>; <span class="attribute">background</span>:yellow; <span class="attribute">position</span>:absolute; <span class="attribute">bottom</span>:<span class="number">0</span>; <span class="attribute">right</span>:<span class="number">0</span>;&#125;</span></span><br><span class="line"><span class="css"><span class="selector-id">#div3</span>&#123; <span class="attribute">width</span>:<span class="number">100px</span>; <span class="attribute">height</span>:<span class="number">100px</span>; <span class="attribute">background</span>:blue; <span class="attribute">position</span>:absolute; <span class="attribute">right</span>:<span class="number">0</span>; <span class="attribute">top</span>:<span class="number">0</span>;&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"./sea.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="actionscript"><span class="comment">//A同事 ：</span></span></span><br><span class="line"><span class="actionscript">seajs.use(<span class="string">'./main.js'</span>);</span></span><br><span class="line"><span class="undefined">    </span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"确定"</span> <span class="attr">id</span>=<span class="string">"input1"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div2"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div3"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="A同事"><a href="#A同事" class="headerlink" title="A同事"></a>A同事</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//A同事写的main.js:</span></span><br><span class="line"></span><br><span class="line">define(<span class="function"><span class="keyword">function</span> (<span class="params">require,exports,module</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> oInput = <span class="built_in">document</span>.getElementById(<span class="string">'input1'</span>);</span><br><span class="line">    <span class="keyword">var</span> oDiv1 = <span class="built_in">document</span>.getElementById(<span class="string">'div1'</span>);</span><br><span class="line">    <span class="keyword">var</span> oDiv2 = <span class="built_in">document</span>.getElementById(<span class="string">'div2'</span>);</span><br><span class="line">    <span class="keyword">var</span> oDiv3 = <span class="built_in">document</span>.getElementById(<span class="string">'div3'</span>);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">require</span>(<span class="string">'./drag.js'</span>).drag(oDiv3);</span><br><span class="line">    oInput.onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">        oDiv1.style.display = <span class="string">'block'</span>;</span><br><span class="line">        <span class="built_in">require</span>(<span class="string">'./scale.js'</span>).scale(oDiv1,oDiv2);</span><br><span class="line"></span><br><span class="line">        <span class="built_in">require</span>.async(<span class="string">'./scale.js'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">ex</span>) </span>&#123;</span><br><span class="line">            ex.scale(oDiv1,oDiv2);</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="B同事"><a href="#B同事" class="headerlink" title="B同事"></a>B同事</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment">//B同事写的drag.js:</span></span><br><span class="line"></span><br><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require,exports,module</span>)</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">drag</span>(<span class="params">obj</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> disX = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">var</span> disY = <span class="number">0</span>;</span><br><span class="line">        obj.onmousedown = <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> ev = ev || <span class="built_in">window</span>.event;</span><br><span class="line">            disX = ev.clientX - obj.offsetLeft;</span><br><span class="line">            disY = ev.clientY - obj.offsetTop;</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">document</span>.onmousemove = <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">                <span class="keyword">var</span> ev = ev || <span class="built_in">window</span>.event;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">                 <span class="keyword">var</span> L = <span class="built_in">require</span>(<span class="string">'./range.js'</span>).range(ev.clientX - disX , <span class="built_in">document</span>.documentElement.clientWidth - obj.offsetWidth , <span class="number">0</span> );</span><br><span class="line">                 <span class="keyword">var</span> T = <span class="built_in">require</span>(<span class="string">'./range.js'</span>).range(ev.clientY - disY , <span class="built_in">document</span>.documentElement.clientHeight - obj.offsetHeight , <span class="number">0</span> );</span><br><span class="line"></span><br><span class="line">                </span><br><span class="line">                obj.style.left = L + <span class="string">'px'</span>;</span><br><span class="line">                obj.style.top = T + <span class="string">'px'</span>;</span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="built_in">document</span>.onmouseup = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="built_in">document</span>.onmousemove = <span class="literal">null</span>;</span><br><span class="line">                <span class="built_in">document</span>.onmouseup = <span class="literal">null</span>;</span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    exports.drag = drag;<span class="comment">//对外提供接口</span></span><br><span class="line">    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="C同事"><a href="#C同事" class="headerlink" title="C同事"></a>C同事</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//C同事写的scale.js:</span></span><br><span class="line"></span><br><span class="line">define(<span class="function"><span class="keyword">function</span>(<span class="params">require,exports,module</span>)</span>&#123;</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">scale</span>(<span class="params">obj1,obj2</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> disX = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">var</span> disY = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">var</span> disW = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">var</span> disH = <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        obj2.onmousedown = <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">            <span class="keyword">var</span> ev = ev || <span class="built_in">window</span>.event;</span><br><span class="line">            disX = ev.clientX;</span><br><span class="line">            disY = ev.clientY;</span><br><span class="line">            disW = obj1.offsetWidth;</span><br><span class="line">            disH = obj1.offsetHeight;</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">document</span>.onmousemove = <span class="function"><span class="keyword">function</span>(<span class="params">ev</span>)</span>&#123;</span><br><span class="line">                <span class="keyword">var</span> ev = ev || <span class="built_in">window</span>.event;</span><br><span class="line">                </span><br><span class="line">                <span class="keyword">var</span> W = <span class="built_in">require</span>(<span class="string">'./range.js'</span>).range(ev.clientX - disX + disW , <span class="number">500</span> , <span class="number">100</span>);</span><br><span class="line">                <span class="keyword">var</span> H = <span class="built_in">require</span>(<span class="string">'./range.js'</span>).range(ev.clientY - disY + disH , <span class="number">500</span> , <span class="number">100</span>);</span><br><span class="line">                </span><br><span class="line">                obj1.style.width = W + <span class="string">'px'</span>;</span><br><span class="line">                obj1.style.height = H + <span class="string">'px'</span>;</span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="built_in">document</span>.onmouseup = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">                <span class="built_in">document</span>.onmousemove = <span class="literal">null</span>;</span><br><span class="line">                <span class="built_in">document</span>.onmouseup = <span class="literal">null</span>;</span><br><span class="line">            &#125;;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        &#125;;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    exports.scale = scale;</span><br><span class="line">    </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="D同事"><a href="#D同事" class="headerlink" title="D同事"></a>D同事</h3><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">// D同事的<span class="built_in">range</span>.js--限定拖拽范围</span><br><span class="line"></span><br><span class="line">    define(<span class="function"><span class="keyword">function</span><span class="params">(require,exports,module)</span></span>&#123;</span><br><span class="line">        </span><br><span class="line">        <span class="function"><span class="keyword">function</span></span> <span class="built_in">range</span>(iNum,iMax,iMin)&#123;</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">if</span>( iNum &gt; iMax )&#123;</span><br><span class="line">                <span class="keyword">return</span> iMax;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> <span class="keyword">if</span>( iNum &lt; iMin )&#123;</span><br><span class="line">                <span class="keyword">return</span> iMin;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span>&#123;</span><br><span class="line">                <span class="keyword">return</span> iNum;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        exports.<span class="built_in">range</span> = <span class="built_in">range</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="requirejs开发实例"><a href="#requirejs开发实例" class="headerlink" title="requirejs开发实例"></a>requirejs开发实例</h2><p><code>require.config</code>是用来定义别名的，在<code>paths</code>属性下配置别名。然后通过<code>requirejs(参数一，参数二)</code>；参数一是数组，传入我们需要引用的模块名，第二个参数是个回调函数，回调函数传入一个变量，代替刚才所引入的模块。</p>
+<h3 id="main-js文件"><a href="#main-js文件" class="headerlink" title="main.js文件"></a>main.js文件</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//别名配置</span></span><br><span class="line">requirejs.config(&#123;</span><br><span class="line">    paths: &#123;</span><br><span class="line">        jquery: <span class="string">'jquery.min'</span> <span class="comment">//可以省略.js</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//引入模块，用变量$表示jquery模块</span></span><br><span class="line">requirejs([<span class="string">'jquery'</span>], <span class="function"><span class="keyword">function</span> (<span class="params">$</span>) </span>&#123;</span><br><span class="line">    $(<span class="string">'body'</span>).css(<span class="string">'background-color'</span>,<span class="string">'red'</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>引入模块也可以只写<code>require()</code>。<code>requirejs</code>通过<code>define()</code>定义模块，定义的参数上同。在此模块内的方法和变量外部是无法访问的，只有通过<code>return</code>返回才行。</p>
+<h3 id="define-模块"><a href="#define-模块" class="headerlink" title="define 模块"></a>define 模块</h3><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define([<span class="string">'jquery'</span>], <span class="function"><span class="keyword">function</span> <span class="params">($)</span> </span>&#123;<span class="comment">//引入jQuery模块</span></span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        add: <span class="function"><span class="keyword">function</span><span class="params">(x,y)</span></span>&#123;</span><br><span class="line">            <span class="keyword">return</span> x + y;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>将该模块命名为<code>math.js</code>保存。</p>
+<h3 id="main-js引入模块方法"><a href="#main-js引入模块方法" class="headerlink" title="main.js引入模块方法"></a>main.js引入模块方法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>([<span class="string">'jquery'</span>,<span class="string">'math'</span>], <span class="function"><span class="keyword">function</span> (<span class="params">$,math</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(math.add(<span class="number">10</span>,<span class="number">100</span>));<span class="comment">//110</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="没有依赖"><a href="#没有依赖" class="headerlink" title="没有依赖"></a>没有依赖</h3><p>如果定义的模块不依赖其他模块，则可以：</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">define(<span class="keyword">function</span> <span class="title"></span>() &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="type">&#123;</span></span><br><span class="line">        name: <span class="string">"trigkit4"</span>,</span><br><span class="line">        age: <span class="string">"21"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>AMD</code>推荐的风格通过返回一个对象做为模块对象，<code>CommonJS</code>的风格通过对<code>module.exports或exports</code>的属性赋值来达到暴露模块对象的目的。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+<div>
+  
+    
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/25/JS和jQuery里的this关键字/" rel="next" title="详解JS中的this关键字">
+                <i class="fa fa-chevron-left"></i> 详解JS中的this关键字
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/03/CSS3：background属性/" rel="prev" title="CSS3：background属性">
+                CSS3：background属性 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="思齐" />
+          <p class="site-author-name" itemprop="name">思齐</p>
+           
+              <p class="site-description motion-element" itemprop="description">思与之齐</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Syzq" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/p/1005055693566329/home?from=page_100505&mod=TAB#place" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/beme" target="_blank" title="S  F">
+                  
+                    <i class="fa fa-fw fa-scribd"></i>
+                  
+                  S  F
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/YXY81519/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-comment"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#什么是模块化开发"><span class="nav-number">1.</span> <span class="nav-text">什么是模块化开发</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AMD规范"><span class="nav-number">2.</span> <span class="nav-text">AMD规范</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#define-函数"><span class="nav-number">2.1.</span> <span class="nav-text">define() 函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模块名的格式"><span class="nav-number">2.2.</span> <span class="nav-text">模块名的格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-require-和-exports"><span class="nav-number">2.3.</span> <span class="nav-text">使用 require 和 exports</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CommonJS规范"><span class="nav-number">3.</span> <span class="nav-text">CommonJS规范</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RequireJS和SeaJS"><span class="nav-number">4.</span> <span class="nav-text">RequireJS和SeaJS</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要用requireJS"><span class="nav-number">4.1.</span> <span class="nav-text">为什么要用requireJS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AMD和CMD"><span class="nav-number">5.</span> <span class="nav-text">AMD和CMD</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sea-js如何使用？"><span class="nav-number">6.</span> <span class="nav-text">sea.js如何使用？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#sea-js-开发实例"><span class="nav-number">7.</span> <span class="nav-text">sea.js 开发实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#A同事"><span class="nav-number">7.1.</span> <span class="nav-text">A同事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#B同事"><span class="nav-number">7.2.</span> <span class="nav-text">B同事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#C同事"><span class="nav-number">7.3.</span> <span class="nav-text">C同事</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#D同事"><span class="nav-number">7.4.</span> <span class="nav-text">D同事</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#requirejs开发实例"><span class="nav-number">8.</span> <span class="nav-text">requirejs开发实例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#main-js文件"><span class="nav-number">8.1.</span> <span class="nav-text">main.js文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#define-模块"><span class="nav-number">8.2.</span> <span class="nav-text">define 模块</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#main-js引入模块方法"><span class="nav-number">8.3.</span> <span class="nav-text">main.js引入模块方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#没有依赖"><span class="nav-number">8.4.</span> <span class="nav-text">没有依赖</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-mars"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">思齐</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

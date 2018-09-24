@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="S_UNmLCii9OVqOu5unmzIdCxCetiyjd0biEMaruNi0U" />
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=PingFang SC:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="React," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="一、React起步1.1 bower 的使用bower是前端界的npm。npm有npm install命令，bower也有bower install命令。用来管理、维护前端开发中的JS库的。 bower只负责前端库，nodejs的东西它不管，比如你bower拿不到mongodb的。 自定义bower的安装目录 在项目根下创建一个名为.bowerrc的文件然后 123&amp;#123;  &quot;directo">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React学习（一）">
+<meta property="og:url" content="https://syzq.github.io/2017/08/23/React学习（一）/index.html">
+<meta property="og:site_name" content="Syzq">
+<meta property="og:description" content="一、React起步1.1 bower 的使用bower是前端界的npm。npm有npm install命令，bower也有bower install命令。用来管理、维护前端开发中的JS库的。 bower只负责前端库，nodejs的东西它不管，比如你bower拿不到mongodb的。 自定义bower的安装目录 在项目根下创建一个名为.bowerrc的文件然后 123&amp;#123;  &quot;directo">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006djCGZly1fj8xm048s8j304j053glf.jpg">
+<meta property="og:updated_time" content="2018-09-23T15:58:24.274Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React学习（一）">
+<meta name="twitter:description" content="一、React起步1.1 bower 的使用bower是前端界的npm。npm有npm install命令，bower也有bower install命令。用来管理、维护前端开发中的JS库的。 bower只负责前端库，nodejs的东西它不管，比如你bower拿不到mongodb的。 自定义bower的安装目录 在项目根下创建一个名为.bowerrc的文件然后 123&amp;#123;  &quot;directo">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006djCGZly1fj8xm048s8j304j053glf.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://syzq.github.io/2017/08/23/React学习（一）/"/>
+
+
+
+
+
+  <title>React学习（一） | Syzq</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Syzq</span>
+       <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A blog that you won't read.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://syzq.github.io/2017/08/23/React学习（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="思齐">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Syzq">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React学习（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-23T18:15:06+08:00">
+                2017-08-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/React学习/" itemprop="url" rel="index">
+                    <span itemprop="name">React学习</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="一、React起步"><a href="#一、React起步" class="headerlink" title="一、React起步"></a>一、React起步</h2><h3 id="1-1-bower-的使用"><a href="#1-1-bower-的使用" class="headerlink" title="1.1 bower 的使用"></a>1.1 bower 的使用</h3><p>bower是前端界的npm。npm有<code>npm install</code>命令，bower也有<code>bower install</code>命令。用来管理、维护前端开发中的JS库的。</p>
+<p>bower只负责前端库，nodejs的东西它不管，比如你bower拿不到mongodb的。</p>
+<p><strong>自定义bower的安装目录</strong></p>
+<p>在项目根下创建一个名为<code>.bowerrc</code>的文件然后</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"directory"</span> : <span class="string">"js/lib"</span>   //指定bower安装的目录</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>执行<code>bower install react</code>可以看到文件下载到 js 文件夹下的 lib 文件夹中了。</p>
+<p><strong>bower初始化</strong></p>
+<figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bower </span>init  </span><br><span class="line">// 在git <span class="keyword">bash中执行会出错，在windows </span>cmd 中执行此命令</span><br></pre></td></tr></table></figure>
+<p>会提示你输入一些基本信息，根据提示按回车或者空格即可，然后会生成一个<code>bower.json</code>文件，用来保存该项目的配置</p>
+<p><strong>包的安装</strong></p>
+<p>比如要安装一个react，输入如下命令：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bower </span><span class="keyword">install </span>react --save</span><br></pre></td></tr></table></figure>
+<p>然后bower就会从远程下载react最新版本到你的js/lib目录下<br>其中–save参数是保存配置到你的bower.json，你会发现bower.json文件已经多了一行：</p>
+<figure class="highlight xquery"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"dependencies"</span>: &#123;</span><br><span class="line">   <span class="string">"react"</span>: <span class="string">"^15.6.1"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="1-2-认识-babel-和-JSX"><a href="#1-2-认识-babel-和-JSX" class="headerlink" title="1.2 认识 babel 和 JSX"></a>1.2 认识 babel 和 JSX</h3><p>bable是一个compiler（编译器），英语原意是噪音的意思，把噪音变为我们能听懂的声音。</p>
+<p>bable可以最大限度的让我们的前端界面，现在就可以使用ECMAScript2016甚至今后有更新的语法。bable会把它编译为现在能用的JS语句。</p>
+<p>我们现在仅仅需要把babel运行在前端。所以此时仅仅需要用bower去下载即可：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bower </span><span class="keyword">install </span><span class="keyword">babel</span></span><br></pre></td></tr></table></figure>
+<p>下载之后的文件叫做 <code>browser.min.js</code>，表示babel在浏览器端在进行babel语句的编译。</p>
+<p>babel和react共同提供了一个语法，叫做jsx。</p>
+<h3 id="1-3-Hello-World"><a href="#1-3-Hello-World" class="headerlink" title="1.3 Hello,World !"></a>1.3 Hello,World !</h3><p>引入三个文件，分别是react、react-dom、browser(是babel文件)：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/react/react.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/react/react-dom.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"js/babel/browser.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"box"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="undefined">		ReactDOM.render(</span></span><br><span class="line"><span class="javascript">			&lt;h1&gt;Hello,React!<span class="xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>,</span></span><br><span class="line"><span class="javascript">			<span class="built_in">document</span>.getElementById(<span class="string">'box'</span>)</span></span><br><span class="line"><span class="undefined">		);</span></span><br><span class="line"><span class="undefined">	</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在一个script标签，这个标签的type是text/babel，此时babel就会在浏览器端进行JSX和ECMAScript2016的翻译工作。</p>
+<p><code>ReactDOM.render()</code>函数表示让一个JSX让它上树，此时接受两个参数，一个JSX语句，一个是盒子。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ReactDOM.render(</span><br><span class="line">			&lt;h1&gt;Hello,React!<span class="xml"><span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>,</span><br><span class="line">			<span class="built_in">document</span>.getElementById(<span class="string">'box'</span>)</span><br><span class="line">		);</span><br></pre></td></tr></table></figure>
+<p>此时盒子中的所有内容都将被ReactDOM对象接管。</p>
+<p>JSX是一个语法糖，目的就是让HTML拥有JavaScript的作用域，这是一个React突破性的创举。</p>
+<p>比如：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript">	<span class="keyword">var</span> str=<span class="string">"Cool"</span>;</span></span><br><span class="line"><span class="undefined">	ReactDOM.render(</span></span><br><span class="line"><span class="handlebars"><span class="xml">		<span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello,React!&#123;str&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>,</span></span></span><br><span class="line"><span class="javascript">		<span class="built_in">document</span>.getElementById(<span class="string">'box'</span>)</span></span><br><span class="line"><span class="undefined">	);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此时JSX语句，“沐浴”在了JS的作用域下。</p>
+<p>JSX 的基本语法规则：遇到 HTML 标签（以 &lt; 开头），就用 HTML 规则解析；遇到代码块（以 { 开头），就用 JavaScript 规则解析。</p>
+<p>JSX 允许直接在模板插入 JavaScript 变量。如果这个变量是一个数组，则会展开这个数组的所有成员</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="undefined"></span></span></span><br><span class="line"><span class="xml">	var arr = [</span></span><br><span class="line"><span class="xml"> 	<span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello world!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span>,</span></span><br><span class="line"><span class="xml">  	<span class="tag">&lt;<span class="name">h2</span>&gt;</span>React is awesome<span class="tag">&lt;/<span class="name">h2</span>&gt;</span>,</span></span><br><span class="line"><span class="xml">];</span></span><br><span class="line"><span class="xml">ReactDOM.render(</span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><span class="template-variable">&#123;arr&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span>,</span></span><br><span class="line"><span class="xml">  document.getElementById('box')</span></span><br><span class="line"><span class="xml">);</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h2 id="二、创建组件"><a href="#二、创建组件" class="headerlink" title="二、创建组件"></a>二、创建组件</h2><h3 id="2-1-方法一"><a href="#2-1-方法一" class="headerlink" title="2.1 方法一"></a>2.1 方法一</h3><p>最简单的创建一个自定义的组件的方法，就是使用一个函数，这个函数必须大写字母开头，如果是小写字母开头就不会渲染为组件。函数返回JSX语句。使用这个组件的时候，用自封闭标签来当做这个组件放置的位置：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript"> 	<span class="function"><span class="keyword">function</span> <span class="title">MyComponent</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="javascript"> 		<span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Welcome !<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span></span><br><span class="line"><span class="undefined"> 	&#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"> 	ReactDOM.render(</span></span><br><span class="line"><span class="handlebars"><span class="xml">		<span class="tag">&lt;<span class="name">MyComponent</span>/&gt;</span>,</span></span></span><br><span class="line"><span class="javascript">		<span class="built_in">document</span>.getElementById(<span class="string">"box"</span>)</span></span><br><span class="line"><span class="undefined"> 	);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-2-方法二"><a href="#2-2-方法二" class="headerlink" title="2.2 方法二"></a>2.2 方法二</h3><p>创建一个自定义组件，就是创建一个类，这个类要继承<code>React.Component</code>对象。这个类必须定义类方法render，这个方法返回一个JSX语句。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript">	<span class="comment">//要定义一个组件，实际上就是定义一个类</span></span></span><br><span class="line"><span class="actionscript">	<span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span></span><br><span class="line"><span class="undefined">		render()&#123;</span></span><br><span class="line"><span class="javascript">			<span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是一个h1，我买了一个iphone&#123;3+4&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">	&#125;</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">	<span class="comment">//应用这个组件</span></span></span><br><span class="line"><span class="undefined">	ReactDOM.render(</span></span><br><span class="line"><span class="handlebars"><span class="xml">		<span class="tag">&lt;<span class="name">section</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">			<span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">			<span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">			<span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">			<span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">		<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span></span></span><br><span class="line"><span class="undefined">		,</span></span><br><span class="line"><span class="javascript">		<span class="built_in">document</span>.getElementById(<span class="string">"box"</span>)</span></span><br><span class="line"><span class="undefined">	)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-3-方法三"><a href="#2-3-方法三" class="headerlink" title="2.3 方法三"></a>2.3 方法三</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript">	<span class="keyword">var</span> MyComponent = React.createClass(&#123;</span></span><br><span class="line"><span class="actionscript">		render : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="javascript">			<span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>我是一个h1，我是&#123;2 + 4&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">	&#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">		ReactDOM.render(</span></span><br><span class="line"><span class="handlebars"><span class="xml">		<span class="tag">&lt;<span class="name">section</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">			<span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">			<span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">			<span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">		<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span></span></span><br><span class="line"><span class="undefined">		,</span></span><br><span class="line"><span class="javascript">		<span class="built_in">document</span>.getElementById(<span class="string">"box"</span>)</span></span><br><span class="line"><span class="undefined">	)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="三、获得组件自定义属性"><a href="#三、获得组件自定义属性" class="headerlink" title="三、获得组件自定义属性"></a>三、获得组件自定义属性</h2><h3 id="3-1-this-props"><a href="#3-1-this-props" class="headerlink" title="3.1 this.props"></a>3.1 this.props</h3><p>我们创建组件，肯定要设置、使用组件上面的属性。请看下面的程序，在创建组件的时候，JSX中如果出现了this，this一定表示使用这个组件的时候写的那个自定义标签。props就是函数的属性，可以继续打点去枚举任何属性。</p>
+<figure class="highlight dust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="undefined"></span></span></span><br><span class="line"><span class="xml">	var MyComponent = React.createClass(</span><span class="template-variable">&#123;</span></span><br><span class="line"><span class="template-variable">		render : function()&#123;</span></span><br><span class="line"><span class="template-variable">			return &lt;p&gt;&#123;this.props.a&#125;</span><span class="xml"><span class="tag">&lt;/<span class="name">p</span>&gt;</span>;</span></span><br><span class="line"><span class="xml">		&#125;</span></span><br><span class="line"><span class="xml">	&#125;);</span></span><br><span class="line"><span class="xml">	ReactDOM.render(</span></span><br><span class="line"><span class="xml">		<span class="tag">&lt;<span class="name">section</span>&gt;</span></span></span><br><span class="line"><span class="xml">			<span class="tag">&lt;<span class="name">MyComponent</span> <span class="attr">a</span>=<span class="string">"11"</span>/&gt;</span></span></span><br><span class="line"><span class="xml">			<span class="tag">&lt;<span class="name">MyComponent</span> <span class="attr">a</span>=<span class="string">"22"</span>/&gt;</span></span></span><br><span class="line"><span class="xml">			<span class="tag">&lt;<span class="name">MyComponent</span> <span class="attr">a</span>=<span class="string">"33"</span>/&gt;</span></span></span><br><span class="line"><span class="xml">		<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span></span><br><span class="line"><span class="xml">		,</span></span><br><span class="line"><span class="xml">		document.querySelector("#box")</span></span><br><span class="line"><span class="xml">	);</span></span><br><span class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h3 id="3-2-组件的嵌套，属性级级上传"><a href="#3-2-组件的嵌套，属性级级上传" class="headerlink" title="3.2 组件的嵌套，属性级级上传"></a>3.2 组件的嵌套，属性级级上传</h3><p>组件的嵌套，属性可以级级上传。this是使用这个自定义组件的时候那个标签。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript">	<span class="keyword">var</span> InnerComponent = React.createClass(&#123;</span></span><br><span class="line"><span class="actionscript">		render : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="javascript">			<span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&#123;this.props[</span>"<span class="attr">data-href</span>"]&#125;&gt;</span>去这个网站<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span>;</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">	&#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript">	<span class="keyword">var</span> MyComponent = React.createClass(&#123;</span></span><br><span class="line"><span class="actionscript">		render : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">			<span class="keyword">return</span> (</span></span><br><span class="line"><span class="handlebars"><span class="xml">				<span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">					<span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;this.props.info&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="actionscript">					&lt;InnerComponent data-href=&#123;<span class="keyword">this</span>.props[<span class="string">"data-href"</span>]&#125; /&gt;</span></span><br><span class="line"><span class="handlebars"><span class="xml">				<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span></span><br><span class="line"><span class="undefined">			);</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">	&#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="undefined">	ReactDOM.render(</span></span><br><span class="line"><span class="handlebars"><span class="xml">		<span class="tag">&lt;<span class="name">section</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">			<span class="tag">&lt;<span class="name">MyComponent</span> <span class="attr">info</span>=<span class="string">"百度"</span> <span class="attr">data-href</span>=<span class="string">"http://www.baidu.com/"</span>/&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">			<span class="tag">&lt;<span class="name">MyComponent</span> <span class="attr">info</span>=<span class="string">"网易"</span> <span class="attr">data-href</span>=<span class="string">"http://www.163.com/"</span>/&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">			<span class="tag">&lt;<span class="name">MyComponent</span> <span class="attr">info</span>=<span class="string">"搜狐"</span> <span class="attr">data-href</span>=<span class="string">"http://www.sohu.cn/"</span>/&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">		<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span></span></span><br><span class="line"><span class="undefined">		,</span></span><br><span class="line"><span class="javascript">		<span class="built_in">document</span>.querySelector(<span class="string">"#box"</span>)</span></span><br><span class="line"><span class="undefined">	);</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="四、获得真实的DOM节点"><a href="#四、获得真实的DOM节点" class="headerlink" title="四、获得真实的DOM节点"></a>四、获得真实的DOM节点</h2><h3 id="4-1-先说说事件监听"><a href="#4-1-先说说事件监听" class="headerlink" title="4.1 先说说事件监听"></a>4.1 先说说事件监听</h3><p>我们现在要给一个组件里面的按钮添加事件监听，此时用onClick、onMoouseenter、onFocus的写法，所有原来的事件名，on之后的字母大写，此时React会帮你用DOM2级绑定到冒泡阶段上。注意大写字母！！</p>
+<p>创建一个组件的时候，不仅仅只有Render方法，还可以有其他方法，其他方法都是组件里面的方法。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript">	<span class="keyword">var</span> MyComponent = React.createClass(&#123;</span></span><br><span class="line"><span class="actionscript">		sayhello : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">			alert(<span class="string">'Hello'</span>)</span></span><br><span class="line"><span class="undefined">		&#125;,</span></span><br><span class="line"><span class="actionscript">		render : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">		<span class="keyword">return</span> (</span></span><br><span class="line"><span class="handlebars"><span class="xml">			<span class="tag">&lt;<span class="name">section</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">				<span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">				<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"按钮"</span> <span class="attr">onClick</span>=<span class="string">&#123;this.sayhello&#125;/</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">			<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span></span></span><br><span class="line"><span class="undefined">		);</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">	&#125;);</span></span><br><span class="line"><span class="undefined">	ReactDOM.render(</span></span><br><span class="line"><span class="handlebars"><span class="xml">		<span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span></span></span><br><span class="line"><span class="undefined">		,</span></span><br><span class="line"><span class="javascript">		<span class="built_in">document</span>.querySelector(<span class="string">"#box"</span>)</span></span><br><span class="line"><span class="undefined">	)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-2-获得DOM元素"><a href="#4-2-获得DOM元素" class="headerlink" title="4.2 获得DOM元素"></a>4.2 获得DOM元素</h3><p>组件并不是真实的 DOM 节点，而是存在于内存之中的一种数据结构，叫做虚拟 DOM （virtual DOM）。只有当它插入文档以后，才会变成真实的 DOM 。根据 React 的设计，所有的 DOM 变动，都先在虚拟 DOM 上发生，然后再将实际发生变动的部分，反映在真实 DOM上，这种算法叫做 DOM diff ，它可以极大提高网页的性能表现。</p>
+<p>但是，有时需要从组件获取真实 DOM 的节点，这时就要用到 ref 属性。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript">	<span class="keyword">var</span> MyComponent = React.createClass(&#123;</span></span><br><span class="line"><span class="actionscript">		changeColor : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">			<span class="keyword">this</span>.refs.mytext.style.color=<span class="string">"red"</span>;</span></span><br><span class="line"><span class="undefined">		&#125;,</span></span><br><span class="line"><span class="actionscript">		render : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">		<span class="keyword">return</span> (</span></span><br><span class="line"><span class="handlebars"><span class="xml">			<span class="tag">&lt;<span class="name">section</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">				<span class="tag">&lt;<span class="name">h1</span>  <span class="attr">ref</span>=<span class="string">"mytext"</span>&gt;</span>Hello<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">				<span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">value</span>=<span class="string">"按钮"</span> <span class="attr">onClick</span>=<span class="string">&#123;this.changeColor&#125;/</span>&gt;</span></span></span></span><br><span class="line"><span class="handlebars"><span class="xml">			<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span></span></span><br><span class="line"><span class="undefined">		);</span></span><br><span class="line"><span class="undefined">		&#125;</span></span><br><span class="line"><span class="undefined">	&#125;);</span></span><br><span class="line"><span class="undefined">	ReactDOM.render(</span></span><br><span class="line"><span class="handlebars"><span class="xml">		<span class="tag">&lt;<span class="name">MyComponent</span> /&gt;</span></span></span></span><br><span class="line"><span class="undefined">		,</span></span><br><span class="line"><span class="javascript">		<span class="built_in">document</span>.querySelector(<span class="string">"#box"</span>)</span></span><br><span class="line"><span class="undefined">	)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>this.refs.[refName]</code>就会返回这个真实的 DOM 节点。注意设置的时候用<code>ref</code>，引用的使用用<code>refs</code>。</p>
+<h2 id="五、状态"><a href="#五、状态" class="headerlink" title="五、状态"></a>五、状态</h2><p>我们用React创建的每一个<code>component</code>都有自己的状态，实际上定义的时候是状态的模型，实例化每一个component的时候，每一个component都拥有自己的状态。state 和 props 主要的区别在于 props 是不可变的，而 state 可以根据与用户交互来改变。这就是为什么有些容器组件需要定义 state 来更新和修改数据。 而子组件只能通过 props 来传递数据。</p>
+<h3 id="5-1-初始状态和使用状态"><a href="#5-1-初始状态和使用状态" class="headerlink" title="5.1 初始状态和使用状态"></a>5.1 初始状态和使用状态</h3><p>我们现在可以给这个组件的实例设置一个状态，状态是一个JSON对象，里面用k-v来维持一个个状态，此时用<code>getInitialState</code>函数来设置初始状态。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/babel"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> MyComponent = React.createClass(&#123;</span></span><br><span class="line"><span class="actionscript">    <span class="comment">//创建一个组件类</span></span></span><br><span class="line"><span class="actionscript">    <span class="comment">//得到初始状态函数，这个函数必须返回一个对象</span></span></span><br><span class="line"><span class="actionscript">    getInitialState : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="actionscript">        <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="actionscript">            <span class="string">"a"</span> : <span class="number">1</span></span></span><br><span class="line"><span class="undefined">        &#125;</span></span><br><span class="line"><span class="undefined">    &#125;,</span></span><br><span class="line"><span class="actionscript">    render : <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;this.state.a&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span></span><br><span class="line"><span class="undefined">    &#125;</span></span><br><span class="line"><span class="undefined">&#125;);</span></span><br><span class="line"><span class="undefined"></span></span><br><span class="line"><span class="actionscript"><span class="comment">//使用组件</span></span></span><br><span class="line"><span class="undefined">ReactDOM.render(</span></span><br><span class="line"><span class="javascript">    &lt;MyComponent&gt;<span class="xml"><span class="tag">&lt;/<span class="name">MyComponent</span>&gt;</span></span></span></span><br><span class="line"><span class="undefined">    ,</span></span><br><span class="line"><span class="javascript">    <span class="built_in">document</span>.getElementById(<span class="string">"box"</span>)</span></span><br><span class="line"><span class="undefined">)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果创建组件的时候使用的是ES6的class关键字创建的，可以很明显看见state是自己身上的属性：</p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span></span>&#123;</span><br><span class="line">    constructor(props)&#123;</span><br><span class="line">        <span class="keyword">super</span>(props);  <span class="comment">//调用超类</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//所谓的状态就是自己身上的属性</span></span><br><span class="line">        <span class="keyword">this</span>.state = &#123;</span><br><span class="line">            <span class="string">"a"</span> : <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    render()&#123;</span><br><span class="line">        <span class="keyword">return</span> &lt;h1&gt;你好&#123;<span class="keyword">this</span>.state.a&#125;&lt;/h1&gt;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="5-2-设置状态"><a href="#5-2-设置状态" class="headerlink" title="5.2 设置状态"></a>5.2 设置状态</h3><p>如果要更改状态， 不能直接用点语法更改状态，一定要使用<code>setState()</code>函数，因为这个函数能够让视图同步刷新。但是是局部刷新，就是所有用到这个状态的地方进行刷新。</p>
+<p><strong>案例 - 购物车数量</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/006djCGZly1fj8xm048s8j304j053glf.jpg" alt="image"></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=<span class="string">"text/babel"</span>&gt;</span><br><span class="line"></span><br><span class="line"> 	<span class="keyword">var</span> MyComponent = React.createClass(&#123;</span><br><span class="line"> 		<span class="comment">//创建一个组件类</span></span><br><span class="line"> 		<span class="comment">//得到初始状态函数，这个函数必须返回一个对象</span></span><br><span class="line"> 		getInitialState : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> 			<span class="keyword">return</span> &#123;</span><br><span class="line"> 				<span class="string">"a"</span> : <span class="number">1</span></span><br><span class="line"> 			&#125;</span><br><span class="line"> 		&#125;,</span><br><span class="line"> 		minus : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> 			<span class="comment">//让状态改变，setState会引发视图的刷新。并且还是局部刷新。</span></span><br><span class="line"> 			<span class="keyword">this</span>.setState(&#123;<span class="string">"a"</span> : <span class="keyword">this</span>.state.a - <span class="number">1</span>&#125;);</span><br><span class="line"> 		&#125;,</span><br><span class="line"> 		add : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> 			<span class="keyword">this</span>.setState(&#123;<span class="string">"a"</span> : <span class="keyword">this</span>.state.a + <span class="number">1</span>&#125;);</span><br><span class="line"> 		&#125;,</span><br><span class="line"> 		render : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> 			<span class="keyword">return</span> (</span><br><span class="line"> 				&lt;div&gt;</span><br><span class="line">	 				&lt;input type=<span class="string">"button"</span> value=<span class="string">"-"</span> onClick=&#123;<span class="keyword">this</span>.minus&#125; /&gt;</span><br><span class="line">	 				&lt;span&gt;&#123;<span class="keyword">this</span>.state.a&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">	 				&lt;input type="button" value="+" onClick=&#123;this.add&#125;/</span>&gt;</span><br><span class="line">	 			&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"> 			)</span></span><br><span class="line"><span class="regexp"> 		&#125;</span></span><br><span class="line"><span class="regexp"> 	&#125;);</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp"> 	/</span><span class="regexp">/使用组件</span></span><br><span class="line"><span class="regexp"> 	ReactDOM.render(</span></span><br><span class="line"><span class="regexp"> 		&lt;div&gt;</span></span><br><span class="line"><span class="regexp">	 		&lt;MyComponent&gt;&lt;/</span>MyComponent&gt;</span><br><span class="line">	 		&lt;MyComponent&gt;<span class="xml"><span class="tag">&lt;/<span class="name">MyComponent</span>&gt;</span></span></span><br><span class="line">	 		&lt;MyComponent&gt;<span class="xml"><span class="tag">&lt;/<span class="name">MyComponent</span>&gt;</span></span></span><br><span class="line">	 		&lt;MyComponent&gt;<span class="xml"><span class="tag">&lt;/<span class="name">MyComponent</span>&gt;</span></span></span><br><span class="line">	 	&lt;<span class="regexp">/div&gt;</span></span><br><span class="line"><span class="regexp"> 		,</span></span><br><span class="line"><span class="regexp"> 		document.getElementById("box")</span></span><br><span class="line"><span class="regexp"> 	)</span></span><br><span class="line"><span class="regexp">&lt;/</span>script&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="六、组件的生命周期"><a href="#六、组件的生命周期" class="headerlink" title="六、组件的生命周期"></a>六、组件的生命周期</h2><p>在创建一个组件的时候，语法就是</p>
+<figure class="highlight openscad"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">React.createClass(&#123;</span><br><span class="line"><span class="comment">//这里书写下面的方法</span></span><br><span class="line">componentWillMount : <span class="function"><span class="keyword">function</span><span class="params">()</span>&#123;</span>&#125;,</span><br><span class="line">componentDidMount  : <span class="function"><span class="keyword">function</span><span class="params">()</span>&#123;</span>&#125;,</span><br><span class="line">...</span><br><span class="line"><span class="built_in">render</span>: <span class="function"><span class="keyword">function</span><span class="params">()</span>&#123;</span>&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>一个组件有三个状态：Mount上树、update更新、unmount下树</p>
+<figure class="highlight pf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">componentWillMount 在渲染前调用,在客户端也在服务端。</span><br><span class="line">	</span><br><span class="line">componentDidMount : 在第一次渲染后调用，只在客户端。之后组件已经生成了对应的DOM结构，可以通过this.refs来进行访问。 如果你想和其他JavaScript框架一起使用，可以在这个方法中调用<span class="built_in">set</span>Timeout, <span class="built_in">set</span>Interval或者发送AJAX请求等操作(防止异部操作阻塞UI)。</span><br><span class="line"></span><br><span class="line">componentWillReceiveProps 在组件接收到一个新的prop时被调用。这个方法在初始化render时不会被调用。</span><br><span class="line"></span><br><span class="line">shouldComponentUpdate 返回一个布尔值。在组件接收到新的props或者<span class="keyword">state</span>时被调用。在初始化时或者使用forceUpdate时不被调用。 </span><br><span class="line">可以在你确认不需要更新组件时使用。</span><br><span class="line"></span><br><span class="line">componentWillUpdate在组件接收到新的props或者<span class="keyword">state</span>但还没有render时被调用。在初始化时不会被调用。</span><br><span class="line"></span><br><span class="line">componentDidUpdate 在组件完成更新后立即调用。在初始化时不会被调用。</span><br><span class="line"></span><br><span class="line">componentWillUnmount在组件从 DOM 中移除的时候立刻被调用。</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+<div>
+  
+    
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"><i class="fa fa-tag"></i> React</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/21/详解网页性能管理/" rel="next" title="详解网页性能管理">
+                <i class="fa fa-chevron-left"></i> 详解网页性能管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/24/牛客网的一些题/" rel="prev" title="牛客网的一些题">
+                牛客网的一些题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="思齐" />
+          <p class="site-author-name" itemprop="name">思齐</p>
+           
+              <p class="site-description motion-element" itemprop="description">思与之齐</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Syzq" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/p/1005055693566329/home?from=page_100505&mod=TAB#place" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/beme" target="_blank" title="S  F">
+                  
+                    <i class="fa fa-fw fa-scribd"></i>
+                  
+                  S  F
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/YXY81519/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-comment"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一、React起步"><span class="nav-number">1.</span> <span class="nav-text">一、React起步</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-bower-的使用"><span class="nav-number">1.1.</span> <span class="nav-text">1.1 bower 的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-认识-babel-和-JSX"><span class="nav-number">1.2.</span> <span class="nav-text">1.2 认识 babel 和 JSX</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-Hello-World"><span class="nav-number">1.3.</span> <span class="nav-text">1.3 Hello,World !</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二、创建组件"><span class="nav-number">2.</span> <span class="nav-text">二、创建组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-方法一"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 方法一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-方法二"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 方法二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-方法三"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 方法三</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三、获得组件自定义属性"><span class="nav-number">3.</span> <span class="nav-text">三、获得组件自定义属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-this-props"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 this.props</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-组件的嵌套，属性级级上传"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 组件的嵌套，属性级级上传</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#四、获得真实的DOM节点"><span class="nav-number">4.</span> <span class="nav-text">四、获得真实的DOM节点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-先说说事件监听"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 先说说事件监听</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-获得DOM元素"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 获得DOM元素</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#五、状态"><span class="nav-number">5.</span> <span class="nav-text">五、状态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#5-1-初始状态和使用状态"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 初始状态和使用状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-2-设置状态"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 设置状态</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#六、组件的生命周期"><span class="nav-number">6.</span> <span class="nav-text">六、组件的生命周期</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-mars"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">思齐</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

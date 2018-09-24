@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="S_UNmLCii9OVqOu5unmzIdCxCetiyjd0biEMaruNi0U" />
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=PingFang SC:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="思齐,思与之齐,web前端,个人博客,JavaScript" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="1.DOM事件类基本概念：DOM 事件的级别 → DOM事件模型（冒泡和捕获） → DOM 事件流 → 描述DOM事件捕获的具体流程 → Event对象的常见应用 → 自定义事件 1.1事件级别DOM01element.onclick=function()&amp;#123;&amp;#125; DOM2 12345element.addEventListener(&apos;click&apos;,function()&amp;#123;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="imooc（二）">
+<meta property="og:url" content="https://syzq.github.io/2017/08/16/前端面试二（imooc）/index.html">
+<meta property="og:site_name" content="Syzq">
+<meta property="og:description" content="1.DOM事件类基本概念：DOM 事件的级别 → DOM事件模型（冒泡和捕获） → DOM 事件流 → 描述DOM事件捕获的具体流程 → Event对象的常见应用 → 自定义事件 1.1事件级别DOM01element.onclick=function()&amp;#123;&amp;#125; DOM2 12345element.addEventListener(&apos;click&apos;,function()&amp;#123;">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i2.bvimg.com/602806/f46ef8d643d12985.png">
+<meta property="og:image" content="http://i2.bvimg.com/602806/402bab0f45fcd2e6.png">
+<meta property="og:image" content="http://i2.bvimg.com/602806/7fd0d09f8214fd98.png">
+<meta property="og:updated_time" content="2018-09-23T15:58:39.945Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="imooc（二）">
+<meta name="twitter:description" content="1.DOM事件类基本概念：DOM 事件的级别 → DOM事件模型（冒泡和捕获） → DOM 事件流 → 描述DOM事件捕获的具体流程 → Event对象的常见应用 → 自定义事件 1.1事件级别DOM01element.onclick=function()&amp;#123;&amp;#125; DOM2 12345element.addEventListener(&apos;click&apos;,function()&amp;#123;">
+<meta name="twitter:image" content="http://i2.bvimg.com/602806/f46ef8d643d12985.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://syzq.github.io/2017/08/16/前端面试二（imooc）/"/>
+
+
+
+
+
+  <title>imooc（二） | Syzq</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Syzq</span>
+       <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A blog that you won't read.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://syzq.github.io/2017/08/16/前端面试二（imooc）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="思齐">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Syzq">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">imooc（二）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-16T22:00:58+08:00">
+                2017-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端杂烩/" itemprop="url" rel="index">
+                    <span itemprop="name">前端杂烩</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-DOM事件类"><a href="#1-DOM事件类" class="headerlink" title="1.DOM事件类"></a>1.DOM事件类</h2><p>基本概念：DOM 事件的级别 → DOM事件模型（冒泡和捕获） → DOM 事件流 → 描述DOM事件捕获的具体流程 → Event对象的常见应用 → 自定义事件</p>
+<h3 id="1-1事件级别"><a href="#1-1事件级别" class="headerlink" title="1.1事件级别"></a>1.1事件级别</h3><p>DOM0<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.onclick=<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>DOM2</p>
+<figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">element.addEventListener(<span class="string">'click'</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;&#125;,<span class="literal">false</span>)</span><br><span class="line"></span><br><span class="line">默认：<span class="literal">false</span>（冒泡）</span><br><span class="line"></span><br><span class="line"><span class="literal">true</span>（捕获）</span><br></pre></td></tr></table></figure>
+<p>DOM3<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.addEventListener(<span class="string">'keyup'</span>,<span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;&#125;,<span class="literal">false</span>)</span><br></pre></td></tr></table></figure></p>
+<h3 id="1-2事件模型"><a href="#1-2事件模型" class="headerlink" title="1.2事件模型"></a>1.2事件模型</h3><p>DOM事件模型包括<strong>冒泡型事件</strong>和<strong>捕获型事件</strong>。</p>
+<p>冒泡型事件：事件从特定的事件目标到最不特定的事件目标的顺序触发。</p>
+<p>捕获型事件：与冒泡事件相反，事件从最不精确的对象开始触发，然后到最精确。</p>
+<h3 id="1-3事件流"><a href="#1-3事件流" class="headerlink" title="1.3事件流"></a>1.3事件流</h3><p>事件流包括三个阶段：事件捕获阶段–&gt;处于目标阶段–&gt;事件冒泡阶段。</p>
+<p>首先发生的是事件捕获阶段，为截获事件提供了机会。然后是实际的目标接收事件。最后一个阶段是冒泡阶段。</p>
+<p><img src="http://i2.bvimg.com/602806/f46ef8d643d12985.png" alt="image"></p>
+<h3 id="1-4事件捕获和冒泡的具体流程"><a href="#1-4事件捕获和冒泡的具体流程" class="headerlink" title="1.4事件捕获和冒泡的具体流程"></a>1.4事件捕获和冒泡的具体流程</h3><p>Window –&gt; Document –&gt; html –&gt; body –&gt; … –&gt; 目标元素</p>
+<h3 id="1-5-Event对象的常见应用"><a href="#1-5-Event对象的常见应用" class="headerlink" title="1.5 Event对象的常见应用"></a>1.5 Event对象的常见应用</h3><p><code>event.preventDefault()</code>：取消事件的默认动作。</p>
+<p><code>event.stopPropagation()</code>：阻止事件冒泡。</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Event/stopImmediatePropagation" target="_blank" rel="noopener"><code>event.stopImmediatePropagation()</code></a>：如果一个元素上绑定了多个事件，若其中某个事件执行了此方法，那么后续的事件将不再执行。</p>
+<p><a href="http://www.w3school.com.cn/jsref/event_currenttarget.asp" target="_blank" rel="noopener"><code>event.currentTarget()</code></a>：返回其监听器触发事件的节点，即当前处理该事件的元素、文档或窗口。</p>
+<p><a href="http://www.w3school.com.cn/jsref/event_target.asp" target="_blank" rel="noopener"><code>event.target()</code></a>：返回事件的目标节点（触发该事件的节点），如生成事件的元素、文档或窗口。</p>
+<h3 id="1-6自定义事件"><a href="#1-6自定义事件" class="headerlink" title="1.6自定义事件"></a>1.6自定义事件</h3><figure class="highlight oxygene"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">event</span> = <span class="keyword">new</span> <span class="keyword">Event</span>(<span class="string">'build'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Listen for the event.</span></span><br><span class="line">elem.addEventListener(<span class="string">'build'</span>, <span class="function"><span class="keyword">function</span> <span class="params">(e)</span> <span class="comment">&#123; ... &#125;</span>, <span class="title">false</span>);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Dispatch the event.</span></span><br><span class="line">elem.dispatchEvent(<span class="keyword">event</span>);</span><br></pre></td></tr></table></figure>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/Events/Creating_and_triggering_events" target="_blank" rel="noopener">CustomEvent</a></p>
+<h2 id="2-HTTP协议类"><a href="#2-HTTP协议类" class="headerlink" title="2. HTTP协议类"></a>2. HTTP协议类</h2><p>HTTP协议的主要特点 → HTTP报文的组成部分 → HTTP方法 → POST 和 GET 的区别 → HTTP 状态码 → 什么是持久连接 → 什么是管线化</p>
+<h3 id="2-1-HTTP协议的主要特点"><a href="#2-1-HTTP协议的主要特点" class="headerlink" title="2.1 HTTP协议的主要特点"></a>2.1 HTTP协议的主要特点</h3><p>一、简单快速：客户端向服务器请求服务时，只需传送请求方法和路径。</p>
+<p>二、灵活：HTTP允许传输任意类型的数据对象。</p>
+<p>三、无连接：服务器处理完客户端的请求并收到客户端的应答后，即断开连接。采用这种方式可以节省传输时间。</p>
+<p>四、无状态：指协议对于事务处理没有记忆能力。缺少状态意味着如果后续处理需要前面的信息，则它必须重传，这样可能导致每次连接传送的数据量增大。</p>
+<h3 id="2-2-HTTP报文的组成部分"><a href="#2-2-HTTP报文的组成部分" class="headerlink" title="2.2 HTTP报文的组成部分"></a>2.2 HTTP报文的组成部分</h3><p><a href="http://laichuanfeng.com/reading/parts-of-http-message/" target="_blank" rel="noopener">HTTP 报文的组成部分</a></p>
+<p>一、请求报文：请求行、请求头、空行、请求体。</p>
+<p>二、响应报文：状态行、响应头、空行、响应体。</p>
+<h3 id="2-3-HTTP方法"><a href="#2-3-HTTP方法" class="headerlink" title="2.3 HTTP方法"></a>2.3 HTTP方法</h3><p>一、GET：获取资源</p>
+<p>二、POST：传输资源</p>
+<p>三、PUT：更新资源</p>
+<p>四、DELETE：删除资源</p>
+<p>五、HEAD：获得报文首部</p>
+<h3 id="2-4-POST和GET的区别（重要）"><a href="#2-4-POST和GET的区别（重要）" class="headerlink" title="2.4 POST和GET的区别（重要）"></a>2.4 POST和GET的区别（重要）</h3><p><a href="http://www.w3school.com.cn/tags/html_ref_httpmethods.asp" target="_blank" rel="noopener">POST和GET的区别</a></p>
+<ul>
+<li>GET 在浏览器回退时是无害的，而 POST 会再次提交请求</li>
+<li>GET 请求会被浏览器主动缓存，而 POST 不会，除非手动设置</li>
+<li>GET 请求参数会被完整保留在浏览器历史记录里，而 POST 中的参数不会被保留</li>
+<li>GET 请求在URL中传送的参数是有长度限制的，而 POST 没有长度限制</li>
+<li>与 POST 相比，GET 的安全性较差，因为 GET 的参数直接暴露在URL上，所以不能来传递敏感信息</li>
+<li>GET 参数通过 URL 传递，POST 放在 Request body中</li>
+</ul>
+<h3 id="2-5-HTTP-状态码"><a href="#2-5-HTTP-状态码" class="headerlink" title="2.5 HTTP 状态码"></a>2.5 HTTP 状态码</h3><p><a href="http://www.w3school.com.cn/tags/html_ref_httpmessages.asp" target="_blank" rel="noopener">HTTP 状态消息</a></p>
+<ul>
+<li>1XX：指示信息 - 表示请求已收到，继续处理</li>
+<li>2XX：成功 - 表示请求已被成功接收</li>
+<li>3XX：重定向 - 要完成请求必须进行更进一步操作</li>
+<li>4XX：客户端错误 - 请求有语法错误或请求无法实现</li>
+<li>5XX：服务器错误 - 服务器未能实现合法的请求</li>
+</ul>
+<h3 id="2-6-持久连接"><a href="#2-6-持久连接" class="headerlink" title="2.6 持久连接"></a>2.6 持久连接</h3><p>HTTP 协议采用“请求 - 应答”模式，当使用普通模式，即非 Keep-Alive 模式时，每个请求/应答客户和服务器都要新建立一个连接，完成之后立即断开连接（HTTP协议为无连接的协议）。</p>
+<p>当使用 Keep-Alive 模式（又称持久连接、连接重用）时，Keep-Alive 功能使客户端到服务器端的连接持久有效，当出现对服务器的后续请求时，Keep-Alive 功能避免了建立或者重新建立连接。</p>
+<p> Keep-Alive 模式在 HTTP/1.1支持，HTTP/1.0 不支持。</p>
+<p> <img src="http://i2.bvimg.com/602806/402bab0f45fcd2e6.png" alt="image"></p>
+<h3 id="2-7-管线化"><a href="#2-7-管线化" class="headerlink" title="2.7 管线化"></a>2.7 管线化</h3><p>HTTP管线化可以克服同域并行请求限制带来的阻塞，它是建立在持久连接之上，是把所有请求一并发给服务器，但是服务器需要按照顺序一个一个响应，而不是等到一个响应回来才能发下一个请求，这样就节省了很多请求到服务器的时间。</p>
+<p><img src="http://i2.bvimg.com/602806/7fd0d09f8214fd98.png" alt="image"></p>
+<p>管线化机制须通过永久连接（persistent connection）完成，仅 HTTP/1.1 支持此技术（ HTTP/1.0 不支持），并且只有 GET 和 HEAD 要求可以进行管线化，而POST则有所限制。此外，初次创建连接时也不应启动管线机制，因为对方（服务器）不一定支持 HTTP/1.1 版本的协议。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+<div>
+  
+    
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/15/前端面试一（imooc）/" rel="next" title="imooc（一）">
+                <i class="fa fa-chevron-left"></i> imooc（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/17/互联网协议入门（一）/" rel="prev" title="互联网协议入门（一）">
+                互联网协议入门（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="思齐" />
+          <p class="site-author-name" itemprop="name">思齐</p>
+           
+              <p class="site-description motion-element" itemprop="description">思与之齐</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Syzq" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/p/1005055693566329/home?from=page_100505&mod=TAB#place" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/beme" target="_blank" title="S  F">
+                  
+                    <i class="fa fa-fw fa-scribd"></i>
+                  
+                  S  F
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/YXY81519/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-comment"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-DOM事件类"><span class="nav-number">1.</span> <span class="nav-text">1.DOM事件类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1事件级别"><span class="nav-number">1.1.</span> <span class="nav-text">1.1事件级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2事件模型"><span class="nav-number">1.2.</span> <span class="nav-text">1.2事件模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3事件流"><span class="nav-number">1.3.</span> <span class="nav-text">1.3事件流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4事件捕获和冒泡的具体流程"><span class="nav-number">1.4.</span> <span class="nav-text">1.4事件捕获和冒泡的具体流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-Event对象的常见应用"><span class="nav-number">1.5.</span> <span class="nav-text">1.5 Event对象的常见应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6自定义事件"><span class="nav-number">1.6.</span> <span class="nav-text">1.6自定义事件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-HTTP协议类"><span class="nav-number">2.</span> <span class="nav-text">2. HTTP协议类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-HTTP协议的主要特点"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 HTTP协议的主要特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-HTTP报文的组成部分"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 HTTP报文的组成部分</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-HTTP方法"><span class="nav-number">2.3.</span> <span class="nav-text">2.3 HTTP方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-POST和GET的区别（重要）"><span class="nav-number">2.4.</span> <span class="nav-text">2.4 POST和GET的区别（重要）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-5-HTTP-状态码"><span class="nav-number">2.5.</span> <span class="nav-text">2.5 HTTP 状态码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-6-持久连接"><span class="nav-number">2.6.</span> <span class="nav-text">2.6 持久连接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-7-管线化"><span class="nav-number">2.7.</span> <span class="nav-text">2.7 管线化</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-mars"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">思齐</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

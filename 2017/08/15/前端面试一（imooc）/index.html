@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="S_UNmLCii9OVqOu5unmzIdCxCetiyjd0biEMaruNi0U" />
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=PingFang SC:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="思齐,思与之齐,web前端,个人博客,JavaScript" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="页面布局 题目：假设高度已知，请写出三栏布局，其中左栏、右栏宽度各为300px，中间自适应。  float实现基于纯float实现的三栏布局需要将中间的内容放在HTML结构的最后，否则右侧会沉在中间内容的下侧。 原理：元素浮动后，脱离文档流，后面的元素受浮动影响，设置受影响元素的margin值即可。 两边固定宽度，中间宽度自适应。 利用中间元素的margin值控制两边的间距。 宽度小于左右部分宽度">
+<meta property="og:type" content="article">
+<meta property="og:title" content="imooc（一）">
+<meta property="og:url" content="https://syzq.github.io/2017/08/15/前端面试一（imooc）/index.html">
+<meta property="og:site_name" content="Syzq">
+<meta property="og:description" content="页面布局 题目：假设高度已知，请写出三栏布局，其中左栏、右栏宽度各为300px，中间自适应。  float实现基于纯float实现的三栏布局需要将中间的内容放在HTML结构的最后，否则右侧会沉在中间内容的下侧。 原理：元素浮动后，脱离文档流，后面的元素受浮动影响，设置受影响元素的margin值即可。 两边固定宽度，中间宽度自适应。 利用中间元素的margin值控制两边的间距。 宽度小于左右部分宽度">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://i4.bvimg.com/602806/da25763a93afc637.png">
+<meta property="og:image" content="http://i2.bvimg.com/602806/4b1b109eb202c85e.png">
+<meta property="og:image" content="http://i2.bvimg.com/602806/718b198c65fc7aa7.jpg">
+<meta property="og:image" content="http://i1.bvimg.com/602806/a43612c0d3bfec58.png">
+<meta property="og:image" content="http://i1.bvimg.com/602806/882265ffdcd4eb9a.png">
+<meta property="og:image" content="http://i1.bvimg.com/602806/a1bfd7595545945c.png">
+<meta property="og:image" content="http://i2.bvimg.com/602806/8bb64a7449598591.png">
+<meta property="og:image" content="http://i2.bvimg.com/602806/e7c3b41b66bca3fa.png">
+<meta property="og:image" content="http://i1.bvimg.com/602806/8835b0f8ee71768d.png">
+<meta property="og:image" content="http://i1.bvimg.com/602806/3017b702666541e5.png">
+<meta property="og:image" content="http://i1.bvimg.com/602806/7a18a15896827d13.png">
+<meta property="og:image" content="http://i1.bvimg.com/602806/e5c3cb77a5955a89.png">
+<meta property="og:image" content="http://i1.bvimg.com/602806/fc1089f769685836.png">
+<meta property="og:updated_time" content="2018-09-23T15:58:36.994Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="imooc（一）">
+<meta name="twitter:description" content="页面布局 题目：假设高度已知，请写出三栏布局，其中左栏、右栏宽度各为300px，中间自适应。  float实现基于纯float实现的三栏布局需要将中间的内容放在HTML结构的最后，否则右侧会沉在中间内容的下侧。 原理：元素浮动后，脱离文档流，后面的元素受浮动影响，设置受影响元素的margin值即可。 两边固定宽度，中间宽度自适应。 利用中间元素的margin值控制两边的间距。 宽度小于左右部分宽度">
+<meta name="twitter:image" content="http://i4.bvimg.com/602806/da25763a93afc637.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://syzq.github.io/2017/08/15/前端面试一（imooc）/"/>
+
+
+
+
+
+  <title>imooc（一） | Syzq</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Syzq</span>
+       <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A blog that you won't read.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://syzq.github.io/2017/08/15/前端面试一（imooc）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="思齐">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Syzq">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">imooc（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-15T21:57:20+08:00">
+                2017-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端杂烩/" itemprop="url" rel="index">
+                    <span itemprop="name">前端杂烩</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="页面布局"><a href="#页面布局" class="headerlink" title="页面布局"></a>页面布局</h2><blockquote>
+<p>题目：假设高度已知，请写出三栏布局，其中左栏、右栏宽度各为300px，中间自适应。</p>
+</blockquote>
+<h3 id="float实现"><a href="#float实现" class="headerlink" title="float实现"></a><code>float</code>实现</h3><p>基于纯<code>float</code>实现的三栏布局需要将<strong>中间的内容放在HTML结构的最后，否则右侧会沉在中间内容的下侧</strong>。</p>
+<p>原理：元素浮动后，脱离文档流，后面的元素受浮动影响，设置受影响元素的<code>margin</code>值即可。</p>
+<p>两边固定宽度，中间宽度自适应。</p>
+<p>利用中间元素的<code>margin</code>值控制两边的间距。</p>
+<p><strong>宽度小于左右部分宽度之和时，右侧部分会被挤下去。</strong></p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span>左侧宽度固定<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span>右侧宽度固定<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"main"</span>&gt;</span>中间内容自适应<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">	<span class="selector-tag">div</span> &#123;<span class="attribute">height</span>: <span class="number">100px</span>;&#125;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.left</span> &#123;<span class="attribute">width</span>: <span class="number">300px</span>;<span class="attribute">background</span>: blue;<span class="attribute">float</span>: left;&#125;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.right</span> &#123;<span class="attribute">width</span>: <span class="number">300px</span>;<span class="attribute">background</span>: green;<span class="attribute">float</span>: right;&#125;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.main</span> &#123;<span class="attribute">background</span>: gray;&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://i4.bvimg.com/602806/da25763a93afc637.png" alt="image"></p>
+<h3 id="position实现"><a href="#position实现" class="headerlink" title="position实现"></a><code>position</code>实现</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span>左侧宽度固定<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"main"</span>&gt;</span>中间内容自适应<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span>右侧宽度固定<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">	<span class="selector-tag">div</span> &#123;<span class="attribute">height</span>: <span class="number">100px</span>;&#125;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.left</span>&#123;<span class="attribute">position</span>: absolute;<span class="attribute">left</span>: <span class="number">0</span>;<span class="attribute">width</span>: <span class="number">300px</span>;<span class="attribute">background</span>: yellow;&#125;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.right</span>&#123;<span class="attribute">position</span>: absolute;<span class="attribute">right</span>: <span class="number">0</span>;<span class="attribute">width</span>: <span class="number">300px</span>;<span class="attribute">background</span>: gray;&#125;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.main</span>&#123;<span class="attribute">position</span>: absolute;<span class="attribute">left</span>: <span class="number">300px</span>;<span class="attribute">right</span>: <span class="number">300px</span>;<span class="attribute">background</span>: skyblue;&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="flex布局"><a href="#flex布局" class="headerlink" title="flex布局"></a><code>flex</code>布局</h3><p>在外围包裹一层<code>div</code>，设置为<code>display：flex</code>；中间设置<code>flex：1</code>；但是盒模型默认紧紧挨着，可以使用<code>margin</code>控制外边距。</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"wrap"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"left"</span>&gt;</span>左侧宽度固定<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"main"</span>&gt;</span>中间内容自适应<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"right"</span>&gt;</span>右侧宽度固定<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">type</span>=<span class="string">"text/css"</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="css">	<span class="selector-tag">div</span> &#123;<span class="attribute">height</span>: <span class="number">100px</span>;&#125;</span></span><br><span class="line"><span class="css">	<span class="selector-id">#wrap</span> &#123;<span class="attribute">display</span>: flex;&#125;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.left</span> &#123;<span class="attribute">width</span>: <span class="number">300px</span>;<span class="attribute">background</span>: red;&#125;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.right</span> &#123;<span class="attribute">width</span>: <span class="number">300px</span>;<span class="attribute">background</span>: blue;&#125;</span></span><br><span class="line"><span class="css">	<span class="selector-class">.main</span> &#123;<span class="attribute">flex</span>: <span class="number">1</span>;<span class="attribute">background</span>: pink;&#125;</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="页面布局的变通"><a href="#页面布局的变通" class="headerlink" title="页面布局的变通"></a>页面布局的变通</h3><p>三栏布局</p>
+<ul>
+<li>左右宽度固定，中间自适应</li>
+<li>上下高度固定，中间自适应</li>
+</ul>
+<p>两栏布局</p>
+<ul>
+<li>左宽度固定，右自适应</li>
+<li>右宽度固定，左自适应</li>
+<li>上高度固定，下自适应</li>
+<li>下高度固定，上自适应</li>
+</ul>
+<h2 id="CSS盒模型"><a href="#CSS盒模型" class="headerlink" title="CSS盒模型"></a>CSS盒模型</h2><blockquote>
+<p>谈谈你对CSS盒模型的认识</p>
+</blockquote>
+<p>标准模型+IE模型 → 标准模型和IE模型的区别 → CSS如何设置这两种模型 → JS如何设置获取盒模型对应的宽和高 → 实例题（根据盒模型解释边距重叠）→ BFC（边距重叠解决方案）</p>
+<h3 id="标准模型-IE模型"><a href="#标准模型-IE模型" class="headerlink" title="标准模型+IE模型"></a>标准模型+IE模型</h3><p>两者的区别在于<code>content</code>的不同，IE(5.5及以前)盒模型的<code>content</code>包括<code>border、padding</code></p>
+<p><img src="http://i2.bvimg.com/602806/4b1b109eb202c85e.png" alt="image"></p>
+<p><img src="http://i2.bvimg.com/602806/718b198c65fc7aa7.jpg" alt="image"></p>
+<h3 id="CSS如何设置这两种模型"><a href="#CSS如何设置这两种模型" class="headerlink" title="CSS如何设置这两种模型"></a>CSS如何设置这两种模型</h3><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">box</span>-sizing:<span class="built_in">border</span>-<span class="built_in">box</span> || <span class="built_in">content</span>-<span class="built_in">box</span>(default)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">当使用<span class="built_in">border</span>-<span class="built_in">box</span>时，页面将采用怪异模式解析计算，怪异模式也称为IE模式。</span><br><span class="line"></span><br><span class="line">当使用<span class="built_in">content</span>-<span class="built_in">box</span>时：页面将采用标准模式来解析计算，<span class="built_in">content</span>-<span class="built_in">box</span>也是默认模式</span><br></pre></td></tr></table></figure>
+<p><strong>此特性在自适应的网页会非常好用，因为它不会破坏网页的结构</strong></p>
+<h2 id="BFC浅析"><a href="#BFC浅析" class="headerlink" title="BFC浅析"></a>BFC浅析</h2><h3 id="什么是BFC（Block-formatting-contexts）"><a href="#什么是BFC（Block-formatting-contexts）" class="headerlink" title="什么是BFC（Block formatting contexts）"></a>什么是BFC（Block formatting contexts）</h3><p>浮动元素和绝对定位元素，非块级盒子的块级容器（例如 <code>inline-blocks, table-cells, 和 table-captions</code>），以及<code>overflow</code>值不为“<code>visiable</code>”的块级盒子，都会为他们的内容创建新的BFC（块级格式上下文）。</p>
+<p>在BFC中，盒子从顶端开始垂直地一个接一个地排列，两个盒子之间的垂直的间隙是由他们的<code>margin</code> 值所决定的。在一个BFC中，两个相邻的块级盒子的垂直外边距会产生折叠。</p>
+<p>在BFC中，每一个盒子的左外边缘（<code>margin-left</code>）会触碰到容器的左边缘(<code>border-left</code>)（对于从右到左的格式来说，则触碰到右边缘）。</p>
+<h3 id="BFC-的特性"><a href="#BFC-的特性" class="headerlink" title="BFC 的特性"></a>BFC 的特性</h3><p>BFC 对布局的影响主要体现在对 <code>float</code>和 <code>margin</code> 两个属性的处理。在我看来，BFC 让 <code>float</code>和 <code>margin</code> 这两个属性的表现更加符合我们的直觉。</p>
+<p>根据 BFC 对其内部元素和外部元素的表现特性，我将 BFC 的特性总结为<strong>对内部元素的包裹性</strong>及<strong>对外部元素的独立性</strong>。</p>
+<h4 id="对内部元素的包裹性"><a href="#对内部元素的包裹性" class="headerlink" title="对内部元素的包裹性"></a>对内部元素的包裹性</h4><p>BFC 对内部元素的包裹性主要体现在 BFC 可以包裹浮动元素，以及 BFC 可以包裹 <code>margin</code>。</p>
+<h5 id="BFC-包裹浮动元素"><a href="#BFC-包裹浮动元素" class="headerlink" title="BFC 包裹浮动元素"></a>BFC 包裹浮动元素</h5><p>BFC 的特性之一就是其高度的计算会包括所有浮动元素的高度，所以使用 BFC 可以包裹浮动元素，达到清除浮动的目的。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> style=<span class="string">"overflow: hidden; background: #AAA;"</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> style=<span class="string">"float: left; width: 100px; height: 100px; background: #000;"</span>&gt;</span><br><span class="line">  &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+<p><code>overflow: hidden</code> 可以触发一个元素的 BFC 属性，使该元素成为一个 BFC 容器，从而使该元素对内部元素及外部元素表现出 BFC 的特性，更多可以触发 BFC 属性的条件会在后面总结。</p>
+<p>运行代码可以看到，我们虽然没有进行任何清除浮动的工作，外层 <code>div</code> 还是包裹住了内层浮动的 <code>div</code>，没有造成高度塌陷的情况。</p>
+<p><img src="http://i1.bvimg.com/602806/a43612c0d3bfec58.png" alt="image"></p>
+<p>另外，将外层<code>div</code> 同时设为浮动来清除内层浮动的方法本质上也是应用了 BFC 的特性，因为将一个元素设为浮动也会触发该元素的 BFC 属性，使外层元素成为一个 BFC 容器。</p>
+<h5 id="BFC-包裹-margin"><a href="#BFC-包裹-margin" class="headerlink" title="BFC 包裹 margin"></a>BFC 包裹 <code>margin</code></h5><p>BFC 对内部元素的另一个特性就是可以取消<code>margin</code> 折叠(margin collapse)。这个特性我喜欢更形象的称之为包裹<code>margin</code>。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> style=<span class="string">"background: #AAA;"</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> style=<span class="string">"width: 100px; height: 100px; margin-top: 50px; background: #000;"</span>&gt;</span><br><span class="line">  &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>运行代码可以看到，内层 <code>div</code>的 <code>margin</code> 并没有将内层<code>div</code>相对于外层 <code>div</code> 向下推移，而是将内外两层 <code>div</code> 整体向下推移：</p>
+<p><img src="http://i1.bvimg.com/602806/882265ffdcd4eb9a.png" alt="image"></p>
+<p>而我们想要的结果是这样的：</p>
+<p><img src="http://i1.bvimg.com/602806/a1bfd7595545945c.png" alt="image"></p>
+<p>内外两层<code>div</code>被整体向下推移的原因就是<code>margin</code> 折叠，关于<code>margin</code> 折叠的相关介绍可以参见<a href="http://www.w3school.com.cn/css/css_margin_collapsing.asp" target="_blank" rel="noopener">这里</a>。CSS 中父子元素的 <code>margin</code> 只要相邻，也会发生折叠，CSS 规范虽是如此，但很多时候这并不符合我们的预期：我们希望外部<code>div</code>能够包裹内部<code>div</code>的 <code>margin</code>，避免形成折叠，这时我们就可以使用 BFC。</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> style=<span class="string">"overflow:hidden; background:#AAA;"</span>&gt;</span><br><span class="line">  &lt;<span class="keyword">div</span> style=<span class="string">"width:100px; height:100px; margin-top:50px; background:#000;"</span>&gt;</span><br><span class="line">  &lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+<p>我们将外层 <code>div</code>设置为一个 BFC 容器，由于 <code>margin</code>折叠只会发生在同一个 BFC 中的元素之间，而不同 BFC 的元素之间以及元素及其所属的 BFC 之间不会发生 <code>margin</code>折叠，因此就可以实现对 <code>margin</code> 的包裹。</p>
+<h4 id="对外部元素的独立性"><a href="#对外部元素的独立性" class="headerlink" title="对外部元素的独立性"></a>对外部元素的独立性</h4><p>BFC 对外部元素的独立性在于 BFC元素不会与浮动元素叠加。例如：</p>
+<figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> style=<span class="string">"float: left; width: 100px; height: 100px; background: #000;"</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;<span class="keyword">div</span> style=<span class="string">"height: 200px; background: #AAA;"</span>&gt;</span><br><span class="line">&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="http://i2.bvimg.com/602806/8bb64a7449598591.png" alt="image"></p>
+<p>可以看到，浮动的<code>div</code> 由于脱离了文档流，导致正常的 <code>div</code> 左上角被覆盖。为了避免这种情况，我们使第二个 <code>div</code> 成为 BFC 容器：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&lt;div</span> <span class="string">style="float:</span> <span class="string">left;</span> <span class="attr">width:</span> <span class="number">100</span><span class="string">px;</span> <span class="attr">height:</span> <span class="number">100</span><span class="string">px;</span> <span class="attr">background:</span> <span class="comment">#000;"&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;div</span> <span class="string">style="overflow:</span> <span class="string">hidden;</span> <span class="attr">height:</span> <span class="number">200</span><span class="string">px;</span> <span class="attr">background:</span> <span class="comment">#AAA;"&gt;</span></span><br><span class="line"><span class="string">&lt;/div&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://i2.bvimg.com/602806/e7c3b41b66bca3fa.png" alt="image"></p>
+<p>当第二个<code>div</code> 成为 BFC 容器后，其不会再受到浮动 <code>div</code>的影响，布局相对独立。这样的技巧经常用作两栏或三栏自适应布局。</p>
+<h3 id="触发-BFC"><a href="#触发-BFC" class="headerlink" title="触发 BFC"></a>触发 BFC</h3><p>介绍 BFC 的时候我们就已经说过，BFC 可以被理解为元素的一个属性，但是这个属性无法被显式的设置，那么如何触发一个元素的 BFC 属性呢？上面的代码中使用的 <code>overflow:hidden</code> 就是触发 BFC 的一种方式，除了设置 <code>overflow:hidden</code>，下面的 CSS 属性设置都可以触发 BFC:</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">float</span> 设置为除 <span class="attribute">none</span> 外的取值；</span><br><span class="line"></span><br><span class="line"><span class="attribute">overflow</span> 设置为除 visible 之外的取值；</span><br><span class="line"></span><br><span class="line"><span class="attribute">position</span> 设置为除 static 及 relative 之外的取值；</span><br><span class="line"></span><br><span class="line"><span class="attribute">display</span> 设置为 <span class="selector-tag">table</span>-cell、<span class="selector-tag">table</span>-<span class="selector-tag">caption</span>、inline-block 中的任一取值；</span><br></pre></td></tr></table></figure>
+<h3 id="BFC-与-Layout"><a href="#BFC-与-Layout" class="headerlink" title="BFC 与 Layout"></a>BFC 与 Layout</h3><p>IE 作为浏览器中的奇葩，当然不可能按部就班的支持 BFC 标准，于是乎 IE 中有了 Layout 这个东西。Layout 和 BFC 基本是等价的，为了处理 IE 的兼容性，在需要触发 BFC 时，我们除了需要用上面的 CSS 属性来触发 BFC，还需要针对 IE 浏览器使用 <code>zoom: 1</code>来触发 IE 浏览器的 Layout。</p>
+<h3 id="BFC的作用"><a href="#BFC的作用" class="headerlink" title="BFC的作用"></a>BFC的作用</h3><h4 id="自适应的两栏布局"><a href="#自适应的两栏布局" class="headerlink" title="自适应的两栏布局"></a>自适应的两栏布局</h4><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&lt;<span class="keyword">div</span> style=<span class="string">"width: 300px;height: 100px;background: #000;float: left;"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br><span class="line">&lt;<span class="keyword">div</span> style=<span class="string">"height: 200px;background: #AAA;overflow: hidden;"</span>&gt;&lt;/<span class="keyword">div</span>&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="http://i1.bvimg.com/602806/8835b0f8ee71768d.png" alt="image"></p>
+<h4 id="清除内部浮动"><a href="#清除内部浮动" class="headerlink" title="清除内部浮动"></a>清除内部浮动</h4><p>未触发BFC<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"width: 300px;background: blue;"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"width: 100px;height: 100px;background: #AAA;float: left;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">span</span>&gt;</span>这是里面的内容<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p><img src="http://i1.bvimg.com/602806/3017b702666541e5.png" alt="image"></p>
+<p>触发BFC</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"width: 300px;background: blue;overflow: hidden;"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"width: 100px;height: 100px;background: #AAA;float: left;"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">span</span>&gt;</span>这是里面的内容<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="http://i1.bvimg.com/602806/7a18a15896827d13.png" alt="image"></p>
+<h4 id="防止margin重叠"><a href="#防止margin重叠" class="headerlink" title="防止margin重叠"></a>防止margin重叠</h4><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">&lt;p&gt;</span>内容一<span class="params">&lt;/p&gt;</span></span><br><span class="line"><span class="params">&lt;p&gt;</span>内容二<span class="params">&lt;/p&gt;</span></span><br><span class="line"></span><br><span class="line">p&#123;</span><br><span class="line"><span class="symbol">	background:</span> <span class="meta">#AAA;</span></span><br><span class="line"><span class="symbol">	width:</span> <span class="number">200</span>px;</span><br><span class="line"><span class="symbol">	height:</span> <span class="number">100</span>px;</span><br><span class="line"><span class="symbol">	margin:</span> <span class="number">100</span>px;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://i1.bvimg.com/602806/e5c3cb77a5955a89.png" alt="image"></p>
+<p>我们可以在p外面包裹一层容器，并触发该容器生成一个BFC。那么两个P便不属于同一个BFC，就不会发生<code>margin</code>重叠了。</p>
+<figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="params">&lt;p&gt;</span>内容一<span class="params">&lt;/p&gt;</span></span><br><span class="line"><span class="params">&lt;div  class="wrap"&gt;</span></span><br><span class="line">	<span class="params">&lt;p&gt;</span>内容二<span class="params">&lt;/p&gt;</span></span><br><span class="line"><span class="params">&lt;/div&gt;</span></span><br><span class="line"></span><br><span class="line">p&#123;</span><br><span class="line"><span class="symbol">	background:</span> <span class="meta">#AAA;</span></span><br><span class="line"><span class="symbol">	width:</span> <span class="number">200</span>px;</span><br><span class="line"><span class="symbol">	height:</span> <span class="number">100</span>px;</span><br><span class="line"><span class="symbol">	margin:</span> <span class="number">100</span>px;</span><br><span class="line">&#125;</span><br><span class="line">.wrap&#123;</span><br><span class="line"><span class="symbol">	overflow:</span> hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://i1.bvimg.com/602806/fc1089f769685836.png" alt="image"></p>
+<p>浅析BFC：<a href="https://zjy.name/archives/bfc-introduction.html" target="_blank" rel="noopener">https://zjy.name/archives/bfc-introduction.html</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+<div>
+  
+    
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/09/一些JavaScript面试题（一）/" rel="next" title="一些JavaScript面试题（一）">
+                <i class="fa fa-chevron-left"></i> 一些JavaScript面试题（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/16/前端面试二（imooc）/" rel="prev" title="imooc（二）">
+                imooc（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="思齐" />
+          <p class="site-author-name" itemprop="name">思齐</p>
+           
+              <p class="site-description motion-element" itemprop="description">思与之齐</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Syzq" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/p/1005055693566329/home?from=page_100505&mod=TAB#place" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/beme" target="_blank" title="S  F">
+                  
+                    <i class="fa fa-fw fa-scribd"></i>
+                  
+                  S  F
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/YXY81519/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-comment"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#页面布局"><span class="nav-number">1.</span> <span class="nav-text">页面布局</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#float实现"><span class="nav-number">1.1.</span> <span class="nav-text">float实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#position实现"><span class="nav-number">1.2.</span> <span class="nav-text">position实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#flex布局"><span class="nav-number">1.3.</span> <span class="nav-text">flex布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#页面布局的变通"><span class="nav-number">1.4.</span> <span class="nav-text">页面布局的变通</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS盒模型"><span class="nav-number">2.</span> <span class="nav-text">CSS盒模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标准模型-IE模型"><span class="nav-number">2.1.</span> <span class="nav-text">标准模型+IE模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CSS如何设置这两种模型"><span class="nav-number">2.2.</span> <span class="nav-text">CSS如何设置这两种模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BFC浅析"><span class="nav-number">3.</span> <span class="nav-text">BFC浅析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是BFC（Block-formatting-contexts）"><span class="nav-number">3.1.</span> <span class="nav-text">什么是BFC（Block formatting contexts）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFC-的特性"><span class="nav-number">3.2.</span> <span class="nav-text">BFC 的特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对内部元素的包裹性"><span class="nav-number">3.2.1.</span> <span class="nav-text">对内部元素的包裹性</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#BFC-包裹浮动元素"><span class="nav-number">3.2.1.1.</span> <span class="nav-text">BFC 包裹浮动元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BFC-包裹-margin"><span class="nav-number">3.2.1.2.</span> <span class="nav-text">BFC 包裹 margin</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#对外部元素的独立性"><span class="nav-number">3.2.2.</span> <span class="nav-text">对外部元素的独立性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#触发-BFC"><span class="nav-number">3.3.</span> <span class="nav-text">触发 BFC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFC-与-Layout"><span class="nav-number">3.4.</span> <span class="nav-text">BFC 与 Layout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BFC的作用"><span class="nav-number">3.5.</span> <span class="nav-text">BFC的作用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#自适应的两栏布局"><span class="nav-number">3.5.1.</span> <span class="nav-text">自适应的两栏布局</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#清除内部浮动"><span class="nav-number">3.5.2.</span> <span class="nav-text">清除内部浮动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#防止margin重叠"><span class="nav-number">3.5.3.</span> <span class="nav-text">防止margin重叠</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-mars"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">思齐</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

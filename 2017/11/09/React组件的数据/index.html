@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="S_UNmLCii9OVqOu5unmzIdCxCetiyjd0biEMaruNi0U" />
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=PingFang SC:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="React学习," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="React组件的数据React 组件的数据分为两种， prop 和state ，无论 prop 或者 state 的改变，都可能引发组件的重新渲染。prop 是组件的对外接口， state 是组件的内部状态，对外用prop ，内部用 state。 React 的 prop在React 中， prop ( property 的简写）是从外部传递给组件的数据， 一个 React 组件通过定义自己能够接">
+<meta name="keywords" content="React学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React组件的数据">
+<meta property="og:url" content="https://syzq.github.io/2017/11/09/React组件的数据/index.html">
+<meta property="og:site_name" content="Syzq">
+<meta property="og:description" content="React组件的数据React 组件的数据分为两种， prop 和state ，无论 prop 或者 state 的改变，都可能引发组件的重新渲染。prop 是组件的对外接口， state 是组件的内部状态，对外用prop ，内部用 state。 React 的 prop在React 中， prop ( property 的简写）是从外部传递给组件的数据， 一个 React 组件通过定义自己能够接">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-09-23T15:58:30.690Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React组件的数据">
+<meta name="twitter:description" content="React组件的数据React 组件的数据分为两种， prop 和state ，无论 prop 或者 state 的改变，都可能引发组件的重新渲染。prop 是组件的对外接口， state 是组件的内部状态，对外用prop ，内部用 state。 React 的 prop在React 中， prop ( property 的简写）是从外部传递给组件的数据， 一个 React 组件通过定义自己能够接">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://syzq.github.io/2017/11/09/React组件的数据/"/>
+
+
+
+
+
+  <title>React组件的数据 | Syzq</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Syzq</span>
+       <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A blog that you won't read.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://syzq.github.io/2017/11/09/React组件的数据/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="思齐">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Syzq">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React组件的数据</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-09T10:46:00+08:00">
+                2017-11-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/《深入浅出React和Redux》/" itemprop="url" rel="index">
+                    <span itemprop="name">《深入浅出React和Redux》</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="React组件的数据"><a href="#React组件的数据" class="headerlink" title="React组件的数据"></a>React组件的数据</h3><p>React 组件的数据分为两种， prop 和state ，无论 prop 或者 state 的改变，都可能引<br>发组件的重新渲染。prop 是组件的对外接口， state 是组件的内部状态，对外用<br>prop ，内部用 state。</p>
+<h4 id="React-的-prop"><a href="#React-的-prop" class="headerlink" title="React 的 prop"></a>React 的 prop</h4><p>在React 中， prop ( property 的简写）是从外部传递给组件的数据， 一个 React 组件<br>通过定义自己能够接受的 prop 就定义了自己的对外公共接口。</p>
+<p>每个 React 组件都是独立存在的模块，组件之外的一切都是外部世界，外部世界就<br>是通过 prop 来和组件对话的。</p>
+<h5 id="1-给-prop-赋值"><a href="#1-给-prop-赋值" class="headerlink" title="1. 给 prop 赋值"></a>1. 给 prop 赋值</h5><p>我们先从外部世界来看， prop 是如何使用的，在下面的 JSX 代码片段中，就使用了 prop:</p>
+<figure class="highlight htmlbars"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="xml"><span class="tag">&lt;<span class="name">SampleButton</span></span></span></span><br><span class="line"><span class="xml">id="sample" borderWidth=&#123;2&#125; onClick=&#123;onButtonClick&#125;</span></span><br><span class="line"><span class="xml">style=</span><span class="template-variable">&#123;&#123;color :<span class="string">"red"</span>&#125;&#125;</span><span class="xml"></span></span><br><span class="line"><span class="xml">/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在上面的例子中，创建了名为 <code>SampleButton</code> 的组件实例，使用了名字分别为 id、 borderWidth 、onClick 和style的 prop。当 prop 的类型不是字符串类型时，在 JSX 中必<br>须用花括号｛｝把 prop 值包住，所以 style 的值有两层花括号，外层花括号代表是 JSX<br>语法，内层的花括号代表这是一个对象常量。</p>
+<h5 id="2-读取-prop-值"><a href="#2-读取-prop-值" class="headerlink" title="2. 读取 prop 值"></a>2. 读取 prop 值</h5><p>如果一个组件需要定义自己的构造函数，一定要记得在构造函数的第一行通过 super<br>调用父类也就是 React.Component 的构造函数 如果在构造函数中没有调用 super(props),<br>那么组件实例被构造之后，类实例的所有成员函数就无法通过 this.props 访问到父组件传<br>递过来的 props 值。很明显，给 this.props 赋值是 React. Component 构造函数的工作之一。</p>
+<p>在构造函数的最后，我们可以看到读取传入 prop 的方法，在构造函数中可以通过参数<br>props 获得传入 prop 值，在其他函数中则可以通过 this.props 访问传入 prop 的值，比<br>如在 Counter 组件的 render 函数中，我们就是通过 this.props 获得传入的 caption。</p>
+<h4 id="React-的-state"><a href="#React-的-state" class="headerlink" title="React 的 state"></a>React 的 state</h4><p>驱动组件渲染过程的除了 prop ，还有 state, state 代表组件的内部状态。</p>
+<h5 id="1-初始化-state"><a href="#1-初始化-state" class="headerlink" title="1. 初始化 state"></a>1. 初始化 state</h5><p>通常在组件类的构造函数结尾处初始化 state ，在 Counter 构造函数中，通过对 this.<br>state 的赋值完成了对组件 state 的初始化。</p>
+<h5 id="2-读取和更新-state"><a href="#2-读取和更新-state" class="headerlink" title="2. 读取和更新 state"></a>2. 读取和更新 state</h5><p>在代码中，通过 this.state 可以读取到组件的当前 state。 值得注意的是，我们改变组件<br>state 必须要使用 this.setState 函数，而不能直接去修改 this.state。</p>
+<p>this.setState （）函数所做的事情，首先是改变 this.state 的值，然后驱动组件<br>经历更新过程，这样才有机会让 this.state 里新的值出现在界面。</p>
+<h5 id="3-prop-和-state-的对比"><a href="#3-prop-和-state-的对比" class="headerlink" title="3. prop 和 state 的对比"></a>3. prop 和 state 的对比</h5><ul>
+<li>prop 用于定义外部接口， state 用于记录内部状态；</li>
+<li>prop 的赋值在外部世界使用组件时， state 的赋值在组件内部；</li>
+<li>组件不应该改变 prop 的值，而 state 存在的目的就是让组件来改变的。</li>
+</ul>
+<p>组件的 state ，就相当于组件的记忆，其存在意义就是被修改，每一次通过 this.setState函数修改 state 就改变了组件的状态，然后通过渲染过程把这种变化体现出来。</p>
+<h4 id="组件的生命周期"><a href="#组件的生命周期" class="headerlink" title="组件的生命周期"></a>组件的生命周期</h4><p>React 严格定义了组件的生命周期，生命周期可能会经历如下三个过程：</p>
+<ul>
+<li>装载过程（Mount ），也就是把组件第一次在 DOM 树中渲染的过程；</li>
+<li>更新过程（Update ），当组件被重新渲染的过程；</li>
+<li>卸载过程（Unmount ），组件从 DOM 中删除的过程。</li>
+</ul>
+<p>三种不同的过程， React 库会依次调用组件的一些成员函数，这些函数称为生命周期函数。</p>
+<h5 id="装载过程"><a href="#装载过程" class="headerlink" title="装载过程"></a>装载过程</h5><p>当组件第一次被渲染的时候，依次调用的函数是如下这些：</p>
+<ul>
+<li>constructor</li>
+<li>getlnitialState</li>
+<li>getDefaultProps</li>
+<li>componentWillMount </li>
+<li>render</li>
+<li>componentDidMount</li>
+</ul>
+<h6 id="1-constructor"><a href="#1-constructor" class="headerlink" title="1. constructor"></a>1. constructor</h6><p>我们先来看第一个 constructor ，也就是 ES6 中每个类的构造函数，要创造一个组件<br>类的实例，当然会调用对应的构造函数。</p>
+<p>要注意，并不是每个组件都需要定义自己的构造函数。在后面的章节我们可以看到，<br>无状态的 React 组件往往就不需要定义构造函数，一个 React 组件需要构造函数，往往是<br>为了下面的目的：</p>
+<ul>
+<li>初始化 state ，因为组件生命周期中任何函数都可能要访问 state ，那么整个生命<br>周期中第一个被调用的构造函数自然是初始化 state 最理想的地方；</li>
+<li>绑定成员函数的 this 环境。</li>
+</ul>
+<p>在ES6 语法下，类的每个成员函数在执行时的 this 并不是和类实例自动绑定的。而在构造函数中， this 就是当前组件实例，所以，为了方便将来的调用，往往在构造函数中<br>将这个实例的特定函数绑定 this 为当前实例。</p>
+<p>以Counter 组件为例，我们的构造函数有这样如下的代码：</p>
+<figure class="highlight kotlin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.onClickIncrementButton = <span class="keyword">this</span>.onClickIncrementButton.bind(<span class="keyword">this</span>);</span><br><span class="line"><span class="keyword">this</span>.onClickDecrementButton = <span class="keyword">this</span>.onClickDecrementButton.bind(<span class="keyword">this</span>);</span><br></pre></td></tr></table></figure>
+<p>这两条语句的作用，就是通过 bind 方法让当前实例中 onClicklncrementButton和<br>onClickDecrementButton 函数被调用时， this 始终是指向当前组件实例。</p>
+<h6 id="2-getlnitialState-和-getDefaultProps"><a href="#2-getlnitialState-和-getDefaultProps" class="headerlink" title="2. getlnitialState 和 getDefaultProps"></a>2. getlnitialState 和 getDefaultProps</h6><p>getlnitialState 这个函数的返回值会用来初始化组件的 this.state ，但是，这个方法只<br>有用 React. createClass 方法创造的组件类才会发生作用。</p>
+<p>总之， getlnitialState和getDefaultProps 两个方法在 ES6 的方法定义的 React 组件中根本不会用到。</p>
+<h6 id="3-render"><a href="#3-render" class="headerlink" title="3. render"></a>3. render</h6><p>render函数是 React组件中最重要的函数，render 函数并不做实际的渲染动<br>作，它只是返回一个 JSX 描述的结构，最终由 React 来操作渲染过程。</p>
+<p>在 render 函数中去调用 this.setState 毫无疑问是错误的，因为一个纯函数不应该引起状态的改变。</p>
+<h6 id="4-componentWillMount-和-componentDidMount"><a href="#4-componentWillMount-和-componentDidMount" class="headerlink" title="4. componentWillMount 和 componentDidMount"></a>4. componentWillMount 和 componentDidMount</h6><p>在装载过程中， componentWillMount 会在调用 render 函数之前被调用， componentDidMount<br>会在调用 render 函数之后被调用，这两个函数就像是 render 函数的前哨和后<br>卫，一前一后，把 render 函数夹住，正好分别做 render 前后必要的工作。</p>
+<h5 id="更新过程"><a href="#更新过程" class="headerlink" title="更新过程"></a>更新过程</h5><p>当组件被装载到 DOM 树上之后，用户在网页上可以看到组件的第一印象，但是要<br>提供更好的交互体验，就要让该组件可以随着用户操作改变展现的内容，当 props 或者<br>state 被修改的时候，就会引发组件的更新过程。</p>
+<p>更新过程会依次调用下面的生命周期函数，其中 render 函数和装载过程一样，没有差别。</p>
+<ul>
+<li>componentWillReceiveProps</li>
+<li>shouldComponentUpdate</li>
+<li>componentWillUpdate</li>
+<li>render</li>
+<li>componentDidUpdate </li>
+</ul>
+<h5 id="卸载过程"><a href="#卸载过程" class="headerlink" title="卸载过程"></a>卸载过程</h5><p>React 组件的卸载过程只涉及一个函数componentWillUnmount ，当React 组件要从<br>DOM 树上删除掉之前，对应的 componentWillUnmount 函数会被调用，所以这个函数适<br>合做一些清理性的工作。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+<div>
+  
+    
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React学习/" rel="tag"><i class="fa fa-tag"></i> React学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/09/编写易于维护的组件/" rel="next" title="编写易于维护的组件">
+                <i class="fa fa-chevron-left"></i> 编写易于维护的组件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/11/09/Flux框架/" rel="prev" title="Flux框架">
+                Flux框架 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="思齐" />
+          <p class="site-author-name" itemprop="name">思齐</p>
+           
+              <p class="site-description motion-element" itemprop="description">思与之齐</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">62</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">37</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Syzq" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/p/1005055693566329/home?from=page_100505&mod=TAB#place" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/beme" target="_blank" title="S  F">
+                  
+                    <i class="fa fa-fw fa-scribd"></i>
+                  
+                  S  F
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/YXY81519/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-comment"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#React组件的数据"><span class="nav-number">1.</span> <span class="nav-text">React组件的数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#React-的-prop"><span class="nav-number">1.1.</span> <span class="nav-text">React 的 prop</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-给-prop-赋值"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. 给 prop 赋值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-读取-prop-值"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. 读取 prop 值</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#React-的-state"><span class="nav-number">1.2.</span> <span class="nav-text">React 的 state</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-初始化-state"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 初始化 state</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-读取和更新-state"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 读取和更新 state</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-prop-和-state-的对比"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. prop 和 state 的对比</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#组件的生命周期"><span class="nav-number">1.3.</span> <span class="nav-text">组件的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#装载过程"><span class="nav-number">1.3.1.</span> <span class="nav-text">装载过程</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-constructor"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">1. constructor</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-getlnitialState-和-getDefaultProps"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">2. getlnitialState 和 getDefaultProps</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-render"><span class="nav-number">1.3.1.3.</span> <span class="nav-text">3. render</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-componentWillMount-和-componentDidMount"><span class="nav-number">1.3.1.4.</span> <span class="nav-text">4. componentWillMount 和 componentDidMount</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#更新过程"><span class="nav-number">1.3.2.</span> <span class="nav-text">更新过程</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#卸载过程"><span class="nav-number">1.3.3.</span> <span class="nav-text">卸载过程</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-mars"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">思齐</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
