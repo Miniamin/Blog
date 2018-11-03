@@ -1,0 +1,1267 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="S_UNmLCii9OVqOu5unmzIdCxCetiyjd0biEMaruNi0U" />
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=PingFang SC:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Golang," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="结构和方法结构体定义Go 通过类型别名（alias types）和结构体的形式支持用户自定义类型，或者叫定制类型。 组成结构体类型的那些数据称为 字段（fields）。每个字段都有一个类型和一个名字；在一个结构体中，字段名字必须是唯一的。 结构体是值类型，因此可以通过new 函数来创建。 结构体定义的一般方式如下： 12345type identifier struct &amp;#123;    fie">
+<meta name="keywords" content="Golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Way to Go（四）">
+<meta property="og:url" content="https://syzq.github.io/2018/05/27/The-Way-to-Go（四）/index.html">
+<meta property="og:site_name" content="Syzq">
+<meta property="og:description" content="结构和方法结构体定义Go 通过类型别名（alias types）和结构体的形式支持用户自定义类型，或者叫定制类型。 组成结构体类型的那些数据称为 字段（fields）。每个字段都有一个类型和一个名字；在一个结构体中，字段名字必须是唯一的。 结构体是值类型，因此可以通过new 函数来创建。 结构体定义的一般方式如下： 12345type identifier struct &amp;#123;    fie">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006djCGZgy1fwr3xm7567j30sp05zglh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006djCGZgy1fwr3ymtgbvj30sn084gln.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006djCGZgy1fwr45p3aqej30lb05kwel.jpg">
+<meta property="og:updated_time" content="2018-11-03T02:52:19.278Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Way to Go（四）">
+<meta name="twitter:description" content="结构和方法结构体定义Go 通过类型别名（alias types）和结构体的形式支持用户自定义类型，或者叫定制类型。 组成结构体类型的那些数据称为 字段（fields）。每个字段都有一个类型和一个名字；在一个结构体中，字段名字必须是唯一的。 结构体是值类型，因此可以通过new 函数来创建。 结构体定义的一般方式如下： 12345type identifier struct &amp;#123;    fie">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006djCGZgy1fwr3xm7567j30sp05zglh.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://syzq.github.io/2018/05/27/The-Way-to-Go（四）/"/>
+
+
+
+
+
+  <title>The Way to Go（四） | Syzq</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Syzq</span>
+       <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A blog that you won't read.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://syzq.github.io/2018/05/27/The-Way-to-Go（四）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="思齐">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Syzq">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">The Way to Go（四）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T14:34:35+08:00">
+                2018-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/The-Way-to-Go/" itemprop="url" rel="index">
+                    <span itemprop="name">The Way to Go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="结构和方法"><a href="#结构和方法" class="headerlink" title="结构和方法"></a>结构和方法</h2><h3 id="结构体定义"><a href="#结构体定义" class="headerlink" title="结构体定义"></a>结构体定义</h3><p>Go 通过类型别名（alias types）和结构体的形式支持用户自定义类型，或者叫定制类型。</p>
+<p>组成结构体类型的那些数据称为 字段（fields）。每个字段都有一个类型和一个名字；在一个结构体中，字段名字必须是唯一的。</p>
+<p>结构体是值类型，因此可以通过<code>new</code> 函数来创建。</p>
+<p>结构体定义的一般方式如下：</p>
+<figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">type</span> <span class="title">identifier</span></span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    field1 type1</span><br><span class="line">    field2 type2</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>type T struct {a, b int}</code> 也是合法的语法，它更适用于简单的结构体。</p>
+<p>结构体的字段可以是任何类型，甚至是结构体本身 ，也可以是函数或者接口 。可以声明结构体类型的一个变量，然后像下面这样给它的字段赋值：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">var</span> s T</span><br><span class="line">s<span class="selector-class">.a</span> = <span class="number">5</span></span><br><span class="line">s<span class="selector-class">.b</span> = <span class="number">8</span></span><br></pre></td></tr></table></figure>
+<h3 id="使用-new"><a href="#使用-new" class="headerlink" title="使用 new"></a>使用 new</h3><p>使用 <code>new</code> 函数给一个新的结构体变量分配内存，它返回指向已分配内存的指针：<code>var t *T = new(T)</code>，如果需要可以把这条语句放在不同的行（比如定义是包范围的，但是分配却没有必要在开始就做）。</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> <span class="built_in">t</span> *<span class="built_in">T</span></span><br><span class="line"><span class="built_in">t</span> = new(<span class="built_in">T</span>)</span><br></pre></td></tr></table></figure>
+<p>写这条语句的惯用方法是：<code>t := new(T)</code>，变量 <code>t</code> 是一个指向 <code>T</code>的指针，此时结构体字段的值是它们所属类型的零值。</p>
+<p>声明 <code>var t T</code> 也会给 <code>t</code> 分配内存，并零值化内存，但是这个时候 <code>t</code> 是类型<code>T</code>。在这两种方式中，<code>t</code> 通常被称做类型 <code>T</code> 的一个实例（instance）或对象（object）。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> struct1 <span class="keyword">struct</span> &#123;</span><br><span class="line">    i1  <span class="keyword">int</span></span><br><span class="line">    f1  <span class="keyword">float32</span></span><br><span class="line">    str <span class="keyword">string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    ms := <span class="built_in">new</span>(struct1)</span><br><span class="line">    ms.i1 = <span class="number">10</span></span><br><span class="line">    ms.f1 = <span class="number">15.5</span></span><br><span class="line">    ms.str= <span class="string">"Chris"</span></span><br><span class="line"></span><br><span class="line">    fmt.Printf(<span class="string">"The int is: %d\n"</span>, ms.i1)</span><br><span class="line">    fmt.Printf(<span class="string">"The float is: %f\n"</span>, ms.f1)</span><br><span class="line">    fmt.Printf(<span class="string">"The string is: %s\n"</span>, ms.str)</span><br><span class="line">    fmt.Println(ms)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">The <span class="keyword">int</span> <span class="keyword">is</span>: <span class="number">10</span></span><br><span class="line">The <span class="keyword">float</span> <span class="keyword">is</span>: <span class="number">15.500000</span></span><br><span class="line">The <span class="keyword">string</span> <span class="keyword">is</span>: Chris</span><br><span class="line">&amp;&#123;<span class="number">10</span> <span class="number">15.5</span> Chris&#125;</span><br></pre></td></tr></table></figure></p>
+<p>无论变量是一个结构体类型还是一个结构体类型指针，都使用同样的 选择器符（selector-notation）点号符 来引用结构体的字段：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type myStruct struct &#123; <span class="selector-tag">i</span> int &#125;</span><br><span class="line"><span class="selector-tag">var</span> v myStruct    <span class="comment">// v是结构体类型变量</span></span><br><span class="line"><span class="selector-tag">var</span> <span class="selector-tag">p</span> *myStruct   <span class="comment">// p是指向一个结构体类型变量的指针</span></span><br><span class="line">v.i</span><br><span class="line"><span class="selector-tag">p</span>.i</span><br></pre></td></tr></table></figure>
+<p>初始化一个结构体实例（一个结构体字面量：struct-literal）的更简短和惯用的方式如下：</p>
+<figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">ms</span> <span class="title">:= &amp;struct1</span>&#123;<span class="number">10</span>, <span class="number">15.5</span>, <span class="string">"Chris"</span>&#125;</span><br><span class="line">// 此时ms的类型是 *struct1</span><br></pre></td></tr></table></figure>
+<p>或者<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var <span class="keyword">ms</span> <span class="title">struct1</span></span><br><span class="line"><span class="keyword">ms</span> <span class="title">= struct1</span>&#123;<span class="number">10</span>, <span class="number">15.5</span>, <span class="string">"Chris"</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<p>混合字面量语法（composite literal syntax）<code>&amp;struct1{a, b, c}</code> 是一种简写，底层仍然会调用<code>new ()</code>，这里值的顺序必须按照字段顺序来写。</p>
+<p><strong>表达式 <code>new(Type)</code> 和 <code>&amp;Type{}</code> 是等价的。</strong></p>
+<p>使用结构体的一个典型例子：<br><figure class="highlight ocaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="type">Interval</span> <span class="keyword">struct</span> &#123;</span><br><span class="line">    start <span class="built_in">int</span></span><br><span class="line">    <span class="keyword">end</span>   <span class="built_in">int</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>初始化方式：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">intr :</span>= Interval&#123;<span class="number">0</span>, <span class="number">3</span>&#125;            (A)</span><br><span class="line"><span class="string">intr :</span>= Interval&#123;<span class="string">end:</span><span class="number">5</span>, <span class="string">start:</span><span class="number">1</span>&#125;  (B)</span><br><span class="line"><span class="string">intr :</span>= Interval&#123;<span class="string">end:</span><span class="number">5</span>&#125;           (C)</span><br></pre></td></tr></table></figure></p>
+<p>在（A）中，值必须以字段在结构体定义时的顺序给出，<code>&amp;</code> 不是必须的。（B）显示了另一种方式，字段名加一个冒号放在值的前面，这种情况下值的顺序不必一致，并且某些字段还可以被忽略掉，就像（C）中那样。</p>
+<p>下图说明了结构体类型实例和一个指向它的指针的内存布局：<br><figure class="highlight rust"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">type</span> <span class="title">Point</span></span> <span class="class"><span class="keyword">struct</span> &#123;</span> x, y int &#125;</span><br></pre></td></tr></table></figure></p>
+<p>使用 new 初始化：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006djCGZgy1fwr3xm7567j30sp05zglh.jpg" alt=""></p>
+<p>作为结构体字面量初始化：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006djCGZgy1fwr3ymtgbvj30sn084gln.jpg" alt=""></p>
+<p>下面的例子显示了一个结构体 <code>Person</code>，一个方法，方法有一个类型为 <code>*Person</code> 的参数（因此对象本身是可以被改变的），以及三种调用这个方法的不同方式：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line">import (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"strings"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line">type Person struct &#123;</span><br><span class="line">    firstName   string</span><br><span class="line">    lastName    string</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func upPerson(<span class="selector-tag">p</span> *Person) &#123;</span><br><span class="line">    <span class="selector-tag">p</span><span class="selector-class">.firstName</span> = strings.ToUpper(<span class="selector-tag">p</span>.firstName)</span><br><span class="line">    <span class="selector-tag">p</span><span class="selector-class">.lastName</span> = strings.ToUpper(<span class="selector-tag">p</span>.lastName)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    <span class="comment">// 1-struct as a value type:</span></span><br><span class="line">    <span class="selector-tag">var</span> pers1 Person</span><br><span class="line">    pers1<span class="selector-class">.firstName</span> = <span class="string">"Chris"</span></span><br><span class="line">    pers1<span class="selector-class">.lastName</span> = <span class="string">"Woodward"</span></span><br><span class="line">    upPerson(&amp;pers1)</span><br><span class="line">    fmt.Printf(<span class="string">"The name of the person is %s %s\n"</span>, pers1<span class="selector-class">.firstName</span>, pers1.lastName)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2—struct as a pointer:</span></span><br><span class="line">    pers2 := new(Person)</span><br><span class="line">    pers2<span class="selector-class">.firstName</span> = <span class="string">"Chris"</span></span><br><span class="line">    pers2<span class="selector-class">.lastName</span> = <span class="string">"Woodward"</span></span><br><span class="line">    (*pers2)<span class="selector-class">.lastName</span> = <span class="string">"Woodward"</span>  <span class="comment">// 这是合法的</span></span><br><span class="line">    upPerson(pers2)</span><br><span class="line">    fmt.Printf(<span class="string">"The name of the person is %s %s\n"</span>, pers2<span class="selector-class">.firstName</span>, pers2.lastName)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 3—struct as a literal:</span></span><br><span class="line">    pers3 := &amp;Person&#123;<span class="string">"Chris"</span>,<span class="string">"Woodward"</span>&#125;</span><br><span class="line">    upPerson(pers3)</span><br><span class="line">    fmt.Printf(<span class="string">"The name of the person is %s %s\n"</span>, pers3<span class="selector-class">.firstName</span>, pers3.lastName)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The <span class="built_in">name</span> <span class="keyword">of</span> <span class="keyword">the</span> person <span class="keyword">is</span> CHRIS WOODWARD</span><br><span class="line">The <span class="built_in">name</span> <span class="keyword">of</span> <span class="keyword">the</span> person <span class="keyword">is</span> CHRIS WOODWARD</span><br><span class="line">The <span class="built_in">name</span> <span class="keyword">of</span> <span class="keyword">the</span> person <span class="keyword">is</span> CHRIS WOODWARD</span><br></pre></td></tr></table></figure></p>
+<p>在上面例子的第二种情况中，可以直接通过指针，像 <code>pers2.lastName=&quot;Woodward&quot;</code> 这样给结构体字段赋值，没有像 C++ 中那样需要使用 <code>-&gt;</code> 操作符，Go 会自动做这样的转换。</p>
+<p>注意也可以通过解指针的方式来设置值：<code>(*pers2).lastName = &quot;Woodward&quot;</code></p>
+<h3 id="结构体的内存布局"><a href="#结构体的内存布局" class="headerlink" title="结构体的内存布局"></a>结构体的内存布局</h3><figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="type">Rect1</span> struct &#123;<span class="type">Min</span>, <span class="type">Max</span> <span class="type">Point</span> &#125;</span><br><span class="line"><span class="keyword">type</span> <span class="type">Rect2</span> struct &#123;<span class="type">Min</span>, <span class="type">Max</span> *<span class="type">Point</span> &#125;</span><br></pre></td></tr></table></figure>
+<p><img src="http://ww1.sinaimg.cn/large/006djCGZgy1fwr45p3aqej30lb05kwel.jpg" alt=""></p>
+<h3 id="结构体转换"><a href="#结构体转换" class="headerlink" title="结构体转换"></a>结构体转换</h3><p>Go 中的类型转换遵循严格的规则。当为结构体定义了一个 alias 类型时，此结构体类型和它的 alias 类型都有相同的底层类型，同时需要注意其中非法赋值或转换引起的编译错误。</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> <span class="title">main</span></span><br><span class="line">import <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="type">number </span>struct &#123;</span><br><span class="line">    f float32</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="type">nr </span>number   // alias <span class="keyword">type</span></span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    a := number&#123;<span class="number">5.0</span>&#125;</span><br><span class="line">    b := nr&#123;<span class="number">5.0</span>&#125;</span><br><span class="line">    // var i float32 = b   // compile-error: cannot <span class="keyword">use</span> b (<span class="keyword">type</span> <span class="type">nr) </span>as <span class="keyword">type</span> <span class="type">float32 </span><span class="keyword">in</span> assignment</span><br><span class="line">    // var i = float32(b)  // compile-error: cannot convert b (<span class="keyword">type</span> <span class="type">nr) </span>to <span class="keyword">type</span> <span class="type">float32</span></span><br><span class="line"><span class="type">    </span>// var c number = b    // compile-error: cannot <span class="keyword">use</span> b (<span class="keyword">type</span> <span class="type">nr) </span>as <span class="keyword">type</span> <span class="type">number </span><span class="keyword">in</span> assignment</span><br><span class="line">    // needs a conversion:</span><br><span class="line">    var c = number(b)</span><br><span class="line">    fmt.Println(a, b, c)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight clojure"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#123;<span class="number">5</span>&#125; &#123;<span class="number">5</span>&#125; &#123;<span class="number">5</span>&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用自定义包中的结构体"><a href="#使用自定义包中的结构体" class="headerlink" title="使用自定义包中的结构体"></a>使用自定义包中的结构体</h3><p>下面的例子中，<code>main.go</code> 使用了一个结构体，它来自 <code>struct_pack</code> 下的包 <code>structPack</code>。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># structPack.go</span></span><br><span class="line">package structPack</span><br><span class="line"></span><br><span class="line">type ExpStruct struct &#123;</span><br><span class="line">    Mi1 int</span><br><span class="line">    Mf1 float32</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># main.<span class="keyword">go</span>：</span><br><span class="line"></span><br><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"./struct_pack/structPack"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    struct1 := <span class="built_in">new</span>(structPack.ExpStruct)</span><br><span class="line">    struct1.Mi1 = <span class="number">10</span></span><br><span class="line">    struct1.Mf1 = <span class="number">16.</span></span><br><span class="line"></span><br><span class="line">    fmt.Printf(<span class="string">"Mi1 = %d\n"</span>, struct1.Mi1)</span><br><span class="line">    fmt.Printf(<span class="string">"Mf1 = %f\n"</span>, struct1.Mf1)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">Mi1</span> = <span class="number">10</span></span><br><span class="line"><span class="attr">Mf1</span> = <span class="number">16.000000</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="带标签的结构体"><a href="#带标签的结构体" class="headerlink" title="带标签的结构体"></a>带标签的结构体</h3><p>结构体中的字段除了有名字和类型外，还可以有一个可选的标签（tag）：它是一个附属于字段的字符串，可以是文档或其他的重要标记。</p>
+<p>标签的内容不可以在一般的编程中使用，只有包 <code>reflect</code> 能获取它。它可以在运行时自省类型、属性和方法，比如：在一个变量上调用 <code>reflect.TypeOf()</code> 可以获取变量的正确类型，如果变量是一个结构体类型，就可以通过 <code>Field</code> 来索引结构体的字段，然后就可以使用 <code>Tag</code> 属性。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">    <span class="string">"reflect"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> TagType <span class="keyword">struct</span> &#123; <span class="comment">// tags</span></span><br><span class="line">    field1 <span class="keyword">bool</span>   <span class="string">"An important answer"</span></span><br><span class="line">    field2 <span class="keyword">string</span> <span class="string">"The name of the thing"</span></span><br><span class="line">    field3 <span class="keyword">int</span>    <span class="string">"How much there are"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    tt := TagType&#123;<span class="literal">true</span>, <span class="string">"Barak Obama"</span>, <span class="number">1</span>&#125;</span><br><span class="line">    <span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">3</span>; i++ &#123;</span><br><span class="line">        refTag(tt, i)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">refTag</span><span class="params">(tt TagType, ix <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    ttType := reflect.TypeOf(tt)</span><br><span class="line">    ixField := ttType.Field(ix)</span><br><span class="line">    fmt.Printf(<span class="string">"%v\n"</span>, ixField.Tag)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">An important answer</span><br><span class="line">The name <span class="keyword">of</span> the <span class="keyword">thing</span></span><br><span class="line">How much there <span class="keyword">are</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="匿名字段和内嵌结构体"><a href="#匿名字段和内嵌结构体" class="headerlink" title="匿名字段和内嵌结构体"></a>匿名字段和内嵌结构体</h3><p>结构体可以包含一个或多个 匿名（或内嵌）字段，即这些字段没有显式的名字，只有字段的类型是必须的，此时类型就是字段的名字。匿名字段本身可以是一个结构体类型，即 结构体可以包含内嵌结构体。</p>
+<p>可以粗略地将这个和面向对象语言中的继承概念相比较，随后将会看到它被用来模拟类似继承的行为。Go 语言中的继承是通过内嵌或组合来实现的，所以可以说，在 Go 语言中，相比较于继承，组合更受青睐。</p>
+<p>内层结构体被简单的插入或者内嵌进外层结构体。这个简单的“继承”机制提供了一种方式，使得可以从另外一个或一些类型继承部分或全部实现。</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package main</span><br><span class="line"></span><br><span class="line">import <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line">type A struct &#123;</span><br><span class="line">    ax, ay int</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type B struct &#123;</span><br><span class="line">    A</span><br><span class="line">    bx, by float32</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">func main() &#123;</span><br><span class="line">    b := B&#123;A&#123;1, 2&#125;, 3.0, 4.0&#125;</span><br><span class="line">    fmt.Println(b.ax, b.ay, b.bx, b.by)</span><br><span class="line">    fmt.Println(b.A)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span></span><br><span class="line">&#123;<span class="number">1</span> <span class="number">2</span>&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h2><h3 id="什么是方法"><a href="#什么是方法" class="headerlink" title="什么是方法"></a>什么是方法</h3><p>在 Go 语言中，结构体就像是类的一种简化形式，Go 方法是作用在接收者（receiver）上的一个函数，接收者是某种类型的变量。因此方法是一种特殊类型的函数。</p>
+<p>接收者类型可以是（几乎）任何类型，不仅仅是结构体类型：任何类型都可以有方法，甚至可以是函数类型，可以是 int、bool、string 或数组的别名类型。但是接收者不能是一个接口类型，因为接口是一个抽象定义。</p>
+<p>最后接收者不能是一个指针类型，但是它可以是任何其他允许类型的指针。</p>
+<p>一个类型加上它的方法等价于面向对象中的一个类。一个重要的区别是：在 Go 中，类型的代码和绑定在它上面的方法的代码可以不放置在一起，它们可以存在在不同的源文件，唯一的要求是：它们必须是同一个包的。</p>
+<p>类型 <code>T</code>（或 <code>*T</code>）上的所有方法的集合叫做类型 <code>T</code>（或 <code>*T</code>）的方法集。</p>
+<p>定义方法的一般格式如下：</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(recv receiver_type)</span> <span class="title">methodName</span><span class="params">(parameter_list)</span> <span class="params">(return_value_list)</span> &#123; ... &#125;</span></span><br></pre></td></tr></table></figure>
+<p>在方法名之前，<code>func</code> 关键字之后的括号中指定 <code>receiver</code>。</p>
+<p>如果 <code>recv</code> 是 receiver 的实例，Method1 是它的方法名，那么方法调用遵循传统的 <code>object.name</code> 选择器符号：<code>recv.Method1()</code>。</p>
+<p>如果 <code>recv</code> 一个指针，Go 会自动解引用。</p>
+<p>如果方法不需要使用 <code>recv</code> 的值，可以用 <code>_</code> 替换它，比如：</p>
+<figure class="highlight autoit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(_ receiver_type)</span> <span class="title">methodName</span><span class="params">(parameter_list)</span> <span class="params">(return_value_list)</span> &#123; ... &#125;</span></span><br></pre></td></tr></table></figure>
+<p><code>recv</code> 就像是面向对象语言中的 <code>this</code> 或 <code>self</code>，但是 Go 中并没有这两个关键字。随个人喜好，你可以使用 <code>this</code> 或 <code>self</code> 作为 <code>receiver</code> 的名字。</p>
+<p>下面是一个结构体上的简单方法的例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> TwoInts <span class="keyword">struct</span> &#123;</span><br><span class="line">    a <span class="keyword">int</span></span><br><span class="line">    b <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    two1 := <span class="built_in">new</span>(TwoInts)</span><br><span class="line">    two1.a = <span class="number">12</span></span><br><span class="line">    two1.b = <span class="number">10</span></span><br><span class="line"></span><br><span class="line">    fmt.Printf(<span class="string">"The sum is: %d\n"</span>, two1.AddThem())</span><br><span class="line">    fmt.Printf(<span class="string">"Add them to the param: %d\n"</span>, two1.AddToParam(<span class="number">20</span>))</span><br><span class="line"></span><br><span class="line">    two2 := TwoInts&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</span><br><span class="line">    fmt.Printf(<span class="string">"The sum is: %d\n"</span>, two2.AddThem())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(tn *TwoInts)</span> <span class="title">AddThem</span><span class="params">()</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> tn.a + tn.b</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(tn *TwoInts)</span> <span class="title">AddToParam</span><span class="params">(param <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</span><br><span class="line">    <span class="keyword">return</span> tn.a + tn.b + param</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">The <span class="built_in">sum</span> is: <span class="number">22</span></span><br><span class="line">Add them <span class="built_in">to</span> <span class="keyword">the</span> <span class="built_in">param</span>: <span class="number">42</span></span><br><span class="line">The <span class="built_in">sum</span> is: <span class="number">7</span></span><br></pre></td></tr></table></figure></p>
+<p>下面是非结构体类型上方法的例子：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> IntVector []<span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v IntVector)</span> <span class="title">Sum</span><span class="params">()</span> <span class="params">(s <span class="keyword">int</span>)</span></span> &#123;</span><br><span class="line">    <span class="keyword">for</span> _, x := <span class="keyword">range</span> v &#123;</span><br><span class="line">        s += x</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    fmt.Println(IntVector&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125;.Sum()) <span class="comment">// 输出是6</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="函数个方法的区别"><a href="#函数个方法的区别" class="headerlink" title="函数个方法的区别"></a>函数个方法的区别</h3><p>函数将变量作为参数：<code>Function1(recv)</code></p>
+<p>方法在变量上被调用：<code>recv.Method1()</code></p>
+<p>在接收者是指针时，方法可以改变接收者的值（或状态），这点函数也可以做到（当参数作为指针传递，即通过引用调用时，函数也可以改变参数的状态）。</p>
+<p>接收者必须有一个显式的名字，这个名字必须在方法中被使用。</p>
+<p><code>receiver_type</code> 叫做 （接收者）基本类型，这个类型必须在和方法同样的包中被声明。</p>
+<p>在 Go 中，（接收者）类型关联的方法不写在类型结构里面，就像类那样；耦合更加宽松；类型和方法之间的关联由接收者来建立。</p>
+<p>方法没有和数据定义（结构体）混在一起：它们是正交的类型；表示（数据）和行为（方法）是独立的。</p>
+<h3 id="指针或值作为接收者"><a href="#指针或值作为接收者" class="headerlink" title="指针或值作为接收者"></a>指针或值作为接收者</h3><p>鉴于性能的原因，<code>recv</code> 最常见的是一个指向 <code>receiver_type</code> 的指针（因为我们不想要一个实例的拷贝，如果按值调用的话就会是这样），特别是在 <code>receiver</code> 类型是结构体时，就更是如此了。</p>
+<p>如果想要方法改变接收者的数据，就在接收者的指针类型上定义该方法。否则，就在普通的值类型上定义方法。</p>
+<p>下面的例子中，<code>change()</code>接受一个指向 B 的指针，并改变它内部的成员；<code>write()</code> 接受通过拷贝接受 B 的值并只输出B的内容。注意 Go 为我们做了探测工作，我们自己并没有指出是否在指针上调用方法，Go 替我们做了这些事情。<code>b1</code> 是值而<code>b2</code> 是指针，方法都支持运行了。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> B <span class="keyword">struct</span> &#123;</span><br><span class="line">    thing <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b *B)</span> <span class="title">change</span><span class="params">()</span></span> &#123; b.thing = <span class="number">1</span> &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(b B)</span> <span class="title">write</span><span class="params">()</span> <span class="title">string</span></span> &#123; <span class="keyword">return</span> fmt.Sprint(b) &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="keyword">var</span> b1 B <span class="comment">// b1是值</span></span><br><span class="line">    b1.change()</span><br><span class="line">    fmt.Println(b1.write())</span><br><span class="line"></span><br><span class="line">    b2 := <span class="built_in">new</span>(B) <span class="comment">// b2是指针</span></span><br><span class="line">    b2.change()</span><br><span class="line">    fmt.Println(b2.write())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 输出：</span></span><br><span class="line"><span class="comment">&#123;1&#125;</span></span><br><span class="line"><span class="comment">&#123;1&#125;</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>试着在<code>write()</code> 中改变接收者<code>b</code>的值：将会看到它可以正常编译，但是开始的 <code>b</code> 没有被改变。</p>
+<p>我们知道方法将指针作为接收者不是必须的，如下面的例子，我们只是需要 <code>Point3</code> 的值来做计算：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type Point3 struct &#123; x, y, z float64 &#125;</span><br><span class="line"><span class="comment">// A method on Point3</span></span><br><span class="line">func (<span class="selector-tag">p</span> Point3) Abs() float64 &#123;</span><br><span class="line">    return math.Sqrt(<span class="selector-tag">p</span>.x*<span class="selector-tag">p</span><span class="selector-class">.x</span> + <span class="selector-tag">p</span>.y*<span class="selector-tag">p</span><span class="selector-class">.y</span> + <span class="selector-tag">p</span>.z*<span class="selector-tag">p</span>.z)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样做稍微有点昂贵，因为 <code>Point3</code> 是作为值传递给方法的，因此传递的是它的拷贝，这在 Go 中合法的。也可以在指向这个类型的指针上调用此方法（会自动解引用）。</p>
+<p>假设 <code>p3</code> 定义为一个指针：<code>p3 := &amp;Point{ 3, 4, 5}</code>。</p>
+<p>可以使用 <code>p3.Abs()</code> 来替代 <code>(*p3).Abs()</code>。</p>
+<p>在值和指针上调用方法：</p>
+<p>可以有连接到类型的方法，也可以有连接到类型指针的方法。</p>
+<p>但是这没关系：对于类型 <code>T</code>，如果在 <code>*T</code> 上存在方法 <code>Meth()</code>，并且 <code>t</code> 是这个类型的变量，那么 <code>t.Meth()</code> 会被自动转换为 <code>(&amp;t).Meth()</code>。</p>
+<p>指针方法和值方法都可以在指针或非指针上被调用，如下面程序所示，类型 List 在值上有一个方法 <code>Len()</code>，在指针上有一个方法 <code>Append()</code>，但是可以看到两个方法都可以在两种类型的变量上被调用。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> List []<span class="keyword">int</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l List)</span> <span class="title">Len</span><span class="params">()</span> <span class="title">int</span></span>        &#123; <span class="keyword">return</span> <span class="built_in">len</span>(l) &#125;</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(l *List)</span> <span class="title">Append</span><span class="params">(val <span class="keyword">int</span>)</span></span> &#123; *l = <span class="built_in">append</span>(*l, val) &#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// 值</span></span><br><span class="line">    <span class="keyword">var</span> lst List</span><br><span class="line">    lst.Append(<span class="number">1</span>)</span><br><span class="line">    fmt.Printf(<span class="string">"%v (len: %d)"</span>, lst, lst.Len()) <span class="comment">// [1] (len: 1)</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 指针</span></span><br><span class="line">    plst := <span class="built_in">new</span>(List)</span><br><span class="line">    plst.Append(<span class="number">2</span>)</span><br><span class="line">    fmt.Printf(<span class="string">"%v (len: %d)"</span>, plst, plst.Len()) <span class="comment">// &amp;[2] (len: 1)</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+<div>
+  
+    
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Golang/" rel="tag"><i class="fa fa-tag"></i> Golang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/27/The-Way-to-Go（三）/" rel="next" title="The Way to Go（三）">
+                <i class="fa fa-chevron-left"></i> The Way to Go（三）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/24/【转】向恐龙解释现代JavaScript/" rel="prev" title="【转】向恐龙解释现代JavaScript">
+                【转】向恐龙解释现代JavaScript <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="思齐" />
+          <p class="site-author-name" itemprop="name">思齐</p>
+           
+              <p class="site-description motion-element" itemprop="description">思与之齐</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">66</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Syzq" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/p/1005055693566329/home?from=page_100505&mod=TAB#place" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/beme" target="_blank" title="S  F">
+                  
+                    <i class="fa fa-fw fa-scribd"></i>
+                  
+                  S  F
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/YXY81519/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-comment"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#结构和方法"><span class="nav-number">1.</span> <span class="nav-text">结构和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体定义"><span class="nav-number">1.1.</span> <span class="nav-text">结构体定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用-new"><span class="nav-number">1.2.</span> <span class="nav-text">使用 new</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体的内存布局"><span class="nav-number">1.3.</span> <span class="nav-text">结构体的内存布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体转换"><span class="nav-number">1.4.</span> <span class="nav-text">结构体转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用自定义包中的结构体"><span class="nav-number">1.5.</span> <span class="nav-text">使用自定义包中的结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带标签的结构体"><span class="nav-number">1.6.</span> <span class="nav-text">带标签的结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#匿名字段和内嵌结构体"><span class="nav-number">1.7.</span> <span class="nav-text">匿名字段和内嵌结构体</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#方法"><span class="nav-number">2.</span> <span class="nav-text">方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么是方法"><span class="nav-number">2.1.</span> <span class="nav-text">什么是方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数个方法的区别"><span class="nav-number">2.2.</span> <span class="nav-text">函数个方法的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针或值作为接收者"><span class="nav-number">2.3.</span> <span class="nav-text">指针或值作为接收者</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-mars"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">思齐</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
