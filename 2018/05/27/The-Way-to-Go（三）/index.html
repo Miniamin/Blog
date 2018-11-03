@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="S_UNmLCii9OVqOu5unmzIdCxCetiyjd0biEMaruNi0U" />
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=PingFang SC:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Golang," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="数组与切片 数组  数组是具有相同 唯一类型 的一组已编号且长度固定的数据项序列（这是一种同构的数据结构）；这种类型可以是任意的原始类型例如整型、字符串或者自定义类型。数组长度必须是一个常量表达式，并且必须是一个非负整数。数组长度也是数组类型的一部分，所以[5]int和[10]int是属于不同类型的。 1var identifier [len]type  切片声明切片的格式是：   1var id">
+<meta name="keywords" content="Golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Way to Go（三）">
+<meta property="og:url" content="https://syzq.github.io/2018/05/27/The-Way-to-Go（三）/index.html">
+<meta property="og:site_name" content="Syzq">
+<meta property="og:description" content="数组与切片 数组  数组是具有相同 唯一类型 的一组已编号且长度固定的数据项序列（这是一种同构的数据结构）；这种类型可以是任意的原始类型例如整型、字符串或者自定义类型。数组长度必须是一个常量表达式，并且必须是一个非负整数。数组长度也是数组类型的一部分，所以[5]int和[10]int是属于不同类型的。 1var identifier [len]type  切片声明切片的格式是：   1var id">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-03T02:50:51.823Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="The Way to Go（三）">
+<meta name="twitter:description" content="数组与切片 数组  数组是具有相同 唯一类型 的一组已编号且长度固定的数据项序列（这是一种同构的数据结构）；这种类型可以是任意的原始类型例如整型、字符串或者自定义类型。数组长度必须是一个常量表达式，并且必须是一个非负整数。数组长度也是数组类型的一部分，所以[5]int和[10]int是属于不同类型的。 1var identifier [len]type  切片声明切片的格式是：   1var id">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://syzq.github.io/2018/05/27/The-Way-to-Go（三）/"/>
+
+
+
+
+
+  <title>The Way to Go（三） | Syzq</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Syzq</span>
+       <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A blog that you won't read.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://syzq.github.io/2018/05/27/The-Way-to-Go（三）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="思齐">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Syzq">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">The Way to Go（三）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T10:50:00+08:00">
+                2018-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/The-Way-to-Go/" itemprop="url" rel="index">
+                    <span itemprop="name">The Way to Go</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="数组与切片"><a href="#数组与切片" class="headerlink" title="数组与切片"></a>数组与切片</h2><ul>
+<li>数组</li>
+</ul>
+<p>数组是具有相同 唯一类型 的一组已编号且长度固定的数据项序列（这是一种同构的数据结构）；这种类型可以是任意的原始类型例如整型、字符串或者自定义类型。数组长度必须是一个常量表达式，并且必须是一个非负整数。数组长度也是数组类型的一部分，所以<code>[5]int</code>和<code>[10]int</code>是属于不同类型的。</p>
+<figure class="highlight excel"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">var</span> identifier [<span class="built_in">len</span>]<span class="built_in">type</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>切片<br>声明切片的格式是： </li>
+</ul>
+<figure class="highlight delphi"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> identifier []<span class="keyword">type</span>   <span class="comment">//不需要说明长度</span></span><br></pre></td></tr></table></figure>
+<p>注意不要用指针指向 <code>slice</code>。切片本身已经是一个引用类型，所以它本身就是一个指针。</p>
+<h3 id="new-和-make-的区别"><a href="#new-和-make-的区别" class="headerlink" title="new() 和 make() 的区别"></a>new() 和 make() 的区别</h3><p>看起来二者没有什么区别，都在堆上分配内存，但是它们的行为不同，适用于不同的类型。</p>
+<ul>
+<li><p><code>new(T)</code> 为每个新的类型<code>T</code>分配一片内存，初始化为 0 并且返回类型为<code>*T</code>的内存地址：这种方法 返回一个指向类型为 <code>T</code>，值为 0 的地址的指针，它适用于值类型如数组和结构体；它相当于 <code>&amp;T{}</code>。</p>
+</li>
+<li><p><code>make(T)</code> 返回一个类型为 <code>T</code> 的初始值，它只适用于3种内建的引用类型：切片、map 和 channel</p>
+</li>
+</ul>
+<p>换言之，<code>new</code> 函数分配内存，<code>make</code> 函数初始化。</p>
+<h3 id="字符串、数组和切片的应用"><a href="#字符串、数组和切片的应用" class="headerlink" title="字符串、数组和切片的应用"></a>字符串、数组和切片的应用</h3><ul>
+<li>从字符串生成字节切片</li>
+<li>假设 <code>s</code> 是一个字符串（本质上是一个字节数组），那么就可以直接通过 <code>c := []byte(s)</code> 来获取一个字节的切片 <code>c</code>。另外，还可以通过 <code>copy</code> 函数来达到相同的目的：<code>copy(dst []byte, src string)</code>。</li>
+</ul>
+<p>同样的，还可以使用 <code>for-range</code> 来获得每个元素。</p>
+<ul>
+<li>修改字符串中的某个字符</li>
+</ul>
+<p>Go 语言中的字符串是不可变的，也就是说 <code>str[index]</code> 这样的表达式是不可以被放在等号左侧的。如果尝试运行 <code>str[i] = &#39;D&#39;</code>会得到错误：<code>cannot assign to str[i]</code>。</p>
+<p>因此，必须先将字符串转换成字节数组，然后再通过修改数组中的元素值来达到修改字符串的目的，最后将字节数组转换回字符串格式。</p>
+<p>例如，将字符串 <code>&quot;hello&quot;</code> 转换为 <code>&quot;cello&quot;</code>：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s := <span class="string">"hello"</span></span><br><span class="line">c := []<span class="keyword">byte</span>(s)</span><br><span class="line">c[<span class="number">0</span>] = <span class="string">'c'</span></span><br><span class="line">s2 := <span class="keyword">string</span>(c) <span class="comment">// s2 == "cello"</span></span><br></pre></td></tr></table></figure>
+<p>所以，可以通过操作切片来完成对字符串的操作。</p>
+<ul>
+<li>搜索及排序切片和数组</li>
+</ul>
+<p>标准库提供了 <code>sort</code> 包来实现常见的搜索和排序操作。您可以使用 <code>sort</code> 包中的函数 <code>func Ints(a []int)</code> 来实现对 <code>int</code> 类型的切片排序。例如 <code>sort.Ints(arri)</code>，其中变量 <code>arri</code> 就是需要被升序排序的数组或切片。为了检查某个数组是否已经被排序，可以通过函数 <code>IntsAreSorted(a []int) bool</code>来检查，如果返回 <code>true</code> 则表示已经被排序。</p>
+<p>类似的，可以使用函数 <code>func Float64s(a []float64)</code> 来排序 <code>float64</code> 的元素，或使用函数 <code>func Strings(a []string)</code> 排序字符串元素。</p>
+<p>想要在数组或切片中搜索一个元素，该数组或切片必须先被排序（因为标准库的搜索算法使用的是二分法）。然后，您就可以使用函数<code>func SearchInts(a []int, n int) int</code> 进行搜索，并返回对应结果的索引值。</p>
+<h3 id="append-函数常见操作"><a href="#append-函数常见操作" class="headerlink" title="append 函数常见操作"></a>append 函数常见操作</h3><ol>
+<li>将切片 b 的元素追加到切片 a 之后：<code>a = append(a, b...)</code></li>
+<li><p>复制切片 a 的元素到新的切片 b 上：</p>
+ <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">b = <span class="built_in">make</span>([]T, <span class="built_in">len</span>(a))</span><br><span class="line"><span class="built_in">copy</span>(b, a)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除位于索引 i 的元素：<code>a = append(a[:i], a[i+1:]...)</code></p>
+</li>
+<li>切除切片 a 中从索引 i 至 j 位置的元素：<code>a = append(a[:i], a[j:]...)</code></li>
+<li>为切片 a 扩展 j 个元素长度：<code>a = append(a, make([]T, j)...)</code></li>
+<li>在索引 i 的位置插入元素 x：<code>a = append(a[:i], append([]T{x}, a[i:]...)...)</code></li>
+<li>在索引 i 的位置插入长度为 j 的新切片：<code>a = append(a[:i], append(make([]T, j), a[i:]...)...)</code></li>
+<li>在索引 i 的位置插入切片 b 的所有元素：<code>a = append(a[:i], append(b, a[i:]...)...)</code></li>
+<li>取出位于切片 a 最末尾的元素 x：<code>x, a = a[len(a)-1], a[:len(a)-1]</code></li>
+<li>将元素 x 追加到切片 a：<code>a = append(a, x)</code></li>
+</ol>
+<p>因此，您可以使用切片和 append 操作来表示任意可变长度的序列。</p>
+<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><p><code>map</code> 是引用类型，可以使用如下声明：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> map1 <span class="keyword">map</span>[keytype]valuetype</span><br><span class="line"><span class="keyword">var</span> map1 <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span></span><br></pre></td></tr></table></figure>
+<p>在声明的时候不需要知道 <code>map</code> 的长度，<code>map</code> 是可以动态增长的。</p>
+<p>未初始化的 <code>map</code> 的值是<code>nil</code>。</p>
+<p>key 可以是任意可以用 == 或者 != 操作符比较的类型，比如 string、int、float。所以数组、切片和结构体不能作为 key，但是指针和接口类型可以。</p>
+<p>value 可以是任意类型的；通过使用空接口类型，我们可以存储任意值，但是使用这种类型作为值时需要先做一次类型断言。</p>
+<p><code>map</code> 是 引用类型 的： 内存用 <code>make</code> 方法来分配。</p>
+<p><code>map</code> 的初始化：<code>var map1 = make(map[keytype]valuetype)</code>。</p>
+<p>或者简写为：<code>map1 := make(map[keytype]valuetype)</code>。</p>
+<h3 id="测试键值对是否存在及删除元素"><a href="#测试键值对是否存在及删除元素" class="headerlink" title="测试键值对是否存在及删除元素"></a>测试键值对是否存在及删除元素</h3><p>使用 <code>val1 = map1[key1]</code> 的方法获取 <code>key1</code> 对应的值 <code>val1</code>。如果<code>map</code> 中不存在<code>key1</code>，<code>val1</code> 就是一个值类型的空值。</p>
+<p>这就会给我们带来困惑了：现在我们没法区分到底是<code>key1</code> 不存在还是它对应的 <code>value</code> 就是空值。</p>
+<p>为了解决这个问题，我们可以这么用：<code>val1, isPresent = map1[key1]</code></p>
+<p>如果你只是想判断某个 key 是否存在而不关心它对应的值到底是多少，你可以这么做：</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">_,</span> ok := map1[key1] // 如果key1存在则ok == <span class="literal">true</span>，否则ok为<span class="literal">false</span></span><br></pre></td></tr></table></figure>
+<p>或者和 <code>if</code> 混合使用：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> _, ok := map1[key1]; ok &#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>从 <code>map1</code> 中删除 <code>key1</code>：</p>
+<p>直接 <code>delete(map1, key1)</code>就可以。</p>
+<p>如果<code>key1</code> 不存在，该操作不会产生错误。</p>
+<h3 id="map-类型的切片"><a href="#map-类型的切片" class="headerlink" title="map 类型的切片"></a>map 类型的切片</h3><p>假设我们想获取一个 map 类型的切片，我们必须使用两次 <code>make()</code> 函数，第一次分配切片，第二次分配 切片中每个 map 元素</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    <span class="comment">// Version A:</span></span><br><span class="line">    items := <span class="built_in">make</span>([]<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">int</span>, <span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> i:= <span class="keyword">range</span> items &#123;</span><br><span class="line">        items[i] = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">int</span>, <span class="number">1</span>)</span><br><span class="line">        items[i][<span class="number">1</span>] = <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Printf(<span class="string">"Version A: Value of items: %v\n"</span>, items)</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Version B: NOT GOOD!</span></span><br><span class="line">    items2 := <span class="built_in">make</span>([]<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">int</span>, <span class="number">5</span>)</span><br><span class="line">    <span class="keyword">for</span> _, item := <span class="keyword">range</span> items2 &#123;</span><br><span class="line">        item = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">int</span>, <span class="number">1</span>) <span class="comment">// item is only a copy of the slice element.</span></span><br><span class="line">        item[<span class="number">1</span>] = <span class="number">2</span> <span class="comment">// This 'item' will be lost on the next iteration.</span></span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Printf(<span class="string">"Version B: Value of items: %v\n"</span>, items2)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出结果：<br><figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Version A: Value <span class="keyword">of</span> items: <span class="comment">[map<span class="comment">[1:2]</span> map<span class="comment">[1:2]</span> map<span class="comment">[1:2]</span> map<span class="comment">[1:2]</span> map<span class="comment">[1:2]</span>]</span></span><br><span class="line">Version B: Value <span class="keyword">of</span> items: <span class="comment">[map<span class="comment">[]</span> map<span class="comment">[]</span> map<span class="comment">[]</span> map<span class="comment">[]</span> map<span class="comment">[]</span>]</span></span><br></pre></td></tr></table></figure></p>
+<p>需要注意的是，应当像 A 版本那样通过索引使用切片的 map 元素。在 B 版本中获得的项只是 map 值的一个拷贝而已，所以真正的 map 元素没有得到初始化。</p>
+<h3 id="将-map-的键值对调"><a href="#将-map-的键值对调" class="headerlink" title="将 map 的键值对调"></a>将 map 的键值对调</h3><p>这里对调是指调换 key 和 value。如果 map 的值类型可以作为 key 且所有的 value 是唯一的，那么通过下面的方法可以简单的做到键值对调。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> main</span><br><span class="line"><span class="keyword">import</span> (</span><br><span class="line">    <span class="string">"fmt"</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> (</span><br><span class="line">    barVal = <span class="keyword">map</span>[<span class="keyword">string</span>]<span class="keyword">int</span>&#123;<span class="string">"alpha"</span>: <span class="number">34</span>, <span class="string">"bravo"</span>: <span class="number">56</span>, <span class="string">"charlie"</span>: <span class="number">23</span>,</span><br><span class="line">                            <span class="string">"delta"</span>: <span class="number">87</span>, <span class="string">"echo"</span>: <span class="number">56</span>, <span class="string">"foxtrot"</span>: <span class="number">12</span>,</span><br><span class="line">                            <span class="string">"golf"</span>: <span class="number">34</span>, <span class="string">"hotel"</span>: <span class="number">16</span>, <span class="string">"indio"</span>: <span class="number">87</span>,</span><br><span class="line">                            <span class="string">"juliet"</span>: <span class="number">65</span>, <span class="string">"kili"</span>: <span class="number">43</span>, <span class="string">"lima"</span>: <span class="number">98</span>&#125;</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">    invMap := <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="keyword">int</span>]<span class="keyword">string</span>, <span class="built_in">len</span>(barVal))</span><br><span class="line">    <span class="keyword">for</span> k, v := <span class="keyword">range</span> barVal &#123;</span><br><span class="line">        invMap[v] = k</span><br><span class="line">    &#125;</span><br><span class="line">    fmt.Println(<span class="string">"inverted:"</span>)</span><br><span class="line">    <span class="keyword">for</span> k, v := <span class="keyword">range</span> invMap &#123;</span><br><span class="line">        fmt.Printf(<span class="string">"Key: %v, Value: %v / "</span>, k, v)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="包"><a href="#包" class="headerlink" title="包"></a>包</h2><p>像 <code>fmt</code>、<code>os</code> 等这样具有常用功能的内置包在 Go 语言中有 150 个以上，它们被称为标准库，大部分(一些底层的除外)内置于 Go 本身。</p>
+<ul>
+<li><code>unsafe</code>: 包含了一些打破 Go 语言“类型安全”的命令，一般的程序中不会被使用，可用在 C/C++ 程序的调用中。</li>
+<li><p><code>syscall</code>-<code>os</code>-<code>os/exec</code>:  </p>
+<ul>
+<li><code>os</code>: 提供给我们一个平台无关性的操作系统功能接口，采用类Unix设计，隐藏了不同操作系统间差异，让不同的文件系统和操作系统对象表现一致。  </li>
+<li><code>os/exec</code>: 提供我们运行外部操作系统命令和程序的方式。  </li>
+<li><code>syscall</code>: 底层的外部包，提供了操作系统底层调用的基本接口。</li>
+</ul>
+</li>
+<li><p><code>archive/tar</code> 和 <code>/zip-compress</code>：压缩(解压缩)文件功能。</p>
+</li>
+<li><code>fmt</code>-<code>io</code>-<code>bufio</code>-<code>path/filepath</code>-<code>flag</code>:  <ul>
+<li><code>fmt</code>: 提供了格式化输入输出功能。  </li>
+<li><code>io</code>: 提供了基本输入输出功能，大多数是围绕系统功能的封装。  </li>
+<li><code>bufio</code>: 缓冲输入输出功能的封装。  </li>
+<li><code>path/filepath</code>: 用来操作在当前系统中的目标文件名路径。  </li>
+<li><code>flag</code>: 对命令行参数的操作。　　</li>
+</ul>
+</li>
+<li><code>strings</code>-<code>strconv</code>-<code>unicode</code>-<code>regexp</code>-<code>bytes</code>:  <ul>
+<li><code>strings</code>: 提供对字符串的操作。  </li>
+<li><code>strconv</code>: 提供将字符串转换为基础类型的功能。</li>
+<li><code>unicode</code>: 为 unicode 型的字符串提供特殊的功能。</li>
+<li><code>regexp</code>: 正则表达式功能。  </li>
+<li><code>bytes</code>: 提供对字符型分片的操作。  </li>
+<li><code>index/suffixarray</code>: 子字符串快速查询。</li>
+</ul>
+</li>
+<li><code>math</code>-<code>math/cmath</code>-<code>math/big</code>-<code>math/rand</code>-<code>sort</code>:  <ul>
+<li><code>math</code>: 基本的数学函数。  </li>
+<li><code>math/cmath</code>: 对复数的操作。  </li>
+<li><code>math/rand</code>: 伪随机数生成。  </li>
+<li><code>sort</code>: 为数组排序和自定义集合。  </li>
+<li><code>math/big</code>: 大数的实现和计算。  　　</li>
+</ul>
+</li>
+<li><p><code>container</code>-<code>/list-ring-heap</code>: 实现对集合的操作。  </p>
+<ul>
+<li><code>list</code>: 双链表。</li>
+<li><code>ring</code>: 环形链表。</li>
+</ul>
+</li>
+<li><p><code>time</code>-<code>log</code>:  </p>
+<ul>
+<li><code>time</code>: 日期和时间的基本操作。  </li>
+<li><code>log</code>: 记录程序运行时产生的日志,我们将在后面的章节使用它。</li>
+</ul>
+</li>
+<li><code>encoding/json</code>-<code>encoding/xml</code>-<code>text/template</code>:<ul>
+<li><code>encoding/json</code>: 读取并解码和写入并编码 JSON 数据。  </li>
+<li><code>encoding/xml</code>:简单的 XML1.0 解析器,有关 JSON 和 XML 的实例请查阅第 12.9/10 章节。  </li>
+<li><code>text/template</code>:生成像 HTML 一样的数据与文本混合的数据驱动模板（参见第 15.7 节）。  </li>
+</ul>
+</li>
+<li><code>net</code>-<code>net/http</code>-<code>html</code>:（参见第 15 章）<ul>
+<li><code>net</code>: 网络数据的基本操作。  </li>
+<li><code>http</code>: 提供了一个可扩展的 HTTP 服务器和基础客户端，解析 HTTP 请求和回复。  </li>
+<li><code>html</code>: HTML5 解析器。  </li>
+</ul>
+</li>
+<li><code>runtime</code>: Go 程序运行时的交互操作，例如垃圾回收和协程创建。  </li>
+<li><code>reflect</code>: 实现通过程序运行时反射，让程序操作任意类型的变量。  </li>
+</ul>
+<p><code>exp</code> 包中有许多将被编译为新包的实验性的包。它们将成为独立的包在下次稳定版本发布的时候。如果前一个版本已经存在了，它们将被作为过时的包被回收。然而 Go1.0 发布的时候并不包含过时或者实验性的包。</p>
+<h3 id="regexp-包"><a href="#regexp-包" class="headerlink" title="regexp 包"></a>regexp 包</h3><p>在下面的程序里，我们将在字符串中对正则表达式进行匹配。</p>
+<p>如果是简单模式，使用 <code>Match</code> 方法便可：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ok, _ := regexp.Match(pat, []<span class="keyword">byte</span>(searchIn))</span><br></pre></td></tr></table></figure>
+<p>变量 <code>ok</code> 将返回 true 或者 false,我们也可以使用 <code>MatchString</code>：</p>
+<figure class="highlight autohotkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ok,</span> _ := regexp.MatchString(pat, searchIn)</span><br></pre></td></tr></table></figure>
+<h3 id="锁和-sync-包"><a href="#锁和-sync-包" class="headerlink" title="锁和 sync 包"></a>锁和 sync 包</h3><p>在一些复杂的程序中，通常通过不同线程执行不同应用来实现程序的并发。当不同线程要使用同一个变量时，经常会出现一个问题：无法预知变量被不同线程修改的顺序！(这通常被称为资源竞争,指不同线程对同一变量使用的竞争)</p>
+<p>经典的做法是一次只能让一个线程对共享变量进行操作。当变量被一个线程改变时(临界区)，我们为它上锁，直到这个线程执行完成并解锁后，其他线程才能访问它。</p>
+<p>在 Go 语言中这种锁的机制是通过 <code>sync</code> 包中<code>Mutex</code> 来实现的。<code>sync</code> 来源于 “synchronized” 一词，这意味着线程将有序的对同一变量进行访问。</p>
+<p><code>sync.Mutex</code> 是一个互斥锁，它的作用是守护在临界区入口来确保同一时间只能有一个线程进入临界区。</p>
+<p>假设 <code>info</code> 是一个需要上锁的放在共享内存中的变量。通过包含 <code>Mutex</code>来实现的一个典型例子如下：</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span>  "sync"</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> <span class="type">Info</span> struct &#123;</span><br><span class="line">    mu sync.<span class="type">Mutex</span></span><br><span class="line">    // ... other fields, e.g.: <span class="type">Str</span> string</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果一个函数想要改变这个变量可以这样写:</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">func Update(info *Info) &#123;</span><br><span class="line">    info<span class="selector-class">.mu</span><span class="selector-class">.Lock</span>()</span><br><span class="line">    <span class="comment">// critical section:</span></span><br><span class="line">    info<span class="selector-class">.Str</span> = <span class="comment">// new value</span></span><br><span class="line">    <span class="comment">// end critical section</span></span><br><span class="line">    info<span class="selector-class">.mu</span><span class="selector-class">.Unlock</span>()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还有一个很有用的例子是通过 Mutex 来实现一个可以上锁的共享缓冲器:</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> <span class="type">SyncedBuffer</span> struct &#123;</span><br><span class="line">    lock    sync.<span class="type">Mutex</span></span><br><span class="line">    buffer  bytes.<span class="type">Buffer</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+<div>
+  
+    
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Golang/" rel="tag"><i class="fa fa-tag"></i> Golang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/24/The-Way-to-Go（二）/" rel="next" title="The Way to Go（二）">
+                <i class="fa fa-chevron-left"></i> The Way to Go（二）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/24/【转】向恐龙解释现代JavaScript/" rel="prev" title="【转】向恐龙解释现代JavaScript">
+                【转】向恐龙解释现代JavaScript <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="思齐" />
+          <p class="site-author-name" itemprop="name">思齐</p>
+           
+              <p class="site-description motion-element" itemprop="description">思与之齐</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">65</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Syzq" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/p/1005055693566329/home?from=page_100505&mod=TAB#place" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/beme" target="_blank" title="S  F">
+                  
+                    <i class="fa fa-fw fa-scribd"></i>
+                  
+                  S  F
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/YXY81519/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-comment"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#数组与切片"><span class="nav-number">1.</span> <span class="nav-text">数组与切片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#new-和-make-的区别"><span class="nav-number">1.1.</span> <span class="nav-text">new() 和 make() 的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串、数组和切片的应用"><span class="nav-number">1.2.</span> <span class="nav-text">字符串、数组和切片的应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#append-函数常见操作"><span class="nav-number">1.3.</span> <span class="nav-text">append 函数常见操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#map"><span class="nav-number">2.</span> <span class="nav-text">map</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试键值对是否存在及删除元素"><span class="nav-number">2.1.</span> <span class="nav-text">测试键值对是否存在及删除元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#map-类型的切片"><span class="nav-number">2.2.</span> <span class="nav-text">map 类型的切片</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将-map-的键值对调"><span class="nav-number">2.3.</span> <span class="nav-text">将 map 的键值对调</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#包"><span class="nav-number">3.</span> <span class="nav-text">包</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#regexp-包"><span class="nav-number">3.1.</span> <span class="nav-text">regexp 包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#锁和-sync-包"><span class="nav-number">3.2.</span> <span class="nav-text">锁和 sync 包</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-mars"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">思齐</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
