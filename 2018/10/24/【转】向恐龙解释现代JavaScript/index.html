@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="S_UNmLCii9OVqOu5unmzIdCxCetiyjd0biEMaruNi0U" />
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=PingFang SC:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="JavaScript,前端工程化,npm," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="本文的目的是提供JavaScript工具是如何一步步发展到今天(2017年)的一个历史背景。我们将从零开始，构建一个不借助任何工具，只需要简单的HTML和JavaScript的示例网站。接着我们将依次引入不同的工具，并解释它解决了什么样的问题。有了这种历史背景，你将能更好地学习和适应未来不断变化的JavaScript格局。让我们开始吧！  JavaScript的”老派”使用方式让我们从一个只使用H">
+<meta name="keywords" content="JavaScript,前端工程化,npm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【转】向恐龙解释现代JavaScript">
+<meta property="og:url" content="https://syzq.github.io/2018/10/24/【转】向恐龙解释现代JavaScript/index.html">
+<meta property="og:site_name" content="Syzq">
+<meta property="og:description" content="本文的目的是提供JavaScript工具是如何一步步发展到今天(2017年)的一个历史背景。我们将从零开始，构建一个不借助任何工具，只需要简单的HTML和JavaScript的示例网站。接着我们将依次引入不同的工具，并解释它解决了什么样的问题。有了这种历史背景，你将能更好地学习和适应未来不断变化的JavaScript格局。让我们开始吧！  JavaScript的”老派”使用方式让我们从一个只使用H">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006djCGZly1fsm6t9hhxoj30m80egjwy.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006djCGZly1fsm73cwuk6j30m807hq5f.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006djCGZly1fsm7hzpehej30m807ewg9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006djCGZly1fsm7lxio1lj30bs07mt8y.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006djCGZly1fsm7ywnx9sj30m807jtcc.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006djCGZly1fsm8lixnzbj30m807mjsf.jpg">
+<meta property="og:updated_time" content="2018-11-04T06:56:58.340Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="【转】向恐龙解释现代JavaScript">
+<meta name="twitter:description" content="本文的目的是提供JavaScript工具是如何一步步发展到今天(2017年)的一个历史背景。我们将从零开始，构建一个不借助任何工具，只需要简单的HTML和JavaScript的示例网站。接着我们将依次引入不同的工具，并解释它解决了什么样的问题。有了这种历史背景，你将能更好地学习和适应未来不断变化的JavaScript格局。让我们开始吧！  JavaScript的”老派”使用方式让我们从一个只使用H">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006djCGZly1fsm6t9hhxoj30m80egjwy.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://syzq.github.io/2018/10/24/【转】向恐龙解释现代JavaScript/"/>
+
+
+
+
+
+  <title>【转】向恐龙解释现代JavaScript | Syzq</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Syzq</span>
+       <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A blog that you won't read.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://syzq.github.io/2018/10/24/【转】向恐龙解释现代JavaScript/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="思齐">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Syzq">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">【转】向恐龙解释现代JavaScript</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-24T13:12:26+08:00">
+                2018-10-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端杂烩/" itemprop="url" rel="index">
+                    <span itemprop="name">前端杂烩</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本文的目的是提供JavaScript工具是如何一步步发展到今天(2017年)的一个历史背景。我们将从零开始，构建一个不借助任何工具，只需要简单的HTML和JavaScript的示例网站。接着我们将依次引入不同的工具，并解释它解决了什么样的问题。有了这种历史背景，你将能更好地学习和适应未来不断变化的JavaScript格局。让我们开始吧！</p>
+<p><img src="http://ww1.sinaimg.cn/large/006djCGZly1fsm6t9hhxoj30m80egjwy.jpg" alt=""></p>
+<h2 id="JavaScript的”老派”使用方式"><a href="#JavaScript的”老派”使用方式" class="headerlink" title="JavaScript的”老派”使用方式"></a>JavaScript的”老派”使用方式</h2><p>让我们从一个只使用HTML和JavaScript的“老派(old-school)”网站开始，它需要我们手动地下载和链接文件。这里是一个简单的’<code>index.html</code> 文件，并链接了一个 JavaScript 文件：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.html --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>JavaScript Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello from HTML!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>其中 <code>&lt;script src=&quot;index.js&quot;&gt;&lt;/script&gt;</code> 这一行引用了一个与 <code>index.html</code> 在同一目录下名为 <code>index.js</code> 的 JavaScript 文件。</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="string">"Hello from JavaScript!"</span>);</span><br></pre></td></tr></table></figure>
+<p>这就是你制作一个网站所需的一切。现在，假设我们想要添加一个第三方的库，如 <a href="http://momentjs.com/" target="_blank" rel="noopener">moment.js</a> (一个可以将日期格式化为人类可读方式的库)。如下所示，你可以在JavaScript使用 <code>moment</code> 提供的功能：</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">moment</span>()<span class="selector-class">.startOf</span>(<span class="string">'day'</span>)<span class="selector-class">.fromNow</span>();        <span class="comment">// 20 hours ago</span></span><br></pre></td></tr></table></figure>
+<p>但是这需要你在你的网站中加入 mement.js。在 <a href="http://momentjs.com/" target="_blank" rel="noopener">moment.js</a> 主页，你会看到以下说明：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006djCGZly1fsm73cwuk6j30m807hq5f.jpg" alt=""></p>
+<p>我们暂时先忽略右边的  <strong>Install</strong> 部分的内容。我们可以通过手动下载 <code>moment.min.js</code>，并将其放到<code>index.html</code>所在的文件夹中，最后在<code>index.html</code>中引用<code>moment.min.js</code>的方式来给我们的网站添加moment.js功能，如下所示：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.html --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"index.css"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"moment.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello from HTML!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>注意，<code>moment.min.js</code>在<code>index.js</code>加载之前被加载，这意味着我们可以在<code>index.js</code>中使用moment的功能，如下所示：</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="string">"Hello from JavaScript!"</span>);</span><br><span class="line">console.<span class="built_in">log</span>(moment().startOf('day').fromNow());</span><br></pre></td></tr></table></figure>
+<p>这就是以前我们使用JavaScript库制作网站的方式，它的好处是很容易理解；而坏的一面是，当JavaScript库更新时，我们需要重新寻找并下载新版本的JavaScript库，这很烦人。</p>
+<h2 id="使用JavaScript包管理器-npm"><a href="#使用JavaScript包管理器-npm" class="headerlink" title="使用JavaScript包管理器(npm)"></a>使用JavaScript包管理器(npm)</h2><p>大概从2010年开始，出现了几个相互之间具有竞争关系的包管理器，它们帮助开发者自动化地完成从中央存储库下载和升级第三方依赖包的过程。2013年前后，<a href="https://bower.io/" target="_blank" rel="noopener">Bower</a> 毫无疑问是最受欢迎的包管理器，但最终在2015年左右，它被 <a href="https://www.npmjs.com/" target="_blank" rel="noopener">npm</a> 取代。(值得注意的是，从2016年年末开始，<a href="https://yarnpkg.com/en/" target="_blank" rel="noopener">yarn</a> 作为npm的替代品，已经获得了很大的吸引力，但yarn的背后依然使用npm。)</p>
+<p>请注意，npm最初是专门为node.js制作的包管理器，node.js是一个旨在运行在服务器而非浏览器上的JavaScript运行时。所以使用npm作为一个前端包管理器来管理运行在浏览器上的库，是一个非常奇怪的选择。</p>
+<p><strong>注意</strong>：使用包管理器通常会涉及命令行的使用，而在过去，这是一个前端开发者从不需要掌握的技能。如果你从未使用过命令行，这里有一个很好的<a href="https://www.learnenough.com/command-line-tutorial" target="_blank" rel="noopener">入门教程</a> 。无论好与坏，知道如何使用命令行是当代JavaScript开发的一个重要组成部分(同时它也为你在其他领域下的开发打开了一扇大门)。</p>
+<p>下面让我们来看看如何通过npm，而非手动下载的方式来安装<code>moment.js</code>。如果你已经安装了node.js，你也已经安装了npm，这意味着你可以在命令行中导航到<code>index.html</code>所在的文件夹下并输入如下命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> npm init</span></span><br></pre></td></tr></table></figure>
+<p>这将提示你几个问题(一般情况下选默认值即可)并创建一个名为<code>package.json</code>的新文件。<code>package.json</code>是一个配置文件，npm用它来存储一些与工程相关的信息。默认情况下，<code>package.json</code>中的内容应该是这样的：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"your-project-name"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>要安装moment.js JavaScript库，我们可以按照moment.js主页上的指导，在命令行中输入如下命令：</p>
+<figure class="highlight gauss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install <span class="built_in">moment</span> --<span class="keyword">save</span></span><br></pre></td></tr></table></figure>
+<p>这句命令做了两件事，首先它将moment.js包中的所有代码下载到一个名<code>node_modules</code>的本地文件夹中。其次，它自动修改 <code>package.json</code>文件，并将<code>moment.js</code>作为工程的一项依赖记录下来。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"modern-javascript-example"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span>,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"moment"</span>: <span class="string">"^2.19.1"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这在与他人共享工程时非常有用－－你只需要共享 <code>package.json</code>文件，而非整个 <code>node_modules</code>文件夹(它可能会变得非常大)，其他开发者可以通过 <code>npm install</code>命令来自动安装工程所需要的软件包。</p>
+<p>所以，现在我们再也不用从网站上手动下载moment.js了，我们可以通过使用npm来自动下载并更新它。查看 <code>node_modules</code>文件夹，我们可以在 <code>node_modules/moment/min</code>文件夹下找到 <code>moment.min.js</code>文件，这意味着我们可以直接在<code>index.html</code>中链接通过npm下载下来的 <code>moment.min.js</code>：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.html --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>JavaScript Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"node_modules/moment/min/moment.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello from HTML!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此时，好的一面是，通过命令行，我们可以使用npm来下载和更新我们的依赖包；坏的一面是，我们需要深入到 <code>node_modules</code>文件夹内部来寻找每个依赖包的位置，并且需要手动将它们添加到HTML中。这非常麻烦，接下来我们将看看如何自动化地执行这一过程。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006djCGZly1fsm7hzpehej30m807ewg9.jpg" alt=""></p>
+<h2 id="使用JavaScript模块打包工具-webpack"><a href="#使用JavaScript模块打包工具-webpack" class="headerlink" title="使用JavaScript模块打包工具(webpack)"></a>使用JavaScript模块打包工具(webpack)</h2><p>大部分编程语言都提供了将代码从一个文件加载(import)到另一个文件的方法。JavaScript最初被设计成只能在浏览器中运行，出于安全的考虑，它不能访问客户端计算机的文件系统，因此JavaScript不支持这一特性。在很长的一段时间内，我们需要通过全局共享变量的方式来加载组织在不同文件中的JavaScript代码。</p>
+<p>在上述<code>moment.js</code>例子中，我们就是这么干的，整个 <code>moment.min.js</code>文件被加载到HTML中，该HTML定义了一个叫 moment的全局变量，然后在     <code>moment.min.js</code>之后加载的任何文件都可以使用这个变量(无论这个文件是否需要使用到这个变量)。</p>
+<p>在2009年，一个名为CommonJS的项目启动，它的目的是定义一个在浏览器之外运行的JavaScript生态系统。CommonJS的一个重要组成部分就是它的模块规范，它最终允许JavaScript能像大多数编程语言一样可以跨跃文件导入和导出代码，而不需要借助全局共享变量。CommonJS模块规范最著名的应用就是node.js。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006djCGZly1fsm7lxio1lj30bs07mt8y.jpg" alt=""></p>
+<p>正如上文提到的，node.js 是一个运行在服务器上的JavaScript时。我们可以使用 node.js 的模块语法来改造前面的例子。此时，我们不需要使用HTML的<code>script</code>标签，就可以直接在JavaScript文件中加载 <code>moment.min.js</code>，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">var</span> moment = <span class="built_in">require</span>(<span class="string">'moment'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"Hello from JavaScript!"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(moment().startOf(<span class="string">'day'</span>).fromNow());</span><br></pre></td></tr></table></figure>
+<p>这就是node.js加载模块的方式，它效果很好，因为node.js是一门可以访问计算机文件系统的服务器端语言。同时node.js也知道每个npm模块路径的位置，所以加载模块时，我们可以简单地写成 <code>require(&#39;moment&#39;)</code>，而不需要写 <code>require(&#39;./node_modules/moment/min/moment.min.js&#39;)</code>。</p>
+<p>这一切在node.js上都能很好地运行，但当你尝试在浏览器中运行上述代码时，浏览器会报出一个 <code>require</code>未被定义的错误。加载文件必须以同步(会降低执行速度)或异步(可能有时间问题)的方式动态完成，而浏览器不能访问计算机的文件系统，这意味着以这种方式来加载模块会非常的棘手。</p>
+<p>这时我们就需要使用到模块打包工具。JavaScript模块打包工具，通过添加一步叫做build(可以访问计算机文件系统)的操作，创建一个与浏览器兼容的最终输出(不需要访问文件系统)，来解决上述问题。在这种场景下，我们需要用模块打包工具来找到所有的 <code>require</code> (这是无效的浏览器JavaScript语法)语句，并将它们替换成每个需要引入的文件的实际内容。最终的输出结果是一个打包好的JavaScript文件(没有require语法)。</p>
+<p><a href="http://browserify.org/" target="_blank" rel="noopener">Browserify</a> 在2011年发布后，即成为最受欢迎的模块打包器，它率先在前端引入了node.js样式的require语句(这也是使npm成为前端包管理器之一的原因)。在2015年左右，受React前端框架普及的推动，<a href="https://webpack.github.io/" target="_blank" rel="noopener">webpack</a> 打败Browserify成为最受欢迎的模块打包器，React框架充分利用了webpack的各种特性。</p>
+<p>让我们来看看如何通过webpack来使 <code>require(&#39;moment&#39;)</code>语句在浏览器中正常运行。首先，我们需要将webpack安装到工程中，webpack本身就是一个npm包，所以我们可以从命令行安装它：</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install webpack --<span class="built_in">save</span>-<span class="built_in">dev</span></span><br></pre></td></tr></table></figure>
+<p>请注意 <code>--save-dev</code>参数，webpack将会被保存为开发依赖项，这意味着它是在开发环境而非生产环境所需要的软件包，你可以从 <code>package.json</code>中看出这一区别：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"modern-javascript-example"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span>,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"moment"</span>: <span class="string">"^2.19.1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"webpack"</span>: <span class="string">"^3.7.1"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，我们将webpack软件包安装到了 <code>node_modules</code>目录下，你可以在通过下述命令来使用 webpack：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./node_modules/.bin/webpack index.js bundle.js</span></span><br></pre></td></tr></table></figure>
+<p>这句命令会运行安装在 <code>node_modules</code>文件夹下的webpack工具，它将从 <code>index.js</code> 文件开始，查找所有的 <code>require</code> 语句，并将它们替换为对应的代码，最后创建了名为 <code>bundle.js</code> 的单个输出文件。在浏览器中，我们不再使用包涵无效 <code>require</code> 语句的 <code>index.js</code> 文件了，相反，我们使用webpack输出的 <code>bundle.js</code> 文件，HTML文件的改动如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.html --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">title</span>&gt;</span>JavaScript Example<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"bundle.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello from HTML!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>此时刷新浏览器，你会看到一切都像以前一样正常工作。</p>
+<p>注意，每次修改 <code>index.js</code>文件后，我们都需要运行上述webpack命令，这很枯燥。尤其当我们使用webpack的高级功能(例如<a href="https://webpack.js.org/guides/development/#using-source-maps" target="_blank" rel="noopener">生成源码映射</a>以帮助我们从转译后的代码调试原始代码)时，它会变得更加枯燥乏味。webpack可以从工程的根目录下一个名为 <code>webpack.config.js</code>的文件中读取配置选项，在我们的例子中，<code>webpack.config.js</code>应该长这样：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.config.js</span></span><br><span class="line"><span class="keyword">module</span>.<span class="keyword">exports</span> = &#123;</span><br><span class="line">  entry: <span class="string">'./index.js'</span>,</span><br><span class="line">  output: &#123;</span><br><span class="line">    filename: <span class="string">'bundle.js'</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>现在每次修改 <code>index.js</code>文件后，我们只需要运行下述命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./node_modules/.bin/webpack</span></span><br></pre></td></tr></table></figure>
+<p>我们不需要再指定<code>index.js</code>和 <code>bundle.js</code>这两个选项了，因为webpack可以从 <code>webpack.config.js</code> 中读取这些选项。相比之前，这更简单一点，但每次修改代码后都需要输入这行命令依然很枯燥。接下来我们将会使这个过程变得更顺滑一点。</p>
+<p>我们虽然没有做很大的改进，但这个工作流程却有一些巨大的优势。我们再也不用通过全局共享变量的方式来加载外部脚本了，任何新的JavaScript库都将通过JavaScript语言中的<code>require</code>语句来添加，而不是通过在HTML中添加新的<code>&lt;script&gt;</code>标签。相对加载多个JavaScript文件而言，加载单个打包好的JavaScript文件通常会有更好的性能表现。同时，既然我们已经在开发工作流程中添加了一个构建步骤，我们还可以添加一些其他的强大功能！</p>
+<p><img src="http://ww1.sinaimg.cn/large/006djCGZly1fsm7ywnx9sj30m807jtcc.jpg" alt=""></p>
+<h2 id="转译代码以支持新的语言特性-babel"><a href="#转译代码以支持新的语言特性-babel" class="headerlink" title="转译代码以支持新的语言特性(babel)"></a>转译代码以支持新的语言特性(babel)</h2><p>转译代码意味着将一种语言的代码转换为另一种语言的代码，这是前端开发的另外一个重要组成部分－－因为浏览器添加新功能的速度非常缓慢，而带有实验性功能的新语言可以被转译成浏览器兼容的语言。</p>
+<p>对CSS来说，有Sass，Less和Stylus等。而对于JavaScript，曾经一段时间内最受欢迎的转换器是CoffeeScript(2010年左右发布)，而现在，大部分人都使用 <a href="https://babeljs.io/" target="_blank" rel="noopener">babel</a> 或 <a href="http://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>。CoffeeScript是一门通过大量修改JavaScript语言来提升JavaScript能力的一门语言。Babel本身不是一门新的语言，但是它是一个将浏览器尚未全部兼容的下一代JavaScript(ES6及以上)转换为更兼容的JavaScript(ES5)的转换器。Typescript是一种与下一代JavaScript基本相同的语言，同时也增加了可选的静态类型。许多人选择使用babel，因为它最接近vanilla JavaScript。</p>
+<p>下面让我们来看一个如何在现有的webpack构建过程中使用babel的例子。首先我们需要通过下面的命令将babel安装到我们的工程中：</p>
+<figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="keyword">install </span><span class="keyword">babel-core </span><span class="keyword">babel-preset-env </span><span class="keyword">babel-loader </span>--save-dev</span><br></pre></td></tr></table></figure>
+<p>请注意，我们在开发依赖中安装了三个独立的软件包<code>babel-core</code> 是babel的主要组成部分，<code>babel-preset-env</code>预定义了需要转换的JavaScript新特性，<code>babel-loader</code>是一个能使babel与webpack一起工作的软件包。我们通过修改 <code>webpack.config.js</code>来使用<code>babel-loader</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">//</span> <span class="string">webpack.config.js</span></span><br><span class="line"><span class="string">module.exports</span> <span class="string">=</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">  entry:</span> <span class="string">'./index.js'</span><span class="string">,</span></span><br><span class="line"><span class="attr">  output:</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">    filename:</span> <span class="string">'bundle.js'</span></span><br><span class="line">  <span class="string">&#125;,</span></span><br><span class="line"><span class="attr">  module:</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">    rules:</span> <span class="string">[</span></span><br><span class="line">      <span class="string">&#123;</span></span><br><span class="line"><span class="attr">        test:</span> <span class="string">/\.js$/,</span></span><br><span class="line"><span class="attr">        exclude:</span> <span class="string">/node_modules/,</span></span><br><span class="line"><span class="attr">        use:</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">          loader:</span> <span class="string">'babel-loader'</span><span class="string">,</span></span><br><span class="line"><span class="attr">          options:</span> <span class="string">&#123;</span></span><br><span class="line"><span class="attr">            presets:</span> <span class="string">['env']</span></span><br><span class="line">          <span class="string">&#125;</span></span><br><span class="line">        <span class="string">&#125;</span></span><br><span class="line">      <span class="string">&#125;</span></span><br><span class="line">    <span class="string">]</span></span><br><span class="line">  <span class="string">&#125;</span></span><br><span class="line"><span class="string">&#125;;</span></span><br></pre></td></tr></table></figure>
+<p>这个语法可能会让人感到困惑，不过幸运的是，我们不需要经常去改动它。它的基本工作原理是，告诉webpack去查找所有<code>.js</code>文件(包括 <code>node_modules</code>中的<code>.js</code>文件)，然后通过<code>babel-loader</code>与<code>babel-preset-env</code>来进行转换。你可以在<a href="https://webpack.js.org/configuration/" target="_blank" rel="noopener">这里</a>看到webpack的更多配置语法。</p>
+<p>现在一切都已搭建好，我们可以在JavaScript中使用ES2015的新特性了。以下是一个使用<a href="https://babeljs.io/docs/en/learn/#ecmascript-2015-features-template-strings" target="_blank" rel="noopener">ES2015模版字符串</a>的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">var</span> moment = <span class="built_in">require</span>(<span class="string">'moment'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"Hello from JavaScript!"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(moment().startOf(<span class="string">'day'</span>).fromNow());</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">"Bob"</span>, time = <span class="string">"today"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Hello <span class="subst">$&#123;name&#125;</span>, how are you <span class="subst">$&#123;time&#125;</span>?`</span>);</span><br></pre></td></tr></table></figure>
+<p>我们还可以使用<a href="https://babeljs.io/docs/en/learn/#ecmascript-2015-features-modules" target="_blank" rel="noopener">ES2015 的import</a>语句来替代<code>require</code>语句加载模块的功能。今天，你可以在很多代码库发现这种写法。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.js</span></span><br><span class="line"><span class="keyword">import</span> moment <span class="keyword">from</span> <span class="string">'moment'</span>;</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">"Hello from JavaScript!"</span>);</span><br><span class="line"><span class="built_in">console</span>.log(moment().startOf(<span class="string">'day'</span>).fromNow());</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> name = <span class="string">"Bob"</span>, time = <span class="string">"today"</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">`Hello <span class="subst">$&#123;name&#125;</span>, how are you <span class="subst">$&#123;time&#125;</span>?`</span>);</span><br></pre></td></tr></table></figure>
+<p>在这个例子中，import语法与require语法并没有多大的区别，但对于更高级的场景，import语法会更灵活。</p>
+<p>因为修改了 <code>index.js</code>文件，我们需要再次运行这句命令：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ./node_modules/.bin/webpack</span></span><br></pre></td></tr></table></figure>
+<p>刷新浏览器后你会看到期望的效果。在写这篇文章的时候，许多当代浏览器都已经支持了ES2015的特性，所以很难分辨出babel是否起了作用。你可以在IE9等旧版浏览器中进行测试，也可以在 <code>bundle.js</code>查找转换后的这行代码：</p>
+<figure class="highlight sqf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// bundle.js</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">console.<span class="built_in">log</span>(<span class="string">'Hello '</span> + <span class="built_in">name</span> + <span class="string">', how are you '</span> + <span class="built_in">time</span> + <span class="string">'?'</span>);</span><br><span class="line"><span class="comment">// ...</span></span><br></pre></td></tr></table></figure>
+<p>你可以看到，babel将ES2015的模版字符串转换成了常规的JavaScript字符串拼接，以此来保证浏览器的兼容性。尽管这个例子可能不太令人兴奋，但是能转译代码是一个非常强大的功能。它让我们现在就可以使用JavaScript即将要支持的新特性，如<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function" target="_blank" rel="noopener">async/await</a>等，来编写更好的代码。尽管转译过程有时候会很繁琐很痛苦，但它让我们能够在今天去测试将来的语言特性，这也使得JavaScript语言在过去几年里取得了显著的提升。</p>
+<p>至此，我们差不多已经讲完了，但在我们的工作流中依然存在一些未完成的边界。如果我们关心性能，我们需要缩小(<a href="https://en.wikipedia.org/wiki/Minification_%28programming%29" target="_blank" rel="noopener">minifying</a>)打包后的文件，因为我们有了构建这一步，缩小代码也变得非常简单。每次修改JavaScript后，我们都需要重新运行webpack命令，接下来我们将讨如何通过工具来解决这一问题。</p>
+<h2 id="使用task-runner-npm脚本"><a href="#使用task-runner-npm脚本" class="headerlink" title="使用task runner(npm脚本)"></a>使用task runner(npm脚本)</h2><p>既然我们已经使用了构建步骤来处理JavaScript模块，使用一个task runner来自动化各构建任务也变得非常合理。对于前端开发，任务包括缩小代码(minifying code)、优化图片，运行测试等。</p>
+<p>在2013年，Grunt是最流行的前端task runner，随后Glup流行了一小段时间，它们都是借助插件来包装其他的命令行工具。而现在最流行的选择似乎是使用npm包管理器内置的脚本功能，该功能不需要依赖插件，而是直接与其他命令行工具一起使用。</p>
+<p>让我们编写一些npm脚本来帮助我们更方便地使用webpack，这需要改动 <code>package.json</code>文件：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"modern-javascript-example"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>,</span><br><span class="line">    <span class="attr">"build"</span>: <span class="string">"webpack --progress -p"</span>,</span><br><span class="line">    <span class="attr">"watch"</span>: <span class="string">"webpack --progress --watch"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span>,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"moment"</span>: <span class="string">"^2.19.1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"babel-core"</span>: <span class="string">"^6.26.0"</span>,</span><br><span class="line">    <span class="attr">"babel-loader"</span>: <span class="string">"^7.1.2"</span>,</span><br><span class="line">    <span class="attr">"babel-preset-env"</span>: <span class="string">"^1.6.1"</span>,</span><br><span class="line">    <span class="attr">"webpack"</span>: <span class="string">"^3.7.1"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里我们添加了两个新的脚本：<code>build</code>和<code>watch</code>。我们需要通过下述命令来运行<code>build</code>脚本：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="keyword">run</span><span class="bash"> build</span></span><br></pre></td></tr></table></figure>
+<p>这会运行webpack(使用我们之前写在<code>webpack.config.js</code>中的配置项)，并带了<code>--progress</code>和<code>-p</code>这两个可选项。其中<code>--progress</code>用于展示百分比进度，<code>-p</code>会在生产环境下压缩代码。下述命令会运行<code>watch</code>脚本：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="keyword">run</span><span class="bash"> watch</span></span><br></pre></td></tr></table></figure>
+<p>这使用了<code>--watch</code>选项，它会在每次JavaScript文件更改后自动运行webpack，这对开发者来说非常有用。</p>
+<p>请注意，在使用 <code>package.json</code>中的脚本运行webpack时，因为 <code>node.js</code>知道所有npm模块的路径，我不需要指定webpack的全路径：<code>./node_modules/.bin/webpack</code>。这非常方便！此外，我们还可以通过安装 <code>webpack-dev-server</code>，来让事情变得更加简单。 <code>webpack-dev-server</code>是一个单独的工具，它提供了一个带有实时重新加载(live reloading)功能的简单web服务器。我们可以通过下述命令将它安装为开发依赖：</p>
+<figure class="highlight q"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install webpack-<span class="built_in">dev</span>-server --<span class="built_in">save</span>-<span class="built_in">dev</span></span><br></pre></td></tr></table></figure>
+<p>然后在 <code>package.json</code>文件添加如下npm脚本：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"modern-javascript-example"</span>,</span><br><span class="line">  <span class="attr">"version"</span>: <span class="string">"1.0.0"</span>,</span><br><span class="line">  <span class="attr">"description"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"main"</span>: <span class="string">"index.js"</span>,</span><br><span class="line">  <span class="attr">"scripts"</span>: &#123;</span><br><span class="line">    <span class="attr">"test"</span>: <span class="string">"echo \"Error: no test specified\" &amp;&amp; exit 1"</span>,</span><br><span class="line">    <span class="attr">"build"</span>: <span class="string">"webpack --progress -p"</span>,</span><br><span class="line">    <span class="attr">"watch"</span>: <span class="string">"webpack --progress --watch"</span>,</span><br><span class="line">    <span class="attr">"server"</span>: <span class="string">"webpack-dev-server --open"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"author"</span>: <span class="string">""</span>,</span><br><span class="line">  <span class="attr">"license"</span>: <span class="string">"ISC"</span>,</span><br><span class="line">  <span class="attr">"dependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"moment"</span>: <span class="string">"^2.19.1"</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">"devDependencies"</span>: &#123;</span><br><span class="line">    <span class="attr">"babel-core"</span>: <span class="string">"^6.26.0"</span>,</span><br><span class="line">    <span class="attr">"babel-loader"</span>: <span class="string">"^7.1.2"</span>,</span><br><span class="line">    <span class="attr">"babel-preset-env"</span>: <span class="string">"^1.6.1"</span>,</span><br><span class="line">    <span class="attr">"webpack"</span>: <span class="string">"^3.7.1"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，你可以通过以下命令启动开发服务器：</p>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm <span class="keyword">run</span><span class="bash"> server</span></span><br></pre></td></tr></table></figure>
+<p>它会自动在浏览器中打开地址为 <code>localhost:8080</code>(默认情况下)的网站，并显示 <code>index.html</code>中的内容。你每次改变 <code>index.js</code>中的JavaScript代码， <code>webpack-dev-server</code>都会重新生成打包(bundle)后的JavaScript代码，并自动刷新浏览器。这可以显著地节省我们的时间，因为它能够使我们专注于代码，而不需要不断地在代码与浏览器之间切换以查看新的更改。</p>
+<p>你当然也可以编写npm脚本来执行其他的任务，例如将Sass转换为CSS、压缩图片，运行测试 – 任何具有命令行的工具我们都可以通过npm脚本来执行。npm本身也有一些很棒的高级选项和技巧，Kate Hudson的这个<a href="https://www.youtube.com/watch?reload=9&amp;v=0RYETb9YVrk" target="_blank" rel="noopener">演讲</a>就是一个很好的开始。</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>简而言之，这就是现代JavaScript。我们从简单的HTML和JS转向使用包管理器(package manager)来自动下载第三方依赖包，使用模块打包器(module bundler)来创建单个脚本文件，使用转译器(transpiler)来支持未来的语言特性，和使用task runner来自动化各构建过程。这里面肯定有许多迷人的东西，特别是对一个初学者来说。Web开发因为它很容易开始与运行，曾是编程新手们的一个很好的切入点；但现在它可能会非常难，特别是在各种工具都在快速变化的情况下。</p>
+<p>尽管如此，这一切并没有像看起来的那么糟。事情正在稳定下来，特别是在引入node生态作为一种可用的前端开发方式后。我们可以使用npm作为包管理器，使用node的require或import语句来处理模块，使用npm脚本来运行各种任务，这个开发流程很好也很一致，与一两年前相比，这已经是一个大大简化的工作流程了。</p>
+<p>对初学者或经验丰富的开发人员来说，另外一个好消息是现在的框架通常都会提供一些工具，以帮助开发者们更简单地开始或入门。如Ember的 <code>ember-cli</code>，它对Angular的 <code>angular-cli</code>有非常大的影响、React的 <code>create-react-app</code>、Vue的<code>vue-cli</code>等等。所有这些工具都会帮你设置好工程需要的一切－－你所需要做的就是开始编写代码。这些工具本身并不神奇，它们只是按照一种一致且起作用的方式帮你设置好所有的东西－－但你依然可能会遇到需要对webpack、babel等工具进行额外配置的情况，因此理解这些工具都是干什么的依然十分重要。</p>
+<p>现代JavaScript肯定会让人感到沮丧，因为它依然在快速地发展与进化。即使它有时可能会重复造一些轮子，但JavaScript的快速发展也推动了诸如hot reloading、real-time linting和time-travel debugging等创新技术的产生。成为一名开发人员是一个激动人心的时刻，我希望这些信息能够成为一份路线图，帮助您踏上旅途！</p>
+<p><img src="http://ww1.sinaimg.cn/large/006djCGZly1fsm8lixnzbj30m807mjsf.jpg" alt=""></p>
+<p>原文链接：<a href="https://medium.com/the-node-js-collection/modern-javascript-explained-for-dinosaurs-f695e9747b70" target="_blank" rel="noopener">点击此处</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+<div>
+  
+    
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JavaScript/" rel="tag"><i class="fa fa-tag"></i> JavaScript</a>
+          
+            <a href="/tags/前端工程化/" rel="tag"><i class="fa fa-tag"></i> 前端工程化</a>
+          
+            <a href="/tags/npm/" rel="tag"><i class="fa fa-tag"></i> npm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/27/The-Way-to-Go（四）/" rel="next" title="The Way to Go（四）">
+                <i class="fa fa-chevron-left"></i> The Way to Go（四）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/11/04/The-Way-to-Go（五）/" rel="prev" title="The Way to Go（五）">
+                The Way to Go（五） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="思齐" />
+          <p class="site-author-name" itemprop="name">思齐</p>
+           
+              <p class="site-description motion-element" itemprop="description">思与之齐</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">72</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Syzq" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/p/1005055693566329/home?from=page_100505&mod=TAB#place" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/beme" target="_blank" title="S  F">
+                  
+                    <i class="fa fa-fw fa-scribd"></i>
+                  
+                  S  F
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/YXY81519/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-comment"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript的”老派”使用方式"><span class="nav-number">1.</span> <span class="nav-text">JavaScript的”老派”使用方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用JavaScript包管理器-npm"><span class="nav-number">2.</span> <span class="nav-text">使用JavaScript包管理器(npm)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用JavaScript模块打包工具-webpack"><span class="nav-number">3.</span> <span class="nav-text">使用JavaScript模块打包工具(webpack)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转译代码以支持新的语言特性-babel"><span class="nav-number">4.</span> <span class="nav-text">转译代码以支持新的语言特性(babel)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用task-runner-npm脚本"><span class="nav-number">5.</span> <span class="nav-text">使用task runner(npm脚本)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#结论"><span class="nav-number">6.</span> <span class="nav-text">结论</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-mars"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">思齐</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
