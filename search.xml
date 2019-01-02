@@ -4,6 +4,12 @@
     <title><![CDATA[Shell 基础]]></title>
     <url>%2F2019%2F01%2F02%2FShell-%E5%9F%BA%E7%A1%80%2F</url>
     <content type="text"><![CDATA[开始第一行1#! /bin/bash 它代表的意思是，该文件使用的是bash语法。 默认我们用vim编辑的文档是不带有执行权限的，所以需要加一个执行权限chmod1chmod +x test.sh 使用sh命令去执行一个shell脚本的时候是可以加-x选项来查看这个脚本执行过程:sh -x test.sh shell 脚本中的变量123456d=`date "+%Y-%m-%d %H:%M:%S"`echo "this script begin at $d"echo "we will sleep 2 seconds."sleep 2d1=`date "+%Y-%m-%d %H:%M:%S"`echo "the script end at $d1" 上述脚本中d 和d1作为变量出现，格式为：变量名=变量的值。使用变量时需要加上 “$” 符号。 执行结果： 123this script begin at 2019-01-02 11:29:10we will sleep 2 seconds.the script end at 2019-01-02 11:29:12 数学运算1234a=1b=2c=$[$a+$b]echo "$a+$b is $c" 数学计算要用[ ]括起来并且外头要带一个”$”。脚本结果为： 11+2 is 3 与用户进行交互：123456echo "请输入一个数字："read xecho "请再输入一个数字："read ysum=$[$x+$y]echo "$x+$y 的和为：$sum" 结果为：12345请输入一个数字：1请再输入一个数字：21+2 的和为：3 更加简洁的方式，read -p 选项类似echo的作用。: 1234read -p "请输入一个数字：" xread -p "请再输入一个人数字：" ysum=$[$x+$y]echo "$x+$y 的和为：$sum" 执行如下： 123请输入一个数字：2请再输入一个人数字：32+3 的和为：5 预设变量12sum=$[$1+$2]echo $sum 执行时追加变量1和2： 1$ sh pre_var.sh 1 2 输出结果：13 shell脚本中的逻辑判断基础用法1. 不带 else 12345if 判断语句; then一些条件语句fi 1234read -p "Please input your score:" aif ((a&lt;60)) ; thenecho "You didn't pass the exam."fi 输出： 12Please input your score:56You didn't pass the exam. 2. 带有 else123456789if 判断语句 ; thencommandelsecommandfi 123456read -p "Please input your score:" aif ((a&lt;60)) ; thenecho "You didn't pass the exam."elseecho "Good! You passed the exam."fi 3. 带有 elif 12345678910111213if 判断语句一 ; thencommandelif 判断语句二; thencommandelsecommandfi if 判断档案属性1234567891011-e ：判断文件或目录是否存在-d ：判断是不是目录，并是否存在-f ：判断是否是普通文件，并存在-r ：判断文档是否有读权限-w ：判断是否有写权限-x ：判断是否可执行 使用if判断时，具体格式为： if [ -e filename ] ; then case除了用if来判断逻辑外，还有一种常用的方式，那就是case 123456789101112131415161718192021222324252627case 变量 invalue1)command;;value2)command;;value3)command;;*)command;;esac 上面的结构中，不限制value的个数，*则代表除了上面的value外的其他值。 shell脚本中的循环 for 基本语法12345for 变量名 in 循环的条件； docommanddone 示例：（seq 1 5 表示从1到5的一个序列）123for i in `seq 1 5`;doecho $idone 输出：1234512345 while 基本语法 12345while 条件; docommanddone shell脚本中的函数 基本语法12345function 函数名() &#123;command&#125;]]></content>
+      <categories>
+        <category>零碎笔记</category>
+      </categories>
+      <tags>
+        <tag>shell</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[【转】向恐龙解释现代JavaScript]]></title>
