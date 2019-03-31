@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="google-site-verification" content="S_UNmLCii9OVqOu5unmzIdCxCetiyjd0biEMaruNi0U" />
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=PingFang SC:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Monda:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Golang," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.png?v=5.1.1" />
+
+
+
+
+
+
+<meta name="description" content="基本用法ORM 以 QuerySeter 来组织查询，每个返回 QuerySeter 的方法都会获得一个新的 QuerySeter 对象。 基本使用方法： 12345678o := orm.NewOrm()// 获取 QuerySeter 对象，user 为表名qs := o.QueryTable(&quot;user&quot;)// 也可以直接使用对象作为表名user := new(User)qs = o.Que">
+<meta name="keywords" content="Golang">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Beego 高级查询">
+<meta property="og:url" content="https://syzq.github.io/2019/03/31/Beego-高级查询/index.html">
+<meta property="og:site_name" content="Syzq">
+<meta property="og:description" content="基本用法ORM 以 QuerySeter 来组织查询，每个返回 QuerySeter 的方法都会获得一个新的 QuerySeter 对象。 基本使用方法： 12345678o := orm.NewOrm()// 获取 QuerySeter 对象，user 为表名qs := o.QueryTable(&quot;user&quot;)// 也可以直接使用对象作为表名user := new(User)qs = o.Que">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-31T06:05:23.408Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Beego 高级查询">
+<meta name="twitter:description" content="基本用法ORM 以 QuerySeter 来组织查询，每个返回 QuerySeter 的方法都会获得一个新的 QuerySeter 对象。 基本使用方法： 12345678o := orm.NewOrm()// 获取 QuerySeter 对象，user 为表名qs := o.QueryTable(&quot;user&quot;)// 也可以直接使用对象作为表名user := new(User)qs = o.Que">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://syzq.github.io/2019/03/31/Beego-高级查询/"/>
+
+
+
+
+
+  <title>Beego 高级查询 | Syzq</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner">
+<div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Syzq</span>
+       <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">A blog that you won't read.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="https://syzq.github.io/2019/03/31/Beego-高级查询/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="思齐">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Syzq">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Beego 高级查询</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-31T14:04:30+08:00">
+                2019-03-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h2><p>ORM 以 <code>QuerySeter</code> 来组织查询，每个返回 <code>QuerySeter</code> 的方法都会获得一个新的 <code>QuerySeter</code> 对象。</p>
+<p>基本使用方法：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">o := orm.NewOrm()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 获取 QuerySeter 对象，user 为表名</span></span><br><span class="line">qs := o.QueryTable(<span class="string">"user"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 也可以直接使用对象作为表名</span></span><br><span class="line">user := <span class="built_in">new</span>(User)</span><br><span class="line">qs = o.QueryTable(user) <span class="comment">// 返回 QuerySeter</span></span><br></pre></td></tr></table></figure>
+<h2 id="expr"><a href="#expr" class="headerlink" title="expr"></a>expr</h2><p>QuerySeter 中用于描述字段和 sql 操作符，使用简单的 expr 查询方法</p>
+<p>字段组合的前后顺序依照表的关系，比如 <code>User</code> 表拥有 <code>Profile</code> 的外键，那么对 <code>User</code> 表查询对应的 <code>Profile.Age</code> 为条件，则使用 <code>Profile__Age</code> 注意，字段的分隔符号使用双下划线 <code>__</code>，除了描述字段，<code>expr</code> 的尾部可以增加操作符以执行对应的 sql 操作。比如 <code>Profile__Age__gt</code> 代表 <code>Profile.Age &gt; 18</code> 的条件查询。</p>
+<p>注释后面将描述对应的 sql 语句，仅仅是描述 expr 的类似结果，并不代表实际生成的语句。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">qs.Filter(<span class="string">"id"</span>, <span class="number">1</span>) <span class="comment">// WHERE id = 1</span></span><br><span class="line">qs.Filter(<span class="string">"profile__age"</span>, <span class="number">18</span>) <span class="comment">// WHERE profile.age = 18</span></span><br><span class="line">qs.Filter(<span class="string">"Profile__Age"</span>, <span class="number">18</span>) <span class="comment">// 使用字段名和 Field 名都是允许的</span></span><br><span class="line">qs.Filter(<span class="string">"profile__age"</span>, <span class="number">18</span>) <span class="comment">// WHERE profile.age = 18</span></span><br><span class="line">qs.Filter(<span class="string">"profile__age__gt"</span>, <span class="number">18</span>) <span class="comment">// WHERE profile.age &gt; 18</span></span><br><span class="line">qs.Filter(<span class="string">"profile__age__gte"</span>, <span class="number">18</span>) <span class="comment">// WHERE profile.age &gt;= 18</span></span><br><span class="line">qs.Filter(<span class="string">"profile__age__in"</span>, <span class="number">18</span>, <span class="number">20</span>) <span class="comment">// WHERE profile.age IN (18, 20)</span></span><br><span class="line"></span><br><span class="line">qs.Filter(<span class="string">"profile__age__in"</span>, <span class="number">18</span>, <span class="number">20</span>).Exclude(<span class="string">"profile__lt"</span>, <span class="number">1000</span>)</span><br><span class="line"><span class="comment">// WHERE profile.age IN (18, 20) AND NOT profile_id &lt; 1000</span></span><br></pre></td></tr></table></figure>
+<h2 id="Operators"><a href="#Operators" class="headerlink" title="Operators"></a>Operators</h2><p>当前支持的操作符号：</p>
+<ul>
+<li><a href="https://beego.me/docs/mvc/model/query.md#exact" target="_blank" rel="noopener">exact</a> / <a href="https://beego.me/docs/mvc/model/query.md#iexact" target="_blank" rel="noopener">iexact</a> 等于</li>
+<li><a href="https://beego.me/docs/mvc/model/query.md#contains" target="_blank" rel="noopener">contains</a> / <a href="https://beego.me/docs/mvc/model/query.md#icontains" target="_blank" rel="noopener">icontains</a> 包含</li>
+<li><a href="https://beego.me/docs/mvc/model/query.md#gt-%2F-gte" target="_blank" rel="noopener">gt / gte</a> 大于 / 大于等于</li>
+<li><a href="https://beego.me/docs/mvc/model/query.md#lt-%2F-lte" target="_blank" rel="noopener">lt / lte</a> 小于 / 小于等于</li>
+<li><a href="https://beego.me/docs/mvc/model/query.md#startswith" target="_blank" rel="noopener">startswith / istartswith</a> 以…起始</li>
+<li><a href="https://beego.me/docs/mvc/model/query.md#endswith" target="_blank" rel="noopener">endswith / iendswith</a> 以…结束</li>
+<li><a href="https://beego.me/docs/mvc/model/query.md#in" target="_blank" rel="noopener">in</a></li>
+<li><a href="https://beego.me/docs/mvc/model/query.md#isnull" target="_blank" rel="noopener">isnull</a></li>
+</ul>
+<p>后面以 <code>i</code> 开头的表示：大小写不敏感</p>
+<h3 id="exact"><a href="#exact" class="headerlink" title="exact"></a>exact</h3><p>Filter / Exclude / Condition expr 的默认值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">qs.Filter(<span class="string">"name"</span>, <span class="string">"slene"</span>) <span class="comment">// WHERE name = 'slene'</span></span><br><span class="line">qs.Filter(<span class="string">"name__exact"</span>, <span class="string">"slene"</span>) <span class="comment">// WHERE name = 'slene'</span></span><br><span class="line"><span class="comment">// 使用 = 匹配，大小写是否敏感取决于数据表使用的 collation</span></span><br><span class="line">qs.Filter(<span class="string">"profile_id"</span>, <span class="literal">nil</span>) <span class="comment">// WHERE profile_id IS NULL</span></span><br></pre></td></tr></table></figure>
+<h3 id="iexact"><a href="#iexact" class="headerlink" title="iexact"></a>iexact</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qs.Filter(<span class="string">"name__iexact"</span>, <span class="string">"slene"</span>)</span><br><span class="line"><span class="comment">// WHERE name LIKE 'slene'</span></span><br><span class="line"><span class="comment">// 大小写不敏感，匹配任意 'Slene' 'sLENE'</span></span><br></pre></td></tr></table></figure>
+<h3 id="contains"><a href="#contains" class="headerlink" title="contains"></a>contains</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qs.Filter(<span class="string">"name__contains"</span>, <span class="string">"slene"</span>)</span><br><span class="line"><span class="comment">// WHERE name LIKE BINARY '%slene%'</span></span><br><span class="line"><span class="comment">// 大小写敏感, 匹配包含 slene 的字符</span></span><br></pre></td></tr></table></figure>
+<h3 id="icontains"><a href="#icontains" class="headerlink" title="icontains"></a>icontains</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">qs.Filter(<span class="string">"name__icontains"</span>, <span class="string">"slene"</span>)</span><br><span class="line"><span class="comment">// WHERE name LIKE '%slene%'</span></span><br><span class="line"><span class="comment">// 大小写不敏感, 匹配任意 'im Slene', 'im sLENE'</span></span><br></pre></td></tr></table></figure>
+<h3 id="in"><a href="#in" class="headerlink" title="in"></a>in</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">qs.Filter(<span class="string">"profile__age__in"</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>, <span class="number">20</span>)</span><br><span class="line"><span class="comment">// WHERE profile.age IN (17, 18, 19, 20)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">ids:=[]<span class="keyword">int</span>&#123;<span class="number">17</span>,<span class="number">18</span>,<span class="number">19</span>,<span class="number">20</span>&#125;</span><br><span class="line">qs.Filter(<span class="string">"profile__age__in"</span>, ids)</span><br><span class="line"><span class="comment">// WHERE profile.age IN (17, 18, 19, 20)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 同上效果</span></span><br></pre></td></tr></table></figure>
+<h3 id="gt-gte"><a href="#gt-gte" class="headerlink" title="gt / gte"></a>gt / gte</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">qs.Filter(<span class="string">"profile__age__gt"</span>, <span class="number">17</span>)</span><br><span class="line"><span class="comment">// WHERE profile.age &gt; 17</span></span><br><span class="line"></span><br><span class="line">qs.Filter(<span class="string">"profile__age__gte"</span>, <span class="number">18</span>)</span><br><span class="line"><span class="comment">// WHERE profile.age &gt;= 18</span></span><br></pre></td></tr></table></figure>
+<h3 id="lt-lte"><a href="#lt-lte" class="headerlink" title="lt / lte"></a>lt / lte</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">qs.Filter(<span class="string">"profile__age__lt"</span>, <span class="number">17</span>)</span><br><span class="line"><span class="comment">// WHERE profile.age &lt; 17</span></span><br><span class="line"></span><br><span class="line">qs.Filter(<span class="string">"profile__age__lte"</span>, <span class="number">18</span>)</span><br><span class="line"><span class="comment">// WHERE profile.age &lt;= 18</span></span><br></pre></td></tr></table></figure>
+<h3 id="startswith-istartswith"><a href="#startswith-istartswith" class="headerlink" title="startswith / istartswith"></a>startswith / istartswith</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">qs.Filter(<span class="string">"name__startswith"</span>, <span class="string">"slene"</span>)</span><br><span class="line"><span class="comment">// WHERE name LIKE BINARY 'slene%'</span></span><br><span class="line"><span class="comment">// 大小写敏感, 匹配以 'slene' 起始的字符串</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">qs.Filter(<span class="string">"name__istartswith"</span>, <span class="string">"slene"</span>)</span><br><span class="line"><span class="comment">// WHERE name LIKE 'slene%'</span></span><br><span class="line"><span class="comment">// 大小写不敏感, 匹配任意以 'slene', 'Slene' 起始的字符串</span></span><br></pre></td></tr></table></figure>
+<h3 id="endswith-iendswith"><a href="#endswith-iendswith" class="headerlink" title="endswith / iendswith"></a>endswith / iendswith</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">qs.Filter(<span class="string">"name__endswith"</span>, <span class="string">"slene"</span>)</span><br><span class="line"><span class="comment">// WHERE name LIKE BINARY '%slene'</span></span><br><span class="line"><span class="comment">// 大小写敏感, 匹配以 'slene' 结束的字符串</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">qs.Filter(<span class="string">"name__iendswithi"</span>, <span class="string">"slene"</span>)</span><br><span class="line"><span class="comment">// WHERE name LIKE '%slene'</span></span><br><span class="line"><span class="comment">// 大小写不敏感, 匹配任意以 'slene', 'Slene' 结束的字符串</span></span><br></pre></td></tr></table></figure>
+<h3 id="isnull"><a href="#isnull" class="headerlink" title="isnull"></a>isnull</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">qs.Filter(<span class="string">"profile__isnull"</span>, <span class="literal">true</span>)</span><br><span class="line">qs.Filter(<span class="string">"profile_id__isnull"</span>, <span class="literal">true</span>)</span><br><span class="line"><span class="comment">// WHERE profile_id IS NULL</span></span><br><span class="line"></span><br><span class="line">qs.Filter(<span class="string">"profile__isnull"</span>, <span class="literal">false</span>)</span><br><span class="line"><span class="comment">// WHERE profile_id IS NOT NULL</span></span><br></pre></td></tr></table></figure>
+<h2 id="高级查询接口使用"><a href="#高级查询接口使用" class="headerlink" title="高级查询接口使用"></a>高级查询接口使用</h2><p>QuerySeter 是高级查询使用的接口，我们来熟悉下他的接口方法</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> QuerySeter <span class="keyword">interface</span> &#123;</span><br><span class="line">    Filter(<span class="keyword">string</span>, …<span class="keyword">interface</span>&#123;&#125;) QuerySeter</span><br><span class="line">    Exclude(<span class="keyword">string</span>, …<span class="keyword">interface</span>&#123;&#125;) QuerySeter</span><br><span class="line">    SetCond(*Condition) QuerySeter</span><br><span class="line">    Limit(<span class="keyword">int</span>, …<span class="keyword">int64</span>) QuerySeter</span><br><span class="line">    Offset(<span class="keyword">int64</span>) QuerySeter</span><br><span class="line">    GroupBy(…<span class="keyword">string</span>) QuerySeter</span><br><span class="line">    OrderBy(…<span class="keyword">string</span>) QuerySeter</span><br><span class="line">    Distinct() QuerySeter</span><br><span class="line">    RelatedSel(…<span class="keyword">interface</span>&#123;&#125;) QuerySeter</span><br><span class="line">    Count() (<span class="keyword">int64</span>, error)</span><br><span class="line">    Exist() <span class="keyword">bool</span></span><br><span class="line">    Update(Params) (<span class="keyword">int64</span>, error)</span><br><span class="line">    Delete() (<span class="keyword">int64</span>, error)</span><br><span class="line">    PrepareInsert() (Inserter, error)</span><br><span class="line">    All(<span class="keyword">interface</span>&#123;&#125;, …<span class="keyword">string</span>) (<span class="keyword">int64</span>, error)</span><br><span class="line">    One(<span class="keyword">interface</span>&#123;&#125;, …<span class="keyword">string</span>) error</span><br><span class="line">    Values(*[]Params, …<span class="keyword">string</span>) (<span class="keyword">int64</span>, error)</span><br><span class="line">    ValuesList(*[]ParamsList, …<span class="keyword">string</span>) (<span class="keyword">int64</span>, error)</span><br><span class="line">    ValuesFlat(*ParamsList, <span class="keyword">string</span>) (<span class="keyword">int64</span>, error)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>每个返回 QuerySeter 的 api 调用时都会新建一个 QuerySeter，不影响之前创建的。</li>
+<li>高级查询使用 Filter 和 Exclude 来做常用的条件查询。囊括两种清晰的过滤规则：包含， 排除</li>
+</ul>
+<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><p>用来过滤查询结果，起到 包含条件 的作用</p>
+<p>多个 Filter 之间使用 <code>AND</code> 连接</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qs.Filter(<span class="string">"profile__isnull"</span>, <span class="literal">true</span>).Filter(<span class="string">"name"</span>, <span class="string">"slene"</span>)</span><br><span class="line"><span class="comment">// WHERE profile_id IS NULL AND name = 'slene'</span></span><br></pre></td></tr></table></figure>
+<h3 id="Exclude"><a href="#Exclude" class="headerlink" title="Exclude"></a>Exclude</h3><p>用来过滤查询结果，起到 排除条件 的作用</p>
+<p>使用 <code>NOT</code> 排除条件</p>
+<p>多个 Exclude 之间使用 <code>AND</code> 连接</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qs.Exclude(<span class="string">"profile__isnull"</span>, <span class="literal">true</span>).Filter(<span class="string">"name"</span>, <span class="string">"slene"</span>)</span><br><span class="line"><span class="comment">// WHERE NOT profile_id IS NULL AND name = 'slene'</span></span><br></pre></td></tr></table></figure>
+<h3 id="SetCond"><a href="#SetCond" class="headerlink" title="SetCond"></a>SetCond</h3><p>自定义条件表达式</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cond := orm.NewCondition()</span><br><span class="line">cond1 := cond.And(<span class="string">"profile__isnull"</span>, <span class="literal">false</span>).AndNot(<span class="string">"status__in"</span>, <span class="number">1</span>).Or(<span class="string">"profile__age__gt"</span>, <span class="number">2000</span>)</span><br><span class="line"></span><br><span class="line">qs := orm.QueryTable(<span class="string">"user"</span>)</span><br><span class="line">qs = qs.SetCond(cond1)</span><br><span class="line"><span class="comment">// WHERE ... AND ... AND NOT ... OR ...</span></span><br><span class="line"></span><br><span class="line">cond2 := cond.AndCond(cond1).OrCond(cond.And(<span class="string">"name"</span>, <span class="string">"slene"</span>))</span><br><span class="line">qs = qs.SetCond(cond2).Count()</span><br><span class="line"><span class="comment">// WHERE (... AND ... AND NOT ... OR ...) OR ( ... )</span></span><br></pre></td></tr></table></figure>
+<h3 id="Limit"><a href="#Limit" class="headerlink" title="Limit"></a>Limit</h3><p>限制最大返回数据行数，第二个参数可以设置 <code>Offset</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> DefaultRowsLimit = <span class="number">1000</span> <span class="comment">// ORM 默认的 limit 值为 1000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 默认情况下 select 查询的最大行数为 1000</span></span><br><span class="line"><span class="comment">// LIMIT 1000</span></span><br><span class="line"></span><br><span class="line">qs.Limit(<span class="number">10</span>)</span><br><span class="line"><span class="comment">// LIMIT 10</span></span><br><span class="line"></span><br><span class="line">qs.Limit(<span class="number">10</span>, <span class="number">20</span>)</span><br><span class="line"><span class="comment">// LIMIT 10 OFFSET 20 注意跟 SQL 反过来的</span></span><br><span class="line"></span><br><span class="line">qs.Limit(<span class="number">-1</span>)</span><br><span class="line"><span class="comment">// no limit</span></span><br><span class="line"></span><br><span class="line">qs.Limit(<span class="number">-1</span>, <span class="number">100</span>)</span><br><span class="line"><span class="comment">// LIMIT 18446744073709551615 OFFSET 100</span></span><br><span class="line"><span class="comment">// 18446744073709551615 是 1&lt;&lt;64 - 1 用来指定无 limit 限制 但有 offset 偏移的情况</span></span><br></pre></td></tr></table></figure>
+<h3 id="Offset"><a href="#Offset" class="headerlink" title="Offset"></a>Offset</h3><p>设置 偏移行数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qs.Offset(<span class="number">20</span>)</span><br><span class="line"><span class="comment">// LIMIT 1000 OFFSET 20</span></span><br></pre></td></tr></table></figure>
+<h3 id="GroupBy"><a href="#GroupBy" class="headerlink" title="GroupBy"></a>GroupBy</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qs.GroupBy(<span class="string">"id"</span>, <span class="string">"age"</span>)</span><br><span class="line"><span class="comment">// GROUP BY id,age</span></span><br></pre></td></tr></table></figure>
+<h3 id="OrderBy"><a href="#OrderBy" class="headerlink" title="OrderBy"></a>OrderBy</h3><p>参数使用 <code>expr</code></p>
+<p>在 expr 前使用减号<code>-</code> 表示<code>DESC</code>的排列</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">qs.OrderBy(<span class="string">"id"</span>, <span class="string">"-profile__age"</span>)</span><br><span class="line"><span class="comment">// ORDER BY id ASC, profile.age DESC</span></span><br><span class="line"></span><br><span class="line">qs.OrderBy(<span class="string">"-profile__age"</span>, <span class="string">"profile"</span>)</span><br><span class="line"><span class="comment">// ORDER BY profile.age DESC, profile_id ASC</span></span><br></pre></td></tr></table></figure>
+<h3 id="Distinct"><a href="#Distinct" class="headerlink" title="Distinct"></a>Distinct</h3><p>对应 sql 的 <code>distinct</code> 语句, 返回不重复的值.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">qs.Distinct()</span><br><span class="line"><span class="comment">// SELECT DISTINCT</span></span><br></pre></td></tr></table></figure>
+<h3 id="RelatedSel"><a href="#RelatedSel" class="headerlink" title="RelatedSel"></a>RelatedSel</h3><p>关系查询，参数使用 <code>expr</code></p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> DefaultRelsDepth = <span class="number">5</span> <span class="comment">// 默认情况下直接调用 RelatedSel 将进行最大 5 层的关系查询</span></span><br><span class="line"></span><br><span class="line">qs := o.QueryTable(<span class="string">"post"</span>)</span><br><span class="line"></span><br><span class="line">qs.RelatedSel()</span><br><span class="line"><span class="comment">// INNER JOIN user ... LEFT OUTER JOIN profile ...</span></span><br><span class="line"></span><br><span class="line">qs.RelatedSel(<span class="string">"user"</span>)</span><br><span class="line"><span class="comment">// INNER JOIN user ...</span></span><br><span class="line"><span class="comment">// 设置 expr 只对设置的字段进行关系查询</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 对设置 null 属性的 Field 将使用 LEFT OUTER JOIN</span></span><br></pre></td></tr></table></figure>
+<h3 id="Count"><a href="#Count" class="headerlink" title="Count"></a>Count</h3><p>依据当前的查询条件，返回结果行数</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cnt, err := o.QueryTable(<span class="string">"user"</span>).Count() <span class="comment">// SELECT COUNT(*) FROM USER</span></span><br><span class="line">fmt.Printf(<span class="string">"Count Num: %s, %s"</span>, cnt, err)</span><br></pre></td></tr></table></figure>
+<h3 id="Exist"><a href="#Exist" class="headerlink" title="Exist"></a>Exist</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">exist := o.QueryTable(<span class="string">"user"</span>).Filter(<span class="string">"UserName"</span>, <span class="string">"Name"</span>).Exist()</span><br><span class="line">fmt.Printf(<span class="string">"Is Exist: %s"</span>, exist)</span><br></pre></td></tr></table></figure>
+<h3 id="Update"><a href="#Update" class="headerlink" title="Update"></a>Update</h3><p>依据当前查询条件，进行批量更新操作</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">num, err := o.QueryTable(<span class="string">"user"</span>).Filter(<span class="string">"name"</span>, <span class="string">"slene"</span>).Update(orm.Params&#123;</span><br><span class="line">    <span class="string">"name"</span>: <span class="string">"astaxie"</span>,</span><br><span class="line">&#125;)</span><br><span class="line">fmt.Printf(<span class="string">"Affected Num: %s, %s"</span>, num, err)</span><br><span class="line"><span class="comment">// SET name = "astaixe" WHERE name = "slene"</span></span><br></pre></td></tr></table></figure>
+<p>原子操作增加字段值</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 假设 user struct 里有一个 nums int 字段</span></span><br><span class="line">num, err := o.QueryTable(<span class="string">"user"</span>).Update(orm.Params&#123;</span><br><span class="line">    <span class="string">"nums"</span>: orm.ColValue(orm.ColAdd, <span class="number">100</span>),</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">// SET nums = nums + 100</span></span><br></pre></td></tr></table></figure>
+<p><code>orm.ColValue</code> 支持以下操作</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ColAdd      <span class="comment">// 加</span></span><br><span class="line">ColMinus    <span class="comment">// 减</span></span><br><span class="line">ColMultiply <span class="comment">// 乘</span></span><br><span class="line">ColExcept   <span class="comment">// 除</span></span><br></pre></td></tr></table></figure>
+<h3 id="Delete"><a href="#Delete" class="headerlink" title="Delete"></a>Delete</h3><p>依据当前查询条件，进行批量删除操作<br><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num, err := o.QueryTable(<span class="string">"user"</span>).Filter(<span class="string">"name"</span>, <span class="string">"slene"</span>).Delete()</span><br><span class="line">fmt.Printf(<span class="string">"Affected Num: %s, %s"</span>, num, err)</span><br><span class="line"><span class="comment">// DELETE FROM user WHERE name = "slene"</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="PrepareInsert"><a href="#PrepareInsert" class="headerlink" title="PrepareInsert"></a>PrepareInsert</h3><p>用于一次 prepare 多次 insert 插入，以提高批量插入的速度。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> users []*User</span><br><span class="line">...</span><br><span class="line">qs := o.QueryTable(<span class="string">"user"</span>)</span><br><span class="line">i, _ := qs.PrepareInsert()</span><br><span class="line"><span class="keyword">for</span> _, user := <span class="keyword">range</span> users &#123;</span><br><span class="line">    id, err := i.Insert(user)</span><br><span class="line">    <span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// PREPARE INSERT INTO user (`name`, ...) VALUES (?, ...)</span></span><br><span class="line"><span class="comment">// EXECUTE INSERT INTO user (`name`, ...) VALUES ("slene", ...)</span></span><br><span class="line"><span class="comment">// EXECUTE ...</span></span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line">i.Close() <span class="comment">// 别忘记关闭 statement</span></span><br></pre></td></tr></table></figure>
+<h3 id="All"><a href="#All" class="headerlink" title="All"></a>All</h3><p>返回对应的结果集对象</p>
+<p>All 的参数支持 <code>*[]Type</code>和 <code>[]Type</code> 两种形式的 slice</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> users []*User</span><br><span class="line">num, err := o.QueryTable(<span class="string">"user"</span>).Filter(<span class="string">"name"</span>, <span class="string">"slene"</span>).All(&amp;users)</span><br><span class="line">fmt.Printf(<span class="string">"Returned Rows Num: %s, %s"</span>, num, err)</span><br></pre></td></tr></table></figure>
+<p>All / Values / ValuesList / ValuesFlat 受到 Limit 的限制，默认最大行数为 1000</p>
+<p>可以指定返回的字段：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Post <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id      <span class="keyword">int</span></span><br><span class="line">    Title   <span class="keyword">string</span></span><br><span class="line">    Content <span class="keyword">string</span></span><br><span class="line">    Status  <span class="keyword">int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 只返回 Id 和 Title</span></span><br><span class="line"><span class="keyword">var</span> posts []Post</span><br><span class="line">o.QueryTable(<span class="string">"post"</span>).Filter(<span class="string">"Status"</span>, <span class="number">1</span>).All(&amp;posts, <span class="string">"Id"</span>, <span class="string">"Title"</span>)</span><br></pre></td></tr></table></figure>
+<p>对象的其他字段值将会是对应类型的默认值</p>
+<h3 id="One"><a href="#One" class="headerlink" title="One"></a>One</h3><p>尝试返回单条记录</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> user User</span><br><span class="line">err := o.QueryTable(<span class="string">"user"</span>).Filter(<span class="string">"name"</span>, <span class="string">"slene"</span>).One(&amp;user)</span><br><span class="line"><span class="keyword">if</span> err == orm.ErrMultiRows &#123;</span><br><span class="line">    <span class="comment">// 多条的时候报错</span></span><br><span class="line">    fmt.Printf(<span class="string">"Returned Multi Rows Not One"</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> err == orm.ErrNoRows &#123;</span><br><span class="line">    <span class="comment">// 没有找到记录</span></span><br><span class="line">    fmt.Printf(<span class="string">"Not row found"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以指定返回的字段：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 只返回 Id 和 Title</span></span><br><span class="line"><span class="keyword">var</span> post Post</span><br><span class="line">o.QueryTable(<span class="string">"post"</span>).Filter(<span class="string">"Content__istartswith"</span>, <span class="string">"prefix string"</span>).One(&amp;post, <span class="string">"Id"</span>, <span class="string">"Title"</span>)</span><br></pre></td></tr></table></figure>
+<p>对象的其他字段值将会是对应类型的默认值</p>
+<h3 id="Values"><a href="#Values" class="headerlink" title="Values"></a>Values</h3><p>返回结果集的 key =&gt; value 值</p>
+<p>key 为 Model 里的 Field name，value 的值 以 string 保存</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> maps []orm.Params</span><br><span class="line">num, err := o.QueryTable(<span class="string">"user"</span>).Values(&amp;maps)</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"Result Nums: %d\n"</span>, num)</span><br><span class="line">    <span class="keyword">for</span> _, m := <span class="keyword">range</span> maps &#123;</span><br><span class="line">        fmt.Println(m[<span class="string">"Id"</span>], m[<span class="string">"Name"</span>])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>返回指定的 Field 数据</p>
+<p>TODO: 暂不支持级联查询 RelatedSel 直接返回 Values</p>
+<p>但可以直接指定 expr 级联返回需要的数据</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> maps []orm.Params</span><br><span class="line">num, err := o.QueryTable(<span class="string">"user"</span>).Values(&amp;maps, <span class="string">"id"</span>, <span class="string">"name"</span>, <span class="string">"profile"</span>, <span class="string">"profile__age"</span>)</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"Result Nums: %d\n"</span>, num)</span><br><span class="line">    <span class="keyword">for</span> _, m := <span class="keyword">range</span> maps &#123;</span><br><span class="line">        fmt.Println(m[<span class="string">"Id"</span>], m[<span class="string">"Name"</span>], m[<span class="string">"Profile"</span>], m[<span class="string">"Profile__Age"</span>])</span><br><span class="line">        <span class="comment">// map 中的数据都是展开的，没有复杂的嵌套</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ValuesList"><a href="#ValuesList" class="headerlink" title="ValuesList"></a>ValuesList</h3><p>顾名思义，返回的结果集以slice存储</p>
+<p>结果的排列与 Model 中定义的 Field 顺序一致</p>
+<p>返回的每个元素值以 string 保存</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lists []orm.ParamsList</span><br><span class="line">num, err := o.QueryTable(<span class="string">"user"</span>).ValuesList(&amp;lists)</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"Result Nums: %d\n"</span>, num)</span><br><span class="line">    <span class="keyword">for</span> _, row := <span class="keyword">range</span> lists &#123;</span><br><span class="line">        fmt.Println(row)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当然也可以指定 expr 返回指定的 Field</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> lists []orm.ParamsList</span><br><span class="line">num, err := o.QueryTable(<span class="string">"user"</span>).ValuesList(&amp;lists, <span class="string">"name"</span>, <span class="string">"profile__age"</span>)</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"Result Nums: %d\n"</span>, num)</span><br><span class="line">    <span class="keyword">for</span> _, row := <span class="keyword">range</span> lists &#123;</span><br><span class="line">        fmt.Printf(<span class="string">"Name: %s, Age: %s\m"</span>, row[<span class="number">0</span>], row[<span class="number">1</span>])</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ValuesFlat"><a href="#ValuesFlat" class="headerlink" title="ValuesFlat"></a>ValuesFlat</h3><p>只返回特定的 Field 值，将结果集展开到单个 slice 里</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> list orm.ParamsList</span><br><span class="line">num, err := o.QueryTable(<span class="string">"user"</span>).ValuesFlat(&amp;list, <span class="string">"name"</span>)</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"Result Nums: %d\n"</span>, num)</span><br><span class="line">    fmt.Printf(<span class="string">"All User Names: %s"</span>, strings.Join(list, <span class="string">", "</span>))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="关系查询"><a href="#关系查询" class="headerlink" title="关系查询"></a>关系查询</h2><p>以例子里的 <a href="https://beego.me/docs/mvc/model/orm.md" target="_blank" rel="noopener">模型定义</a> 来看下怎么进行关系查询</p>
+<h3 id="OneToOne"><a href="#OneToOne" class="headerlink" title="OneToOne"></a>OneToOne</h3><p>User 和 Profile 是 OneToOne 的关系</p>
+<p>已经取得了 User 对象，查询 Profile：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">user := &amp;User&#123;Id: <span class="number">1</span>&#125;</span><br><span class="line">o.Read(user)</span><br><span class="line"><span class="keyword">if</span> user.Profile != <span class="literal">nil</span> &#123;</span><br><span class="line">    o.Read(user.Profile)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>直接关联查询：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">user := &amp;User&#123;&#125;</span><br><span class="line">o.QueryTable(<span class="string">"user"</span>).Filter(<span class="string">"Id"</span>, <span class="number">1</span>).RelatedSel().One(user)</span><br><span class="line"><span class="comment">// 自动查询到 Profile</span></span><br><span class="line">fmt.Println(user.Profile)</span><br><span class="line"><span class="comment">// 因为在 Profile 里定义了反向关系的 User，所以 Profile 里的 User 也是自动赋值过的，可以直接取用。</span></span><br><span class="line">fmt.Println(user.Profile.User)</span><br><span class="line"></span><br><span class="line"><span class="comment">// [SELECT T0.`id`, T0.`name`, T0.`profile_id`, T1.`id`, T1.`age` FROM `user` T0 INNER JOIN `profile` T1 ON T1.`id` = T0.`profile_id` WHERE T0.`id` = ? LIMIT 1000] - `1`</span></span><br></pre></td></tr></table></figure>
+<p>通过 User 反向查询 Profile：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> profile Profile</span><br><span class="line">err := o.QueryTable(<span class="string">"profile"</span>).Filter(<span class="string">"User__Id"</span>, <span class="number">1</span>).One(&amp;profile)</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(profile)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ManyToOne"><a href="#ManyToOne" class="headerlink" title="ManyToOne"></a>ManyToOne</h3><p>Post 和 User 是 ManyToOne 关系，也就是 ForeignKey 为 User</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Post <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id    <span class="keyword">int</span></span><br><span class="line">    Title <span class="keyword">string</span></span><br><span class="line">    User  *User  <span class="string">`orm:"rel(fk)"`</span></span><br><span class="line">    Tags  []*Tag <span class="string">`orm:"rel(m2m)"`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> posts []*Post</span><br><span class="line">num, err := o.QueryTable(<span class="string">"post"</span>).Filter(<span class="string">"User"</span>, <span class="number">1</span>).RelatedSel().All(&amp;posts)</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(<span class="string">"%d posts read\n"</span>, num)</span><br><span class="line">    <span class="keyword">for</span> _, post := <span class="keyword">range</span> posts &#123;</span><br><span class="line">        fmt.Printf(<span class="string">"Id: %d, UserName: %d, Title: %s\n"</span>, post.Id, post.User.UserName, post.Title)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// [SELECT T0.`id`, T0.`title`, T0.`user_id`, T1.`id`, T1.`name`, T1.`profile_id`, T2.`id`, T2.`age` FROM `post` T0 INNER JOIN `user` T1 ON T1.`id` = T0.`user_id` INNER JOIN `profile` T2 ON T2.`id` = T1.`profile_id` WHERE T0.`user_id` = ? LIMIT 1000] - `1`</span></span><br></pre></td></tr></table></figure>
+<p>根据 <code>Post.Title</code> 查询对应的 <code>User</code>：</p>
+<p>RegisterModel 时，ORM 也会自动建立 User 中 Post 的反向关系，所以可以直接进行查询</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> user User</span><br><span class="line">err := o.QueryTable(<span class="string">"user"</span>).Filter(<span class="string">"Post__Title"</span>, <span class="string">"The Title"</span>).Limit(<span class="number">1</span>).One(&amp;user)</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Printf(user)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="ManyToMany"><a href="#ManyToMany" class="headerlink" title="ManyToMany"></a>ManyToMany</h3><p>Post 和 Tag 是 ManyToMany 关系</p>
+<p>设置 <code>rel(m2m)</code> 以后，ORM 会自动创建中间表</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> Post <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id    <span class="keyword">int</span></span><br><span class="line">    Title <span class="keyword">string</span></span><br><span class="line">    User  *User  <span class="string">`orm:"rel(fk)"`</span></span><br><span class="line">    Tags  []*Tag <span class="string">`orm:"rel(m2m)"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">type</span> Tag <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id    <span class="keyword">int</span></span><br><span class="line">    Name  <span class="keyword">string</span></span><br><span class="line">    Posts []*Post <span class="string">`orm:"reverse(many)"`</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一条 Post 纪录可能对应不同的 Tag 纪录,一条 Tag 纪录可能对应不同的 Post 纪录，所以 Post 和 Tag 属于多对多关系,通过 tag name 查询哪些 post 使用了这个 tag</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> posts []*Post</span><br><span class="line">num, err := dORM.QueryTable(<span class="string">"post"</span>).Filter(<span class="string">"Tags__Tag__Name"</span>, <span class="string">"golang"</span>).All(&amp;posts)</span><br></pre></td></tr></table></figure>
+<p>通过 post title 查询这个 post 有哪些 tag</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tags []*Tag</span><br><span class="line">num, err := dORM.QueryTable(<span class="string">"tag"</span>).Filter(<span class="string">"Posts__Post__Title"</span>, <span class="string">"Introduce Beego ORM"</span>).All(&amp;tags)</span><br></pre></td></tr></table></figure>
+<h2 id="载入关系字段"><a href="#载入关系字段" class="headerlink" title="载入关系字段"></a>载入关系字段</h2><p>LoadRelated 用于载入模型的关系字段，包括所有的 rel/reverse - one/many 关系</p>
+<p>ManyToMany 关系字段载入</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 载入相应的 Tags</span></span><br><span class="line">post := Post&#123;Id: <span class="number">1</span>&#125;</span><br><span class="line">err := o.Read(&amp;post)</span><br><span class="line">num, err := o.LoadRelated(&amp;post, <span class="string">"Tags"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 载入相应的 Posts</span></span><br><span class="line">tag := Tag&#123;Id: <span class="number">1</span>&#125;</span><br><span class="line">err := o.Read(&amp;tag)</span><br><span class="line">num, err := o.LoadRelated(&amp;tag, <span class="string">"Posts"</span>)</span><br></pre></td></tr></table></figure>
+<p>User 是 Post 的 ForeignKey，对应的 ReverseMany 关系字段载入</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> User <span class="keyword">struct</span> &#123;</span><br><span class="line">    Id    <span class="keyword">int</span></span><br><span class="line">    Name  <span class="keyword">string</span></span><br><span class="line">    Posts []*Post <span class="string">`orm:"reverse(many)"`</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">user := User&#123;Id: <span class="number">1</span>&#125;</span><br><span class="line">err := dORM.Read(&amp;user)</span><br><span class="line">num, err := dORM.LoadRelated(&amp;user, <span class="string">"Posts"</span>)</span><br><span class="line"><span class="keyword">for</span> _, post := <span class="keyword">range</span> user.Posts &#123;</span><br><span class="line">    <span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="多对多关系操作"><a href="#多对多关系操作" class="headerlink" title="多对多关系操作"></a>多对多关系操作</h2><p>创建一个 QueryM2Mer 对象</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">o := orm.NewOrm()</span><br><span class="line">post := Post&#123;Id: <span class="number">1</span>&#125;</span><br><span class="line">m2m := o.QueryM2M(&amp;post, <span class="string">"Tags"</span>)</span><br><span class="line"><span class="comment">// 第一个参数的对象，主键必须有值</span></span><br><span class="line"><span class="comment">// 第二个参数为对象需要操作的 M2M 字段</span></span><br><span class="line"><span class="comment">// QueryM2Mer 的 api 将作用于 Id 为 1 的 Post</span></span><br></pre></td></tr></table></figure>
+<h3 id="QueryM2Mer-Add"><a href="#QueryM2Mer-Add" class="headerlink" title="QueryM2Mer Add"></a>QueryM2Mer Add</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">tag := &amp;Tag&#123;Name: <span class="string">"golang"</span>&#125;</span><br><span class="line">o.Insert(tag)</span><br><span class="line"></span><br><span class="line">num, err := m2m.Add(tag)</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Added nums: "</span>, num)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>Add 支持多种类型 Tag <em>Tag []</em>Tag []Tag []interface{}</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tags []*Tag</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 读取 tags 以后</span></span><br><span class="line">...</span><br><span class="line">num, err := m2m.Add(tags)</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Added nums: "</span>, num)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 也可以多个作为参数传入</span></span><br><span class="line"><span class="comment">// m2m.Add(tag1, tag2, tag3)</span></span><br></pre></td></tr></table></figure>
+<h3 id="QueryM2Mer-Remove"><a href="#QueryM2Mer-Remove" class="headerlink" title="QueryM2Mer Remove"></a>QueryM2Mer Remove</h3><p>从M2M关系中删除 tag</p>
+<p>Remove 支持多种类型 Tag <em>Tag []</em>Tag []Tag []interface{}</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> tags []*Tag</span><br><span class="line">...</span><br><span class="line"><span class="comment">// 读取 tags 以后</span></span><br><span class="line">...</span><br><span class="line">num, err := m2m.Remove(tags)</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Removed nums: "</span>, num)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 也可以多个作为参数传入</span></span><br><span class="line"><span class="comment">// m2m.Remove(tag1, tag2, tag3)</span></span><br></pre></td></tr></table></figure>
+<h3 id="QueryM2Mer-Exist"><a href="#QueryM2Mer-Exist" class="headerlink" title="QueryM2Mer Exist"></a>QueryM2Mer Exist</h3><p>判断 Tag 是否存在于 M2M 关系中</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> m2m.Exist(&amp;Tag&#123;Id: <span class="number">2</span>&#125;) &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Tag Exist"</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="QueryM2Mer-Clear"><a href="#QueryM2Mer-Clear" class="headerlink" title="QueryM2Mer Clear"></a>QueryM2Mer Clear</h3><p>清除所有 M2M 关系</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nums, err := m2m.Clear()</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Removed Tag Nums: "</span>, nums)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="QueryM2Mer-Count"><a href="#QueryM2Mer-Count" class="headerlink" title="QueryM2Mer Count"></a>QueryM2Mer Count</h3><p>计算 Tag 的数量</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nums, err := m2m.Count()</span><br><span class="line"><span class="keyword">if</span> err == <span class="literal">nil</span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">"Total Nums: "</span>, nums)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+<div>
+  
+    
+<div style="text-align:center;color: #ccc;font-size:14px;">
+------ 本文结束 ------</div>
+
+  
+</div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Golang/" rel="tag"><i class="fa fa-tag"></i> Golang</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/28/Grid-布局/" rel="next" title="Grid 布局">
+                <i class="fa fa-chevron-left"></i> Grid 布局
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.jpg"
+               alt="思齐" />
+          <p class="site-author-name" itemprop="name">思齐</p>
+           
+              <p class="site-description motion-element" itemprop="description">思与之齐</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">76</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/Syzq" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/p/1005055693566329/home?from=page_100505&mod=TAB#place" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/beme" target="_blank" title="S  F">
+                  
+                    <i class="fa fa-fw fa-scribd"></i>
+                  
+                  S  F
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/YXY81519/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-comment"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本用法"><span class="nav-number">1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#expr"><span class="nav-number">2.</span> <span class="nav-text">expr</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Operators"><span class="nav-number">3.</span> <span class="nav-text">Operators</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#exact"><span class="nav-number">3.1.</span> <span class="nav-text">exact</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iexact"><span class="nav-number">3.2.</span> <span class="nav-text">iexact</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#contains"><span class="nav-number">3.3.</span> <span class="nav-text">contains</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#icontains"><span class="nav-number">3.4.</span> <span class="nav-text">icontains</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#in"><span class="nav-number">3.5.</span> <span class="nav-text">in</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#gt-gte"><span class="nav-number">3.6.</span> <span class="nav-text">gt / gte</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lt-lte"><span class="nav-number">3.7.</span> <span class="nav-text">lt / lte</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#startswith-istartswith"><span class="nav-number">3.8.</span> <span class="nav-text">startswith / istartswith</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#endswith-iendswith"><span class="nav-number">3.9.</span> <span class="nav-text">endswith / iendswith</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#isnull"><span class="nav-number">3.10.</span> <span class="nav-text">isnull</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高级查询接口使用"><span class="nav-number">4.</span> <span class="nav-text">高级查询接口使用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Filter"><span class="nav-number">4.1.</span> <span class="nav-text">Filter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exclude"><span class="nav-number">4.2.</span> <span class="nav-text">Exclude</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SetCond"><span class="nav-number">4.3.</span> <span class="nav-text">SetCond</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Limit"><span class="nav-number">4.4.</span> <span class="nav-text">Limit</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Offset"><span class="nav-number">4.5.</span> <span class="nav-text">Offset</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GroupBy"><span class="nav-number">4.6.</span> <span class="nav-text">GroupBy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OrderBy"><span class="nav-number">4.7.</span> <span class="nav-text">OrderBy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Distinct"><span class="nav-number">4.8.</span> <span class="nav-text">Distinct</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RelatedSel"><span class="nav-number">4.9.</span> <span class="nav-text">RelatedSel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Count"><span class="nav-number">4.10.</span> <span class="nav-text">Count</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exist"><span class="nav-number">4.11.</span> <span class="nav-text">Exist</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Update"><span class="nav-number">4.12.</span> <span class="nav-text">Update</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Delete"><span class="nav-number">4.13.</span> <span class="nav-text">Delete</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PrepareInsert"><span class="nav-number">4.14.</span> <span class="nav-text">PrepareInsert</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#All"><span class="nav-number">4.15.</span> <span class="nav-text">All</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#One"><span class="nav-number">4.16.</span> <span class="nav-text">One</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Values"><span class="nav-number">4.17.</span> <span class="nav-text">Values</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ValuesList"><span class="nav-number">4.18.</span> <span class="nav-text">ValuesList</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ValuesFlat"><span class="nav-number">4.19.</span> <span class="nav-text">ValuesFlat</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关系查询"><span class="nav-number">5.</span> <span class="nav-text">关系查询</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#OneToOne"><span class="nav-number">5.1.</span> <span class="nav-text">OneToOne</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ManyToOne"><span class="nav-number">5.2.</span> <span class="nav-text">ManyToOne</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ManyToMany"><span class="nav-number">5.3.</span> <span class="nav-text">ManyToMany</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#载入关系字段"><span class="nav-number">6.</span> <span class="nav-text">载入关系字段</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多对多关系操作"><span class="nav-number">7.</span> <span class="nav-text">多对多关系操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#QueryM2Mer-Add"><span class="nav-number">7.1.</span> <span class="nav-text">QueryM2Mer Add</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QueryM2Mer-Remove"><span class="nav-number">7.2.</span> <span class="nav-text">QueryM2Mer Remove</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QueryM2Mer-Exist"><span class="nav-number">7.3.</span> <span class="nav-text">QueryM2Mer Exist</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QueryM2Mer-Clear"><span class="nav-number">7.4.</span> <span class="nav-text">QueryM2Mer Clear</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QueryM2Mer-Count"><span class="nav-number">7.5.</span> <span class="nav-text">QueryM2Mer Count</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2016 - 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-mars"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">思齐</span>
+</div>
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.1"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
