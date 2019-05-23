@@ -117,7 +117,7 @@
 <meta property="og:site_name" content="Syzq">
 <meta property="og:description" content="对象部分Object类型Object 是一个无序的集合，可以存放任意类型对象，所有其他对象都继承自这个对象。 创建Object类型有两种，一种是使用new运算符，一种是字面量表示法。 1.使用new运算符创建Object1var obj = new Object();//注意大写，也可以直接写成Object() 注意，通过new Object()的写法生成新对象，与字面量的写法obj = {}是等">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-03-16T09:39:10.126Z">
+<meta property="og:updated_time" content="2019-05-23T05:09:35.137Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JavaScript学习总结（二）数组和对象部分">
 <meta name="twitter:description" content="对象部分Object类型Object 是一个无序的集合，可以存放任意类型对象，所有其他对象都继承自这个对象。 创建Object类型有两种，一种是使用new运算符，一种是字面量表示法。 1.使用new运算符创建Object1var obj = new Object();//注意大写，也可以直接写成Object() 注意，通过new Object()的写法生成新对象，与字面量的写法obj = {}是等">
@@ -424,8 +424,7 @@
 <p>创建<code>Object</code>类型有两种，一种是使用<code>new</code>运算符，一种是字面量表示法。</p>
 <p><strong>1.使用<code>new</code>运算符创建<code>Object</code></strong><br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();<span class="comment">//注意大写，也可以直接写成Object()</span></span><br></pre></td></tr></table></figure></p>
 <p>注意，通过<code>new Object()</code>的写法生成新对象，与字面量的写法<code>obj = {}</code>是等价的。</p>
-<p><strong>2. 使用字面量方式创建：</strong></p>
-<figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">    <span class="string">name :</span> <span class="string">'Beme'</span>,</span><br><span class="line">    <span class="string">age :</span> <span class="number">21</span></span><br><span class="line">&#125;;<span class="comment">//分号最好加上</span></span><br></pre></td></tr></table></figure>
+<p><strong>2. 使用字面量方式创建：</strong><br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var obj = &#123;</span><br><span class="line">    <span class="string">name :</span> <span class="string">'Beme'</span>,</span><br><span class="line">    <span class="string">age :</span> <span class="number">21</span></span><br><span class="line">&#125;;<span class="comment">//分号最好加上</span></span><br></pre></td></tr></table></figure></p>
 <p>在使用字面量声明<code>Object</code>对象时，不会调用<code>Object()</code>构造函数（FF除外）</p>
 <h3 id="Object-prototype对象"><a href="#Object-prototype对象" class="headerlink" title="Object.prototype对象"></a>Object.prototype对象</h3><p>所有构造函数都有一个<code>prototype</code>属性，指向一个原型对象。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line"><span class="built_in">Object</span>.prototype.print = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; <span class="built_in">console</span>.log(<span class="number">111</span>)&#125;;</span><br><span class="line">obj.print() <span class="comment">// 111</span></span><br></pre></td></tr></table></figure></p>
 <p>实例<code>obj</code>直接继承了<code>Object.prototype</code>的属性和方法。<br><figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">1.对象只是一种特殊的数据。对象拥有属性和方法。 JavaScript 是面向对象的语言，但 JavaScript 不使用类。 JavaScript 基于 [<span class="string">prototype</span>][<span class="symbol">1</span>]，而不是基于类的。</span><br><span class="line"></span><br><span class="line">2.属性：是隶属于某个特定对象的变量。方法：是只有某个特定对象才能调用的函数。</span><br><span class="line"></span><br><span class="line">3.js对象是属性和方法的集合。一个方法就是一个函数，是对象的成员。属性是一个值或一组值（以数组或对象的形式），是对象的成员。</span><br><span class="line"></span><br><span class="line">4.js对象是基于构造器函数的，使用构造器函数创建一个新对象时，就可以说是实例化了一个新对象。属性是构造器函数内部的变量。</span><br></pre></td></tr></table></figure></p>
@@ -495,60 +494,60 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="http://w3school.com.cn/jsref/jsref_concat_array.asp" target="_blank" rel="noopener">concat()</a></td>
+<td>concat()</td>
 <td style="text-align:center">连接两个或更多的数组，并返回结果。</td>
 </tr>
 <tr>
-<td><a href="http://w3school.com.cn/jsref/jsref_join.asp" target="_blank" rel="noopener">join()</a></td>
-<td style="text-align:center">把数组的所有元素放入一个字符串。</td>
+<td>join()</td>
+<td style="text-align:center">把数组的所有元素放入一个字符串。元素通过指定的分隔符进行分隔。</td>
 </tr>
 <tr>
-<td><a href="http://w3school.com.cn/jsref/jsref_pop.asp" target="_blank" rel="noopener">pop()</a></td>
-<td style="text-align:center">删除并返回数组的最后一个元素。</td>
+<td>pop()</td>
+<td style="text-align:center">删除数组的最后一个元素，并返回这个元素。</td>
 </tr>
 <tr>
-<td><a href="http://w3school.com.cn/jsref/jsref_push.asp" target="_blank" rel="noopener">push()</a></td>
-<td style="text-align:center">向数组的末尾添加一个或更多元素，并返回新的长度。</td>
+<td>push()</td>
+<td style="text-align:center">在数组的末尾增加一个或多个元素，并返回数组的新长度。</td>
 </tr>
 <tr>
-<td><a href="http://w3school.com.cn/jsref/jsref_reverse.asp" target="_blank" rel="noopener">reverse()</a></td>
+<td>reverse()</td>
 <td style="text-align:center">颠倒数组中元素的顺序。</td>
 </tr>
 <tr>
-<td><a href="http://w3school.com.cn/jsref/jsref_shift.asp" target="_blank" rel="noopener">shift()</a></td>
-<td style="text-align:center">删除并返回数组的第一个元素。</td>
+<td>shift()</td>
+<td style="text-align:center">删除数组的第一个元素，并返回这个元素。</td>
 </tr>
 <tr>
-<td><a href="http://w3school.com.cn/jsref/jsref_slice_array.asp" target="_blank" rel="noopener">slice()</a></td>
-<td style="text-align:center">从某个已有的数组返回选定的元素。</td>
+<td>slice()</td>
+<td style="text-align:center">抽取当前数组中的一段元素组合成一个新数组。</td>
 </tr>
 <tr>
-<td><a href="http://w3school.com.cn/jsref/jsref_sort.asp" target="_blank" rel="noopener">sort() </a></td>
-<td style="text-align:center">对数组的元素进行排序。</td>
+<td>sort()</td>
+<td style="text-align:center">对数组的元素进行排序</td>
 </tr>
 <tr>
-<td><a href="http://w3school.com.cn/jsref/jsref_splice.asp" target="_blank" rel="noopener">splice()</a></td>
-<td style="text-align:center">删除元素，并向数组添加新元素。</td>
+<td>splice()</td>
+<td style="text-align:center">在任意的位置给数组添加或删除任意个元素。</td>
 </tr>
 <tr>
-<td><a href="http://w3school.com.cn/jsref/jsref_tosource_array.asp" target="_blank" rel="noopener">toSource()</a></td>
+<td>toSource()</td>
 <td style="text-align:center">返回该对象的源代码。</td>
 </tr>
 <tr>
-<td><a href="http://w3school.com.cn/jsref/jsref_toString_array.asp" target="_blank" rel="noopener">toString()</a></td>
+<td>toString()</td>
 <td style="text-align:center">把数组转换为字符串，并返回结果。</td>
 </tr>
 <tr>
-<td><a href="http://w3school.com.cn/jsref/jsref_toLocaleString_array.asp" target="_blank" rel="noopener">toLocaleString()</a></td>
+<td>toLocaleString()</td>
 <td style="text-align:center">把数组转换为本地数组，并返回结果。</td>
 </tr>
 <tr>
-<td><a href="http://w3school.com.cn/jsref/jsref_unshift.asp" target="_blank" rel="noopener">unshift()</a></td>
+<td>unshift()</td>
 <td style="text-align:center">向数组的开头添加一个或更多元素，并返回新的长度。</td>
 </tr>
 <tr>
-<td><a href="http://w3school.com.cn/jsref/jsref_valueof_array.asp" target="_blank" rel="noopener">valueOf()</a></td>
-<td style="text-align:center">返回数组对象的原始值。</td>
+<td>valueOf()</td>
+<td style="text-align:center">返回数组对象的原始值</td>
 </tr>
 </tbody>
 </table>
